@@ -1,0 +1,22 @@
+import "./App.css";
+import Header from "./components/Header/Header";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import { About } from "./pages/About/About";
+import SingleProduct from "./pages/SingleProduct/SingleProduct";
+function App() {
+  return (
+    <>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/single-product/:id" element={<SingleProduct />} />
+        </Routes>
+      </Router>
+    </>
+  );
+}
+
+export default App;
