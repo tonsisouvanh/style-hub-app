@@ -11,6 +11,8 @@ import pro9 from "./pro9.png";
 import pro10 from "./pro10.png";
 import pro11 from "./pro11.png";
 import pro12 from "./pro12.png";
+import singlepro from "./singlepro.png";
+import slide3img from "./slide3img.jpg";
 
 export {
   pro1,
@@ -25,4 +27,6 @@ export {
   pro10,
   pro11,
   pro12,
+  singlepro,
+  slide3img
 };

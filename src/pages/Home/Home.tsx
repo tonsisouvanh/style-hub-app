@@ -1,17 +1,19 @@
-import { HeaderAnimate } from "../../animation";
+import { useEffect } from "react";
 import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
 import Hero from "../../components/Hero/Hero";
-import { motion } from "framer-motion";
 
 import { slides } from "../../data/data";
 import Service from "../../components/Services/Service";
 import Promotion from "../../components/Promotion/Promotion";
 
 import { newArrivalProducts, topSellers } from "../../data/data";
-import Footer from "../../components/Footer/Footer";
 import Categories from "../../components/Categories/Categories";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="bg-gray-100">
       {/*============== Hero section ==============*/}
@@ -49,9 +51,6 @@ const Home = () => {
         />
         {/*============== Featured products ==============*/}
       </div>
-      {/*============== Footer ==============*/}
-      <Footer />
-      {/*============== Footer ==============*/}
     </div>
   );
 };

@@ -53,6 +53,21 @@ const scaleAnimate = {
     },
   },
 };
+const scaleAnimateReverse = {
+  offscreen: {
+    opacity: 0,
+    scale: 2,
+  },
+  onscreen: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      bounce: 0.1,
+      duration: 2,
+    },
+  },
+};
 const scaleFromLeftAnimate = {
   offscreen: {
     opacity: 0,
@@ -192,7 +207,7 @@ const flipAnimate = {
 };
 
 // stay shaking animation
-const shakeAnimate = {
+const shakeAnimateInfinity = {
   offscreen: {
     opacity: 0,
     rotate: 0,
@@ -239,7 +254,7 @@ const staggeredFadeInAnimate = {
 };
 
 // staying animatation
-const pulseAnimate = {
+const pulseAnimateInfinity = {
   offscreen: {
     opacity: 0,
     scale: 0.5,
@@ -257,10 +272,10 @@ const pulseAnimate = {
 export {
   scaleFromLeftAnimate,
   fadeFromTopAnimate,
-  pulseAnimate,
+  pulseAnimateInfinity,
   staggeredFadeInAnimate,
   rotateAndScaleAnimate,
-  shakeAnimate,
+  shakeAnimateInfinity,
   flipAnimate,
   bounceAnimate,
   rotateAnimateFromLeft,
@@ -270,4 +285,5 @@ export {
   fadeFromBottomAnimateSprin,
   scaleAnimate,
   fadeFromBottomAnimate,
+  scaleAnimateReverse
 };

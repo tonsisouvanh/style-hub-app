@@ -5,7 +5,8 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
 import UserWishlistCartIcons from "./UserWishlistCartIcons ";
 import { useState } from "react";
-
+import { motion } from "framer-motion";
+import { fadeFromTopAnimate } from "../../animation";
 type DesktopHeaderProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -20,33 +21,40 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   const [submenuOpen, setSubmenuOpen] = useState<boolean>(false);
   return (
     <>
-      <nav className="sticky shadow z-10 top-0 bg-white py-5">
-        <div className="rounded-div flex items-center justify-between">
-          <div onClick={() => toggleMenu()} className="lg:hidden text-xl">
+      <nav className="sticky shadow z-10 top-0 bg-white py-5 font-notosanslao">
+        <motion.div
+          initial="offscreen"
+          animate="onscreen"
+          variants={fadeFromTopAnimate}
+          className="rounded-div flex items-center justify-between"
+        >
+          <div onClick={() => toggleMenu()} className="cursor-pointer lg:hidden text-xl">
             <RxHamburgerMenu />
           </div>
 
-          <div className="hidden items-center text-2xl text-black marker:font-bold lg:flex">
+          <Link
+            to="/"
+            className="hidden items-center text-2xl text-black marker:font-bold lg:flex"
+          >
             <div className="text-3xl font-poppins font-bold text-gray-800">
               Style<span className="text-cyan-800">HUB</span>
             </div>
-          </div>
+          </Link>
 
           {/* Nav menu */}
           <ul className="hidden lg:flex items-center gap-5 text-[1em]">
             <li className="relative flex flex-col items-center w-fit">
-              <Link
-                to="/"
+              <span
                 onClick={() => setSubmenuOpen(!submenuOpen)}
-                className="flex items-center"
+                className="flex items-center cursor-pointer"
               >
-                Shop
+                ເຄື່ອງທັງໝົດ
                 <MdOutlineKeyboardArrowRight
                   className={`transition-transform ${
                     submenuOpen ? "rotate-90" : ""
                   }`}
                 />
-              </Link>
+              </span>
 
               <div
                 onMouseLeave={() => setSubmenuOpen(false)}
@@ -175,7 +183,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           <div className="hidden lg:flex">
             <UserWishlistCartIcons />
           </div>
-        </div>
+        </motion.div>
       </nav>
     </>
   );

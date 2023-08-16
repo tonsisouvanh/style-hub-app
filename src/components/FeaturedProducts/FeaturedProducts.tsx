@@ -1,9 +1,10 @@
-import AddCartAction from "../AddCartAction/AddCartAction";
-import sample from "../../assets/images/sample.jpg";
-import hover from "../../assets/images/hover.jpg";
-import watch from "../../assets/images/watch_cate.jpeg";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  fadeFromTopAnimate,
+  scaleAnimate,
+} from "../../animation";
 interface ProductProps {
   products: Product[];
   featuredTitle: string;
@@ -83,17 +84,40 @@ const FeaturedProducts: React.FC<ProductProps> = ({
   // ];
 
   return (
-    <section className="">
+    <motion.section
+      initial={"offscreen"}
+      whileInView={"onscreen"}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ staggerChildren: 0.2 }}
+    >
       <div className="rounded-div">
         <div className="flex flex-col items-center">
-          <h1 className="text-[36px] font-arimo font-bold">{featuredTitle}</h1>
-          <p className="text-[18px] font-lato mt-4 mb-10">{featuredDesc}</p>
+          <motion.div
+            transition={{ staggerChildren: 0.2 }}
+            className="flex flex-col items-center"
+          >
+            <motion.h1
+              variants={fadeFromTopAnimate}
+              className="text-[36px] font-arimo font-bold"
+            >
+              {featuredTitle}
+            </motion.h1>
+            <motion.p
+              variants={fadeFromTopAnimate}
+              className="text-[18px] font-lato mt-4 mb-10"
+            >
+              {featuredDesc}
+            </motion.p>
+          </motion.div>
           {/* card container */}
-          <div className="grid grid-flow-row gap-x-4 gap-y-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <motion.div
+            variants={fadeFromTopAnimate}
+            className="grid grid-flow-row gap-x-4 gap-y-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          >
             {/* card */}
             {products.map((product) => (
               <Link
-                to="#"
+                to={`/single-product/${product.id}`}
                 key={product.id}
                 className=" transition duration-300 hover:scale-105 flex flex-col items-center"
               >
@@ -110,7 +134,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                 </p>
               </Link>
             ))}
-          </div>
+          </motion.div>
 
           {showButton && (
             <button className="bg-[#024E82] hover:bg-[#024E82]/90 transition text-[16px] text-white py-4 font-lato px-10 whitespace-nowrap mt-20">
@@ -119,7 +143,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
           )}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

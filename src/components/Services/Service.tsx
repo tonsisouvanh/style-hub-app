@@ -1,5 +1,17 @@
 import { FaHeadset, FaLock, FaShippingFast, FaUndo } from "react-icons/fa";
-
+import { motion } from "framer-motion";
+import {
+  bounceAnimate,
+  fadeFromBottomAnimateSprin,
+  fadeFromTopAnimate,
+  flipAnimate,
+  rotateAndScaleAnimate,
+  rotateAnimateFromLeft,
+  scaleAnimate,
+  scaleAnimateReverse,
+  scaleFromLeftAnimate,
+  staggeredFadeInAnimate,
+} from "../../animation";
 // interface ProductProps {
 //   products: Product[];
 //   featuredTitle: string;
@@ -38,26 +50,36 @@ const services = [
 
 const Service = () => {
   return (
-    <section className="">
+    <motion.section
+      initial={"offscreen"}
+      whileInView={"onscreen"}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ staggerChildren: 0.2 }}
+      className=""
+    >
       <div className="rounded-div">
         <div className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div
+            // transition={{ staggerChildren: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {services.map((service, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="flex flex-col items-center text-center"
+                variants={scaleAnimateReverse}
               >
                 <div className="text-3xl text-[#024E82] mb-4">
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-gray-700">{service.description}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -18,6 +18,20 @@
   -webkit-text-size-adjust: 100%;
 }
 
+@font-face {
+  font-family: "notosanslao";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/NotoSansLao/NotoSansLao-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "notosanslao";
+  font-style: normal;
+  font-weight: 800;
+  src: url("./fonts/NotoSansLao/NotoSansLao-Bold.ttf") format("truetype");
+}
+
 .rounded-div {
   @apply max-w-[1340px] px-5 w-full mx-auto;
 }

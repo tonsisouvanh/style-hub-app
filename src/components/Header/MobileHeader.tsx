@@ -45,13 +45,13 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   const count = 3;
   return (
     <nav
-      className={`z-20 py-3 space-y-5 px-5 scale-y-0 origin-top transition duration-100 ${
+      className={`z-20 font-notosanslao py-3 space-y-5 px-5 scale-y-0 origin-top transition duration-100 ${
         isOpen ? "scale-y-100" : ""
       } fixed w-screen h-screen top-0 left-0 bg-white border-b-[1px] text-center lg:hidden`}
     >
       <div className="flex items-center justify-between mb-3">
         <div onClick={toggleMenu}>
-          <AiOutlineClose className="text-black text-xl" />
+          <AiOutlineClose className="cursor-pointer text-black text-xl" />
         </div>
         <UserWishlistCartIcons />
       </div>
@@ -64,23 +64,22 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           onMouseLeave={() => setSubmenuOpen(false)}
           className="flex flex-col items-center py-3 border-b-[1px] text-center transition"
         >
-          <Link
-            to="/"
+          <div
             onClick={() => setSubmenuOpen(!submenuOpen)}
-            className="flex items-center"
+            className="cursor-pointer flex items-center"
           >
-            Shop
+            ເຄື່ອງທັງໝົດ
             <MdOutlineKeyboardArrowRight
               className={`transition-transform ${
                 submenuOpen ? "rotate-90" : ""
               }`}
             />
-          </Link>
+          </div>
 
           <div className="group">
             <div
-              className={`text-black overflow-hidden transform max-h-0 scale-0 opacity-0 transition-all duration-300 origin-top ${
-                submenuOpen ? "scale-100 opacity-100 max-h-full" : null
+              className={`text-black overflow-hidden transform max-h-0 scale-y-0 origin-top opacity-0 transition-all duration-300 origin-top ${
+                submenuOpen ? "scale-y-100 opacity-100 max-h-full" : null
               }`}
             >
               <div className="flex mt-3 items-center justify-center space-x-4 space-y-2">

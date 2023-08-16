@@ -11,6 +11,7 @@ import {
   pro10,
   pro11,
   pro12,
+  slide3img
 } from "../assets/images";
 
 interface Slide {
@@ -34,8 +35,7 @@ export const slides: Slide[] = [
   },
   {
     id: 3,
-    image:
-      "https://img.freepik.com/free-photo/attractive-curly-woman-purple-cashmere-sweater-fuchsia-sunglasses-poses-isolated-wall_197531-24158.jpg?w=1380&t=st=1688232268~exp=1688232868~hmac=365921958b36c79a4687b01febcb066dad460557ef86550fde8fc95b72fb77ac",
+    image: slide3img,
     caption: "Slide 3",
   },
 ];
@@ -100,25 +100,25 @@ export const newArrivalProducts: Product[] = [
 
 export const topSellers: Product[] = [
   {
-    id: 1,
+    id: 9,
     title: "Gray Polo Shirt",
     price: 49.00,
     image: pro9,
   },
   {
-    id: 2,
+    id: 10,
     title: "Red Shirt",
     price: 69.00,
     image: pro10,
   },
   {
-    id: 3,
+    id: 11,
     title: "Polo White Shirt",
     price: 29.00,
     image: pro11,
   },
   {
-    id: 4,
+    id: 12,
     title: "Pink Casual Shirt",
     price: 29.00,
     image: pro12,

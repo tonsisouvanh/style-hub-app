@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { FaCcVisa, FaCcMastercard, FaPaypal } from "react-icons/fa";
 const Footer = () => {
   return (
-    <footer className="bg-transparent">
+    <footer className="bg-gray-100">
       <div className="rounded-div py-10 px-4 sm:px-6 lg:py-20 lg:px-16 bg-[#E8E8E8]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4 uppercase">
               Company info

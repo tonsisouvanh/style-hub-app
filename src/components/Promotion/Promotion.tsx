@@ -1,9 +1,17 @@
 import React from "react";
 import { FaTags, FaHeart } from "react-icons/fa";
-
+import { motion } from "framer-motion";
+import { scaleAnimate } from "../../animation";
 const Promotion = () => {
   return (
-    <section className="">
+    <motion.section
+      initial={"offscreen"}
+      whileInView={"onscreen"}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ staggerChildren: 0.2 }}
+      variants={scaleAnimate}
+      className=""
+    >
       <div className="rounded-div">
         <div className="grid md:grid-cols-2 gap-4">
           {/* first */}
@@ -40,7 +48,7 @@ const Promotion = () => {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
