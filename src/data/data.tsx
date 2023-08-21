@@ -11,7 +11,7 @@ import {
   pro10,
   pro11,
   pro12,
-  slide3img
+  slide3img,
 } from "../assets/images";
 
 interface Slide {
@@ -50,7 +50,7 @@ interface Product {
 export const newArrivalProducts: Product[] = [
   {
     id: 1,
-    title: "Plain White Shirt",
+    title: "ເສື້ອເຊິດຂາວ",
     price: 15.99,
     image: pro1,
   },
@@ -102,25 +102,37 @@ export const topSellers: Product[] = [
   {
     id: 9,
     title: "Gray Polo Shirt",
-    price: 49.00,
+    price: 49.0,
     image: pro9,
   },
   {
     id: 10,
     title: "Red Shirt",
-    price: 69.00,
+    price: 69.0,
     image: pro10,
   },
   {
     id: 11,
     title: "Polo White Shirt",
-    price: 29.00,
+    price: 29.0,
     image: pro11,
   },
   {
     id: 12,
     title: "Pink Casual Shirt",
-    price: 29.00,
+    price: 29.0,
     image: pro12,
   },
+];
+
+interface menuItem {
+  id: number;
+  text: string;
+  toPath: string;
+}
+export const menuItems: menuItem[] = [
+  { id: 2, text: "Sale", toPath: "/sale/:${status}" },
+  { id: 3, text: "ເຄື່ອງມາໃໝ່", toPath: "/arrival/:${status}" },
+  { id: 4, text: "ກ່ຽວກັບເຮົາ", toPath: "/about" },
+  { id: 5, text: "ຕິດຕໍ່", toPath: "/contact" },
 ];

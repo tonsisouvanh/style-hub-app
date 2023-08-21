@@ -15,12 +15,12 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 w-full overflow-hidden">
       {/*============== Hero section ==============*/}
       <Hero slides={slides} />
       {/*============== Hero section ==============*/}
 
-      <div className="space-y-40 py-20">
+      <div className="space-y-10 py-5 md:space-y-40 md:py-20">
         {/*============== Categories ==============*/}
         <Categories />
         {/*============== Categories ==============*/}
@@ -28,14 +28,15 @@ const Home = () => {
         {/*============== Featured products ==============*/}
         <FeaturedProducts
           products={newArrivalProducts}
-          featuredTitle="Discover NEW Arrivals"
-          featuredDesc="Recently added shirts!"
+          featuredTitle="ເຄື່ອງມາໃໝ່"
+          featuredDesc="ຄົ້ນພົບການເພີ່ມໃຫມ່ຫຼ້າສຸດຂອງຄໍເລັກຊັນຂອງພວກເຮົາ, ສະເຫນີທາງເລືອກທີ່ສົດຊື່ນແລະທັນສະໄຫມສໍາລັບທ່ານ."
           showButton={false}
+          isScrollX = {true}
         />
         {/*============== Featured products ==============*/}
 
         {/*============== Services ==============*/}
-        <Service />
+        {/* <Service /> */}
         {/*============== Services ==============*/}
 
         {/*============== Promotion ==============*/}
@@ -45,9 +46,17 @@ const Home = () => {
         {/*============== Featured products ==============*/}
         <FeaturedProducts
           products={topSellers}
-          featuredTitle="Top Sellers"
-          featuredDesc="Browse our top-selling products"
+          featuredTitle="ເຄື່ອງຂາຍດີ"
+          featuredDesc="ເຄື່ອງທີ່ລູກຄ້ານິຍົມ ແລະ ສົນໃຈ"
           showButton={true}
+          isScrollX = {true}
+        />
+        <FeaturedProducts
+          products={topSellers}
+          featuredTitle="SALE"
+          featuredDesc="ຫຼຸດກະນ່ຳ"
+          showButton={true}
+          isScrollX = {true}
         />
         {/*============== Featured products ==============*/}
       </div>

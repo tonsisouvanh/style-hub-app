@@ -55,9 +55,10 @@ const Service = () => {
       whileInView={"onscreen"}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ staggerChildren: 0.2 }}
-      className=""
+      variants={scaleAnimate}
+      className="w-full"
     >
-      <div className="rounded-div">
+      <div className="rounded-div w-full">
         <div className="px-4 sm:px-6 lg:px-8">
           <motion.div
             // transition={{ staggerChildren: 0.2 }}

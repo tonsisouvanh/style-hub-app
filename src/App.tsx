@@ -1,11 +1,13 @@
 import "./App.css";
 import Header from "./components/Header/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import { About } from "./pages/About/About";
-import SingleProduct from "./pages/SingleProduct/SingleProduct";
+import Home from "./pages/Home/HomePage";
+import SingleProduct from "./pages/SingleProduct/SingleProductPage";
 import Footer from "./components/Footer/Footer";
+import ProductsPage from "./pages/Products/ProductsPage";
 import Test from "./pages/Test";
+import AboutPage from "./pages/About/AboutPage";
+
 function App() {
   return (
     <>
@@ -13,7 +15,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/all-products" element={<ProductsPage />} />
           <Route path="/single-product/:id" element={<SingleProduct />} />
           <Route path="/test" element={<Test />} />
         </Routes>

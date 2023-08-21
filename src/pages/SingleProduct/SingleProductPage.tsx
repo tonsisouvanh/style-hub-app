@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { singlepro } from "../../assets/images";
 import { newArrivalProducts, topSellers } from "../../data/data";
 import { AiFillStar } from "react-icons/ai";
@@ -11,6 +11,7 @@ import {
 } from "../../animation";
 import { useParams } from "react-router-dom";
 const SingleProduct = () => {
+  const [showReview, setShowReview] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
   const options = [
     { label: "Small S", value: "Option 1" },
@@ -27,7 +28,6 @@ const SingleProduct = () => {
     window.scrollTo(0, 0);
   }, []);
   const allpros = [...newArrivalProducts, ...topSellers];
-
   const singleproimg = allpros.find((i) => i.id === parseInt(id!));
 
   return (
@@ -37,7 +37,7 @@ const SingleProduct = () => {
           {/*====================== Product info ======================*/}
           <div className="flex flex-col items-center lg:flex-row lg:items-start gap-10">
             {/* Left */}
-            <div className="overflow-hidden w-[25rem] lg:w-[38rem]">
+            <div className="overflow-hidden w-[25rem] lg:w-[38rem] px-5">
               <motion.img
                 className="w-full h-[32rem] object-cover"
                 src={singleproimg?.image}
@@ -50,7 +50,7 @@ const SingleProduct = () => {
                 initial={"offscreen"}
                 animate={"onscreen"}
                 transition={{ staggerChildren: 0.2 }}
-                className="flex items-center gap-2 pt-5"
+                className="flex items-center gap-2 pt-5 overflow-x-scroll no-scrollbar"
               >
                 {[...Array(4)].map((_, index) => (
                   <motion.img
@@ -143,26 +143,41 @@ const SingleProduct = () => {
             className=""
           >
             <div className="flex">
-              <p className="border font-bold text-[16px] font-arimo px-6 py-3">
+              <p
+                onClick={() => setShowReview(false)}
+                className={`${
+                  showReview && "opacity-70 bg-gray-100"
+                } border font-bold text-[16px] font-arimo px-6 py-3`}
+              >
                 Description
               </p>
-              <p className="opacity-70 bg-gray-100 border text-[16px] font-arimo px-6 py-3">
+              <p
+                onClick={() => setShowReview(true)}
+                className={`${
+                  !showReview && "opacity-70 bg-gray-100"
+                } border text-[16px] font-arimo px-6 py-3`}
+              >
                 Reviews(0)
               </p>
             </div>
-            <p className="px-14 py-16 border">
-              A key objective is engaging digital marketing customers and
-              allowing them to interact with the brand through servicing and
-              delivery of digital media. Information is easy to access at a fast
-              rate through the use of digital communications. Users with access
-              to the Internet can use many digital mediums, such as Facebook,
-              YouTube, Forums, and Email etc. Through Digital communications it
-              creates a Multi-communication channel where information can be
-              quickly exchanged around the world by anyone without any regard to
-              whom they are.[28] Social segregation plays no part through social
-              mediums due to lack of face to face communication and information
-              being wide spread instead to a selective audience.{" "}
-            </p>
+            {showReview ? (
+              <p className="px-14 py-16 border">great shirt</p>
+            ) : (
+              <p className="px-14 py-16 border">
+                A key objective is engaging digital marketing customers and
+                allowing them to interact with the brand through servicing and
+                delivery of digital media. Information is easy to access at a
+                fast rate through the use of digital communications. Users with
+                access to the Internet can use many digital mediums, such as
+                Facebook, YouTube, Forums, and Email etc. Through Digital
+                communications it creates a Multi-communication channel where
+                information can be quickly exchanged around the world by anyone
+                without any regard to whom they are.[28] Social segregation
+                plays no part through social mediums due to lack of face to face
+                communication and information being wide spread instead to a
+                selective audience.{" "}
+              </p>
+            )}
           </motion.div>
         </div>
       </div>

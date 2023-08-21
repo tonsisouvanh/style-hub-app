@@ -10,6 +10,10 @@ const Header: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleNavbarClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     // JSX code representing your component's structure and content
     <>
@@ -26,16 +30,18 @@ const Header: React.FC = () => {
           toggleMenu={toggleMenu}
         />
       )} */}
-        <MobileHeader
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          toggleMenu={toggleMenu}
-        />
-        <DesktopHeader
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          toggleMenu={toggleMenu}
-        />
+      <MobileHeader
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        toggleMenu={toggleMenu}
+        handleNavbarClose={handleNavbarClose}
+      />
+      <DesktopHeader
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        toggleMenu={toggleMenu}
+        handleNavbarClose={handleNavbarClose}
+      />
     </>
   );
 };

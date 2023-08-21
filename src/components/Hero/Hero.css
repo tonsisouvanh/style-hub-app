@@ -1,24 +1,24 @@
-.swiper-button-prev,
-.swiper-button-next {
-  height: 5rem;
-  width: 3rem;
+.hero-swiper-button .swiper-button-prev,
+.hero-swiper-button .swiper-button-next {
+  height: 2rem;
+  width: 1rem;
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff; /* Replace with your desired color */
 }
 
-.swiper-button-prev::after,
-.swiper-button-next::after {
+.hero-swiper-button .swiper-button-prev::after,
+.hero-swiper-button .swiper-button-next::after {
   color: #fff; /* Replace with your desired color */
+  font-size: 1rem;
 }
 
-.swiper-pagination-bullet {
+.hero-swiper-button .swiper-pagination-bullet {
   background-color: #fff; /* Replace with your desired color */
 }
 
-.swiper-pagination-bullet-active {
+.hero-swiper-button .swiper-pagination-bullet-active {
   background-color: #fff; /* Replace with your desired color */
 }
-
 
 .fancy {
   background-color: transparent;
@@ -122,4 +122,18 @@
 .fancy:hover .bottom-key-2 {
   right: 0;
   width: 0;
+}
+
+@media screen and (min-width: 480px) {
+  .hero-swiper-button .swiper-button-prev,
+  .hero-swiper-button .swiper-button-next {
+    height: 5rem;
+    width: 3rem;
+  }
+
+  .hero-swiper-button .swiper-button-prev::after,
+  .hero-swiper-button .swiper-button-next::after {
+    color: #fff; /* Replace with your desired color */
+    font-size: 2rem;
+  }
 }

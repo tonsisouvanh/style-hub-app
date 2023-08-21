@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaCcVisa, FaCcMastercard, FaPaypal } from "react-icons/fa";
 const Footer = () => {
   return (
-    <footer className="bg-gray-100">
+    <footer className="bg-gray-100 w-full">
       <div className="rounded-div py-10 px-4 sm:px-6 lg:py-20 lg:px-16 bg-[#E8E8E8]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
@@ -64,7 +64,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4 uppercase">
               Get in the know
             </h3>
@@ -78,7 +78,7 @@ const Footer = () => {
                 Subscribe
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex gap-8 items-center justify-between border-t-gray-300 border-t-2 mt-20 pt-10">

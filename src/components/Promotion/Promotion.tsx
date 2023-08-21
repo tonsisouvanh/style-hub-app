@@ -10,7 +10,7 @@ const Promotion = () => {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ staggerChildren: 0.2 }}
       variants={scaleAnimate}
-      className=""
+      className="w-full"
     >
       <div className="rounded-div">
         <div className="grid md:grid-cols-2 gap-4">

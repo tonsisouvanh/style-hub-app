@@ -7,16 +7,20 @@ import UserWishlistCartIcons from "./UserWishlistCartIcons ";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { fadeFromTopAnimate } from "../../animation";
+import Logo from "../Logo/Logo";
+import { menuItems } from "../../data/data";
 type DesktopHeaderProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   toggleMenu: () => void;
+  handleNavbarClose: () => void;
 };
 
 const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   isOpen,
   setIsOpen,
   toggleMenu,
+  handleNavbarClose,
 }) => {
   const [submenuOpen, setSubmenuOpen] = useState<boolean>(false);
   return (
@@ -28,7 +32,10 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           variants={fadeFromTopAnimate}
           className="rounded-div flex items-center justify-between"
         >
-          <div onClick={() => toggleMenu()} className="cursor-pointer lg:hidden text-xl">
+          <div
+            onClick={() => toggleMenu()}
+            className="cursor-pointer lg:hidden text-xl"
+          >
             <RxHamburgerMenu />
           </div>
 
@@ -36,9 +43,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             to="/"
             className="hidden items-center text-2xl text-black marker:font-bold lg:flex"
           >
-            <div className="text-3xl font-poppins font-bold text-gray-800">
-              Style<span className="text-cyan-800">HUB</span>
-            </div>
+            <Logo />
           </Link>
 
           {/* Nav menu */}
@@ -154,35 +159,26 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
               </div>
             </li>
 
-            <li className="w-fit cursor-pointer transition hover:border-b-2 hover:border-b-black">
-              <Link to="/" className="">
-                Sale
-              </Link>
-            </li>
-            <li className="w-fit cursor-pointer transition hover:border-b-2 hover:border-b-black">
-              <Link to="/" className="">
-                New Arrivals
-              </Link>
-            </li>
-            <li className="w-fit cursor-pointer transition hover:border-b-2 hover:border-b-black">
-              <Link to="/" className="">
-                About Us
-              </Link>
-            </li>
-            <li className="w-fit cursor-pointer transition hover:border-b-2 hover:border-b-black">
-              <Link to="/" className="">
-                Contact Us
-              </Link>
-            </li>
+            {menuItems.map((item, index) => (
+              <li
+                key={index}
+                className="w-fit cursor-pointer transition hover:border-b-2 hover:border-b-black"
+                onClick={handleNavbarClose}
+              >
+                <Link to={item.toPath} className="">
+                  {item.text}
+                </Link>
+              </li>
+            ))}
           </ul>
 
           <div className="hidden lg:flex">
             <SearchBar />
           </div>
 
-          <div className="hidden lg:flex">
+          {/* <div className="hidden lg:flex">
             <UserWishlistCartIcons />
-          </div>
+          </div> */}
         </motion.div>
       </nav>
     </>
