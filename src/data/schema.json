@@ -1,0 +1,42 @@
+{
+  "products": [
+    {
+      "id": "product-1",
+      "title": "Women's T-Shirt",
+      "description": "A comfortable and stylish women's t-shirt.",
+      "price": 29.99,
+      "discount": {
+        "type": "percentage",
+        "value": 20
+      },
+      "images": ["image-url-1.jpg", "image-url-2.jpg"],
+      "colors": ["White", "Black", "Blue", "Red"],
+      "sizes": ["S", "M", "L", "XL"],
+      "category": "T-Shirts",
+      "brand": "Your Brand",
+      "isNewArrival": true,
+      "isFeatured": false,
+      "ratings": 4.8,
+      "reviews": [
+        {
+          "id": "review-1",
+          "username": "customer123",
+          "rating": 5,
+          "comment": "Love this t-shirt!"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "category-1",
+      "title": "T-Shirts"
+    }
+  ],
+  "brands": [
+    {
+      "id": "brand-1",
+      "name": "Your Brand"
+    }
+  ]
+}

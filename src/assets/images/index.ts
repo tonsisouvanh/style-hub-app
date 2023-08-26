@@ -13,6 +13,11 @@ import pro11 from "./pro11.png";
 import pro12 from "./pro12.png";
 import singlepro from "./singlepro.png";
 import slide3img from "./slide3img.jpg";
+import cyberpunk from "./cyberpunk.png";
+import jimabanner from "./jimabanner.jpg";
+import jimbbanner from "./jimbbanner.jpg";
+import cyberpunktext from "./cyberpunktext.png";
+import noimage from "./noimage.jpg";
 
 export {
   pro1,
@@ -28,5 +33,10 @@ export {
   pro11,
   pro12,
   singlepro,
-  slide3img
+  slide3img,
+  cyberpunk,
+  jimabanner,
+  jimbbanner,
+  cyberpunktext,
+  noimage
 };

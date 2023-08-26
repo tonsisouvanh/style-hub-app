@@ -44,14 +44,18 @@ const Hero: React.FC<SlideProps> = ({ slides }) => {
       >
         {slides.map((i, index) => {
           return (
-            <SwiperSlide key={index} className="w-full h-[25rem] lg:h-[50rem]">
+            <SwiperSlide
+              key={index}
+              className="w-full h-[25rem] lg:h-[50rem]"
+              // className="w-full"
+            >
               <div className="relative w-full h-full">
                 <img
                   src={i.image}
                   alt=""
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-5">
+                <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center gap-5">
                   {/* <div className="bg-white bg-opacity-50 p-7 backdrop-blur-lg rounded drop-shadow-lg space-y-2">
                     <h2 className="font-arimo text-2xl md:text-4xl lg:text-5xl font-bold text-black">
                       Welcome to Our Store
@@ -60,7 +64,7 @@ const Hero: React.FC<SlideProps> = ({ slides }) => {
                       Explore our latest collection
                     </p>
                   </div> */}
-                  <Link to="/all-products" className="font-lato bg-white fancy">
+                  <Link to="/all-products" className="font-lato bg-white fancy mb-5">
                     <span className="top-key"></span>
                     <span className="text">Shop Now!</span>
                     <span className="bottom-key-1"></span>

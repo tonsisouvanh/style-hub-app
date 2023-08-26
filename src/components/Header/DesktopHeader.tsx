@@ -25,7 +25,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   const [submenuOpen, setSubmenuOpen] = useState<boolean>(false);
   return (
     <>
-      <nav className="sticky shadow z-10 top-0 bg-white py-5 font-notosanslao">
+      <nav className="sticky shadow z-10 top-0 bg-white py-3 font-notosanslao">
         <motion.div
           initial="offscreen"
           animate="onscreen"

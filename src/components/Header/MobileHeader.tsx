@@ -26,8 +26,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
 
   return (
     <nav
-      className={`z-20 font-notosanslao py-3 space-y-5 px-5 scale-y-0 origin-top transition duration-100 ${
-        isOpen ? "scale-y-100" : ""
+      className={`z-20 font-notosanslao py-3 space-y-5 px-5 scale-y-0 origin-top transition duration-300 opacity-0 ${
+        isOpen ? "scale-y-100 opacity-100" : ""
       } fixed w-screen h-screen top-0 left-0 bg-white border-b-[1px] text-center lg:hidden`}
     >
       <div className="flex items-center justify-between mb-3">
@@ -44,17 +44,17 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           </Link>
         </div>
 
-        <UserWishlistCartIcons />
+        {/* <UserWishlistCartIcons /> */}
       </div>
 
-      <Link
-        to="/"
-        className="items-center text-2xl text-black marker:font-bold lg:flex"
-      >
-        <div onClick={handleNavbarClose}>
+      <div className="w-full flex justify-center" onClick={handleNavbarClose}>
+        <Link
+          to="/"
+          className="w-fit text-2xl text-black marker:font-bold lg:flex"
+        >
           <Logo />
-        </div>
-      </Link>
+        </Link>
+      </div>
 
       <SearchBar />
 

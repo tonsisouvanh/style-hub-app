@@ -1,7 +1,9 @@
+import { cyberpunk, cyberpunktext } from "../../assets/images";
 const Logo = () => {
   return (
-    <div className="text-3xl font-poppins font-bold text-gray-800">
-      Style<span className="text-cyan-800">HUB</span>
+    <div className="flex items-center gap-2">
+      <img className="w-[3rem] h-auto object-cover" src={cyberpunk} alt="" />
+      <img className="w-[7rem] h-auto" src={cyberpunktext} alt="" />
     </div>
   );
 };
