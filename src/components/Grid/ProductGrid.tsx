@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ProductCard from "../Card/ProductCard";
 import { Product } from "../../types";
 interface ProductGridProps {
@@ -6,13 +6,16 @@ interface ProductGridProps {
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({ mockProducts }) => {
-  const products = mockProducts;
-  if (!products) {
+  // const products = mockProducts;
+
+  if (!mockProducts) {
     return <h1>No products</h1>;
   }
+  // console.log(mockProducts?.map((item) => item.price));
+
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
-      {products.map((product) => (
+      {mockProducts.map((product) => (
         <div key={product.id}>
           <ProductCard product={product} />
         </div>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ProductFilter from "../../components/ProductFilterSort/ProductFilter";
 import ProductGrid from "../../components/Grid/ProductGrid";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { useLocation } from "react-router-dom";
@@ -19,9 +18,10 @@ const ProductsPage = () => {
   const location = useLocation();
   const [selectedCate, setSelectedCate] = useState("all");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>();
+  const [selectedSort, setSelectedSort] = useState<string>("");
 
   const handleSelectChange = (value: string) => {
-    console.log("Selected value:", value);
+    setSelectedSort(value);
   };
 
   const onSelectCategory = (value: string) => {
@@ -32,22 +32,36 @@ const ProductsPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // useEffect(() => {
-  //   setFilteredProducts(
-  //     selectedCate === "all"
-  //       ? mockProducts
-  //       : mockProducts.filter((pro) => pro.categories.includes(selectedCate))
-  //   );
-  // }, [selectedCate]);
-
   useEffect(() => {
-    const filteredProducts =
-      selectedCate === "all"
-        ? mockProducts
-        : mockProducts.filter((pro) => pro.categories.includes(selectedCate));
+    const sortProducts = (products: Product[], sortOption: string) => {
+      const sortedProducts = [...products]; // Create a new array to avoid mutating the original
+      switch (sortOption) {
+        case "asc":
+          sortedProducts.sort((a, b) => a.price - b.price);
+          break;
+        case "desc":
+          sortedProducts.sort((a, b) => b.price - a.price);
+          break;
+        default:
+          sortedProducts.sort((a, b) => a.id.localeCompare(b.id));
+          break;
+      }
+      return sortedProducts;
+    };
 
-    setFilteredProducts(filteredProducts);
-  }, [selectedCate]);
+    let sortedProducts: Product[] = [];
+
+    if (selectedCate === "all") {
+      sortedProducts = mockProducts;
+    } else {
+      sortedProducts = mockProducts.filter((pro) =>
+        pro.categories.includes(selectedCate)
+      );
+    }
+
+    const initialSortedProducts = sortProducts(sortedProducts, selectedSort);
+    setFilteredProducts(initialSortedProducts);
+  }, [selectedCate, selectedSort]);
 
   return (
     <div className="py-7">
@@ -65,8 +79,12 @@ const ProductsPage = () => {
         <div className="flex items-center justify-between font-notosanslao">
           <span className="text-sm">Result: 397 items</span>
           <div className="flex items-center gap-8 text-[1rem]">
-            <ProductFilter />
-            <ProductSort options={options} onChange={handleSelectChange} />
+            {/* <ProductFilter /> */}
+            <ProductSort
+              options={options}
+              selectedSort={selectedSort}
+              onChange={handleSelectChange}
+            />
           </div>
         </div>
         <div>

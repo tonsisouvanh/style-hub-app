@@ -1,35 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { noimage } from "../../assets/images";
+import { Product } from "../../types";
+// interface Discount {
+//   type: string;
+//   value: number;
+// }
 
-interface Discount {
-  type: string;
-  value: number;
-}
+// interface Review {
+//   id: string;
+//   username: string;
+//   rating: number;
+//   comment: string;
+// }
 
-interface Review {
-  id: string;
-  username: string;
-  rating: number;
-  comment: string;
-}
-
-interface Product {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  discount: Discount | null;
-  images: string[];
-  colors: string[];
-  sizes: string[];
-  categories: string[];
-  brand: string;
-  isNewArrival: boolean;
-  isFeatured: boolean;
-  ratings: number;
-  reviews: Review[];
-}
+// interface Product {
+//   id: string;
+//   title: string;
+//   description: string;
+//   price: number;
+//   discount: Discount | null;
+//   images: string[];
+//   colors: string[];
+//   sizes: string[];
+//   categories: string[];
+//   brand: string;
+//   isNewArrival: boolean;
+//   isFeatured: boolean;
+//   ratings: number;
+//   reviews: Review[];
+// }
 
 // interface Category {
 //   id: string;

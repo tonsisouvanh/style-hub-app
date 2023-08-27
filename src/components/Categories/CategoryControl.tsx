@@ -14,6 +14,7 @@ const CategoryControl: React.FC<CategoryControlProps> = ({
   const handleCategoryClick = (category: string) => {
     onSelectCategory(category);
   };
+
   return (
     <div
       className="flex py-2 items-center gap-2 font-notosanslao overflow-x-scroll"
