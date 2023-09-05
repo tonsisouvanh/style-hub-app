@@ -22,7 +22,7 @@ const CategoryControl: React.FC<CategoryControlProps> = ({
     >
       <div
         className={`${
-          selectedCate === "all" && "bg-[#024E82] text-white"
+          selectedCate === "all" && "bg-[#024E82] text-white text-sm md:text-base"
         } rounded-full border px-3 py-1 cursor-pointer`}
         onClick={() => handleCategoryClick("all")}
       >
@@ -36,7 +36,7 @@ const CategoryControl: React.FC<CategoryControlProps> = ({
           } whitespace-nowrap rounded-full border px-3 py-1 cursor-pointer`}
           onClick={() => handleCategoryClick(category.title)}
         >
-          <span>{category.title}</span>
+          <span className="text-sm md:text-base">{category.title}</span>
         </div>
       ))}
     </div>

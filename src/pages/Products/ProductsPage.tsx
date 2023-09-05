@@ -7,6 +7,8 @@ import { mockProducts } from "../../data/data";
 import CategoryControl from "../../components/Categories/CategoryControl";
 import { mockCategories } from "../../data/data";
 import { Product } from "../../types";
+import ProductFilter from "../../components/ProductFilterSort/ProductFilter";
+import { BiFilterAlt } from "react-icons/bi";
 const options = [
   { label: "ເຄື່ອງມາໃໝ່", value: "newarrival" },
   { label: "ລາຄາ: ໜ້ອຍ - ຫຼາຍ", value: "asc" },
@@ -19,6 +21,7 @@ const ProductsPage = () => {
   const [selectedCate, setSelectedCate] = useState("all");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>();
   const [selectedSort, setSelectedSort] = useState<string>("");
+  const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
 
   const handleSelectChange = (value: string) => {
     setSelectedSort(value);
@@ -26,6 +29,10 @@ const ProductsPage = () => {
 
   const onSelectCategory = (value: string) => {
     setSelectedCate(value);
+  };
+
+  const handleOpenFilter = (value: boolean) => {
+    setIsOpenFilter(value);
   };
 
   useEffect(() => {
@@ -79,7 +86,20 @@ const ProductsPage = () => {
         <div className="flex items-center justify-between font-notosanslao">
           <span className="text-sm">Result: 397 items</span>
           <div className="flex items-center gap-8 text-[1rem]">
-            {/* <ProductFilter /> */}
+            <div
+              onClick={() => handleOpenFilter(true)}
+              className="flex items-center gap-1 cursor-pointer"
+            >
+              <span>Filter </span>
+              <BiFilterAlt />
+            </div>
+
+            {isOpenFilter && (
+              <div className="fixed w-screen bg-black/80 h-screen top-0 right-0 bg-white z-50 flex justify-end">
+                <ProductFilter handleOpenFilter={handleOpenFilter} />
+              </div>
+            )}
+
             <ProductSort
               options={options}
               selectedSort={selectedSort}

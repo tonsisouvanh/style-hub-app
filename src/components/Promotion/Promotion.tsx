@@ -26,7 +26,7 @@ const Promotion = () => {
               A one-stop platform for all your fashion needs, hassle-free. Buy
               with a peace of mind.
             </p>
-            <button className="mt-5 bg-white px-8 py-2 font-lato text-[14px] rounded-sm text-[#024E82]">
+            <button className="mt-5 whitespace-nowrap bg-white px-8 py-2 font-lato text-[14px] rounded-sm text-[#024E82]">
               BUY NOW
             </button>
           </div>
@@ -42,7 +42,7 @@ const Promotion = () => {
             <p className="text-white font-lato">
               End of season sale. Buy any 2 items of your choice and get 1 free.
             </p>
-            <button className="mt-5 bg-white px-8 py-2 font-lato text-[14px] rounded-sm text-[#024E82]">
+            <button className="mt-5 whitespace-nowrap bg-white px-8 py-2 font-lato text-[14px] rounded-sm text-[#024E82]">
               BUY NOW
             </button>
           </div>
