@@ -5,10 +5,8 @@ import Hero from "../../components/Hero/Hero";
 import { slides } from "../../data/data";
 import Service from "../../components/Services/Service";
 import Promotion from "../../components/Promotion/Promotion";
-
-import { newArrivalProducts, topSellers } from "../../data/data";
 import Categories from "../../components/Categories/Categories";
-
+import {mockProducts} from "../../data/data";
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,11 +25,12 @@ const Home = () => {
 
         {/*============== Featured products ==============*/}
         <FeaturedProducts
-          products={newArrivalProducts}
+          products={mockProducts}
           featuredTitle="ເຄື່ອງມາໃໝ່"
           featuredDesc="ຄົ້ນພົບການເພີ່ມໃຫມ່ຫຼ້າສຸດຂອງຄໍເລັກຊັນຂອງພວກເຮົາ, ສະເຫນີທາງເລືອກທີ່ສົດຊື່ນແລະທັນສະໄຫມສໍາລັບທ່ານ."
           showButton={false}
-          isScrollX = {true}
+          isScrollX={true}
+          showType={"newarrival"}
         />
         {/*============== Featured products ==============*/}
 
@@ -45,18 +44,20 @@ const Home = () => {
 
         {/*============== Featured products ==============*/}
         <FeaturedProducts
-          products={topSellers}
+          products={mockProducts}
           featuredTitle="ເຄື່ອງຂາຍດີ"
           featuredDesc="ເຄື່ອງທີ່ລູກຄ້ານິຍົມ ແລະ ສົນໃຈ"
           showButton={true}
           isScrollX = {true}
+          showType="bestsell"
         />
         <FeaturedProducts
-          products={topSellers}
+          products={mockProducts}
           featuredTitle="SALE"
           featuredDesc="ຫຼຸດກະນ່ຳ"
           showButton={true}
           isScrollX = {true}
+          showType="sale"
         />
         {/*============== Featured products ==============*/}
       </div>

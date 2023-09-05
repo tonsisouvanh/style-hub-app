@@ -84,7 +84,7 @@ const ProductsPage = () => {
           <span className="text-white font-notosanslao">ໂຄສະນາ</span>
         </div>
         <div className="flex items-center justify-between font-notosanslao">
-          <span className="text-sm">Result: 397 items</span>
+          <span className="text-sm text-gray-600">Result: 397 items</span>
           <div className="flex items-center gap-8 text-[1rem]">
             <div
               onClick={() => handleOpenFilter(true)}
@@ -95,7 +95,7 @@ const ProductsPage = () => {
             </div>
 
             {isOpenFilter && (
-              <div className="fixed w-screen bg-black/80 h-screen top-0 right-0 bg-white z-50 flex justify-end">
+              <div className="fixed w-screen bg-black/80 h-screen top-0 right-0 z-50 flex justify-end">
                 <ProductFilter handleOpenFilter={handleOpenFilter} />
               </div>
             )}

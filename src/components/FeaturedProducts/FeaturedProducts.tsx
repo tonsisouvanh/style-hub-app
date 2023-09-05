@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeFromTopAnimate } from "../../animation";
@@ -6,87 +7,46 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./FeaturedProduct.css";
-
+import { Product } from "../../types";
+import { noimage } from "../../assets/images";
 interface ProductProps {
   products: Product[];
   featuredTitle: string;
   featuredDesc: string;
   showButton: boolean;
   isScrollX: boolean;
-}
-
-interface Product {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
+  showType: string;
 }
 
 const FeaturedProducts: React.FC<ProductProps> = ({
   products,
-  featuredTitle = "Discover NEW Arrivals",
-  featuredDesc = "Recently added shirts!",
+  featuredTitle = "No title",
+  featuredDesc = "No description",
   showButton,
   isScrollX = false,
+  showType,
 }) => {
-  // const featuredProducts = [
-  //   {
-  //     id: 1,
-  //     name: "T-Shirt",
-  //     image: sample,
-  //     size: ["S", "M", "L"],
-  //     colors: ["Red", "Blue", "Black"],
-  //     description: "A comfortable and stylish t-shirt for everyday wear.",
-  //     price: 24.99,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Jeans",
-  //     image: sample,
-  //     size: ["S", "M", "L", "XL"],
-  //     colors: ["Blue", "Black"],
-  //     description: "Classic denim jeans for a trendy and casual look.",
-  //     price: 49.99,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Dress",
-  //     image: sample,
-  //     size: ["XS", "S", "M"],
-  //     colors: ["Red", "Black", "White"],
-  //     description: "Elegant and chic dress for special occasions.",
-  //     price: 69.99,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Dress",
-  //     image: sample,
-  //     size: ["XS", "S", "M"],
-  //     colors: ["Red", "Black", "White"],
-  //     description: "Elegant and chic dress for special occasions.",
-  //     price: 69.99,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Dress",
-  //     image: sample,
-  //     size: ["XS", "S", "M"],
-  //     colors: ["Red", "Black", "White"],
-  //     description: "Elegant and chic dress for special occasions.",
-  //     price: 69.99,
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Dress",
-  //     image: sample,
-  //     size: ["XS", "S", "M"],
-  //     colors: ["Red", "Black", "White"],
-  //     description: "Elegant and chic dress for special occasions.",
-  //     price: 69.99,
-  //   },
-  //   // Add more products as needed
-  // ];
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>();
 
+  useEffect(() => {
+    switch (showType) {
+      case "newarrival":
+        setFilteredProducts(
+          products.filter((item) => item.isNewArrival === true)
+        );
+        break;
+      case "bestsell":
+        setFilteredProducts(products.filter((item) => item.ratings >= 5));
+        break;
+      case "sale":
+        setFilteredProducts(products.filter((item) => item.discount !== null));
+        break;
+
+      default:
+        setFilteredProducts([]);
+        break;
+    }
+  }, [showType, products]);
   return (
     <>
       {isScrollX ? (
@@ -121,61 +81,64 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                 variants={fadeFromTopAnimate}
                 className="flex items-start gap-4 overflow-x-scroll no-scrollbar"
               >
+                {filteredProducts && filteredProducts.length > 0 ? (
+                  <Swiper
+                    slidesPerView={3}
+                    allowSlidePrev={true}
+                    navigation={true}
+                    modules={[Navigation]}
+                    className="mySwiper lg:h-full w-full feature-product-swiper-button"
+                    breakpoints={{
+                      320: {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                      },
+                      640: {
+                        slidesPerView: 4,
+                        spaceBetween: 10,
+                      },
+                      768: {
+                        slidesPerView: 5,
+                        spaceBetween: 20,
+                      },
+                      1024: {
+                        slidesPerView: 6,
+                        spaceBetween: 30,
+                      },
+                    }}
+                  >
+                    {filteredProducts?.map((product) => (
+                      <SwiperSlide key={product.id} className="">
+                        <Link
+                          to={`/single-product/${product.id}`}
+                          key={product.id}
+                        >
+                          <div className="transition duration-300 hover:scale-105 flex flex-col items-center ">
+                            <div className="">
+                              <img
+                                src={product.images[0] || noimage}
+                                alt={product.title}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                            <div className="font-notosanslao">
+                              <p className="mt-2 leading-none text-[0.8rem] md:text-[0.9rem] hover:text-gray-600 transition font-bold">
+                                {product.title}
+                              </p>
+                              <p className="text-[#024E82]text-[15px]">
+                                ${product.price}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                ) : (
+                  <p className="w-full text-center">No products found.</p>
+                )}
                 {/* card */}
-                <Swiper
-                  slidesPerView={3}
-                  allowSlidePrev={true}
-                  navigation={true}
-                  modules={[Navigation]}
-                  className="mySwiper lg:h-full w-full feature-product-swiper-button"
-                  breakpoints={{
-                    320: {
-                      slidesPerView: 3,
-                      spaceBetween: 10,
-                    },
-                    640: {
-                      slidesPerView: 4,
-                      spaceBetween: 10,
-                    },
-                    768: {
-                      slidesPerView: 5,
-                      spaceBetween: 20,
-                    },
-                    1024: {
-                      slidesPerView: 6,
-                      spaceBetween: 30,
-                    },
-                  }}
-                >
-                  {products.map((product) => (
-                    <SwiperSlide key={product.id} className="">
-                      <Link
-                        to={`/single-product/${product.id}`}
-                        key={product.id}
-                      >
-                        <div className="transition duration-300 hover:scale-105 flex flex-col items-center ">
-                          <div className="">
-                            <img
-                              src={product.image}
-                              alt={product.title}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          <div className="font-notosanslao">
-                            <p className="mt-2 leading-none text-[0.8rem] md:text-[0.9rem] hover:text-gray-600 transition font-bold">
-                              {product.title}
-                            </p>
-                            <p className="text-[#024E82]text-[15px]">
-                              ${product.price}
-                            </p>
-                          </div>
-                        </div>
-                      </Link>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
               </motion.div>
-
               {/* {showButton && (
                 <button className="bg-[#024E82] hover:bg-[#024E82]/90 transition text-[16px] text-white py-4 font-lato px-10 whitespace-nowrap mt-20">
                   SHOP NOW
@@ -224,7 +187,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                     className=" transition duration-300 hover:scale-105 flex flex-col items-center"
                   >
                     <img
-                      src={product.image}
+                      src={product.images[0]}
                       alt={product.title}
                       className="w-full h-[17rem] object-cover"
                     />
