@@ -4,10 +4,10 @@ export interface Category {
 }
 
 export interface Slide {
-    id: number;
-    image: string;
-    caption: string;
-  }
+  id: number;
+  image: string;
+  caption: string;
+}
 export interface Brand {
   id: string;
   name: string;
@@ -47,3 +47,8 @@ export interface Product {
   ratings: number;
   reviews: Review[];
 }
+
+export type Option = {
+  value: string | "";
+  label: string | "";
+};

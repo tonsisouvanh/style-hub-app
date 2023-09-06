@@ -1,29 +1,29 @@
 import { FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
-const Breadcrumb = ({ pathname, txtFrom = "Root" }) => {
+const Breadcrumb = ({ pathname = "", txtFrom = "" }) => {
   const segments = pathname.split("/").filter((segment) => segment !== "");
   return (
-    <div className="bg-transparent font-roboto">
-      <div className="flex items-center gap-x-2 text-gray-600 text-lg md:text-xl">
-        <div className="flex text-[#024E82] gap-x-1 items-center">
+    <div className="font-roboto bg-transparent">
+      <div className="flex items-center gap-x-2 text-lg text-gray-600 md:text-xl">
+        <div className="flex items-center gap-x-1 text-[#024E82]">
           <FaHome />
           <Link to="/" className="hover:underline">
             Home
           </Link>
         </div>
-        {/* <span className="text-cyan-600"> / {txtFrom}</span> */}
-        {segments.map((segment, index) => (
+        <span className=""> / </span>
+        {/* {segments.map((segment, index) => (
           <span key={segment}>
             <span className=""> / </span>
-            <span
+            <Link
               to={`/${segments.slice(0, index + 1).join("/")}`}
               className=""
             >
-              {/* {segment.charAt(0).toUpperCase() + segment.slice(1)} */}
-              {txtFrom}
-            </span>
+              {segment.charAt(0).toUpperCase() + segment.slice(1)}
+            </Link>
           </span>
-        ))}
+        ))} */}
+        {txtFrom}
       </div>
     </div>
   );

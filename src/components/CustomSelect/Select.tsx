@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-type Option = {
-  value: string;
-  label: string;
-};
-
+import { Option } from "../../types";
 type SelectProps = {
   options: Option[];
   onChange: (value: string) => void;
@@ -20,10 +16,26 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
     setIsOpen(false);
   };
 
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (divRef.current && !divRef.current.contains(event.target as Node)) {
+        setIsOpen(false); // Call the onClickOutside callback when clicked outside
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [setIsOpen]);
+
   return (
-    <div className="relative w-[15rem]">
+    <div ref={divRef} className="relative w-[15rem]">
       <div
-        className="border border-gray-300 rounded px-3 py-2 cursor-pointer"
+        className="cursor-pointer rounded border border-gray-300 px-3 py-2"
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedValue ? (
@@ -36,7 +48,7 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
             />
           </div>
         ) : (
-          <div className="text-black flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-4 text-black">
             <span>Select Size</span>
             <IoIosArrowDown
               className={`transition duration-300 ${
@@ -48,7 +60,7 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
       </div>
 
       <div
-        className={`absolute z-10 mt-1 bg-white border border-gray-300 rounded w-full transition duration-300 ${
+        className={`absolute z-10 mt-1 w-full rounded border border-gray-300 bg-white transition duration-300 ${
           isOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible translate-y-20 opacity-0"
@@ -57,7 +69,7 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
         {options.map((option) => (
           <div
             key={option.value}
-            className="px-3 py-2 cursor-pointer hover:bg-gray-100"
+            className="cursor-pointer px-3 py-2 hover:bg-gray-100"
             onClick={() => handleOptionClick(option.value)}
           >
             {option.label}

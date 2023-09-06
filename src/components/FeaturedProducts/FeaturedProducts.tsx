@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import "./FeaturedProduct.css";
 import { Product } from "../../types";
 import { noimage } from "../../assets/images";
+import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
 interface ProductProps {
   products: Product[];
   featuredTitle: string;
@@ -32,14 +33,16 @@ const FeaturedProducts: React.FC<ProductProps> = ({
     switch (showType) {
       case "newarrival":
         setFilteredProducts(
-          products.filter((item) => item.isNewArrival === true)
+          products.filter((item) => item.isNewArrival === true),
         );
         break;
       case "bestsell":
         setFilteredProducts(products.filter((item) => item.ratings >= 5));
         break;
       case "sale":
-        setFilteredProducts(products.filter((item) => item.discount !== null));
+        setFilteredProducts(
+          products.filter((item) => item.discount !== null && item.discount),
+        );
         break;
 
       default:
@@ -65,13 +68,13 @@ const FeaturedProducts: React.FC<ProductProps> = ({
               >
                 <motion.h1
                   variants={fadeFromTopAnimate}
-                  className={`text-[36px] font-bold text-center`}
+                  className={`text-center text-[36px] font-bold`}
                 >
                   {featuredTitle}
                 </motion.h1>
                 <motion.p
                   variants={fadeFromTopAnimate}
-                  className="text-[18px] mt-4 mb-10 text-center"
+                  className="mb-10 mt-4 text-center text-[18px]"
                 >
                   {featuredDesc}
                 </motion.p>
@@ -79,7 +82,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
               {/* card container */}
               <motion.div
                 variants={fadeFromTopAnimate}
-                className="flex items-start gap-4 overflow-x-scroll no-scrollbar"
+                className="no-scrollbar flex items-start gap-4 overflow-x-scroll"
               >
                 {filteredProducts && filteredProducts.length > 0 ? (
                   <Swiper
@@ -87,7 +90,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                     allowSlidePrev={true}
                     navigation={true}
                     modules={[Navigation]}
-                    className="mySwiper lg:h-full w-full feature-product-swiper-button"
+                    className="mySwiper feature-product-swiper-button w-full lg:h-full"
                     breakpoints={{
                       320: {
                         slidesPerView: 3,
@@ -113,21 +116,41 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                           to={`/single-product/${product.id}`}
                           key={product.id}
                         >
-                          <div className="transition duration-300 hover:scale-105 flex flex-col items-center ">
+                          <div className="flex flex-col items-center transition duration-300 hover:scale-105 ">
                             <div className="">
                               <img
                                 src={product.images[0] || noimage}
                                 alt={product.title}
-                                className="w-full h-full object-cover"
+                                className="h-full w-full object-cover"
                               />
                             </div>
                             <div className="font-notosanslao">
-                              <p className="mt-2 leading-none text-[0.8rem] md:text-[0.9rem] hover:text-gray-600 transition font-bold">
+                              <p className="mt-2 text-[0.8rem] font-bold leading-none transition hover:text-gray-600 md:text-[0.9rem]">
                                 {product.title}
                               </p>
-                              <p className="text-[#024E82]text-[15px]">
+                              {/* <p className="text-[#024E82] text-[15px]">
                                 ${product.price}
-                              </p>
+                              </p> */}
+                              <div className="flex flex-col items-center justify-center ">
+                                <span
+                                  className={`text-[1rem] text-gray-500  lg:text-[1.1rem] ${
+                                    product?.discount && "line-through"
+                                  }`}
+                                >
+                                  {formatPrice(product?.price || 0)}
+                                </span>
+
+                                {product?.discount && (
+                                  <span className="text-[1rem] text-[#024E82] lg:text-[1.1rem]">
+                                    {formatPrice(
+                                      calculateDiscountedPrice(
+                                        product?.price,
+                                        product.discount,
+                                      ),
+                                    )}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </Link>
@@ -169,7 +192,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                 </motion.h1>
                 <motion.p
                   variants={fadeFromTopAnimate}
-                  className="text-[18px] mt-4 mb-10 text-center"
+                  className="mb-10 mt-4 text-center text-[18px]"
                 >
                   {featuredDesc}
                 </motion.p>
@@ -184,17 +207,17 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                   <Link
                     to={`/single-product/${product.id}`}
                     key={product.id}
-                    className=" transition duration-300 hover:scale-105 flex flex-col items-center"
+                    className=" flex flex-col items-center transition duration-300 hover:scale-105"
                   >
                     <img
                       src={product.images[0]}
                       alt={product.title}
-                      className="w-full h-[17rem] object-cover"
+                      className="h-[17rem] w-full object-cover"
                     />
-                    <p className="mt-2 text-[0.9rem] text-lg hover:text-gray-600 transition font-poppins font-bold">
+                    <p className="mt-2 font-poppins text-[0.9rem] text-lg font-bold transition hover:text-gray-600">
                       {product.title}
                     </p>
-                    <p className="text-[#024E82] font-lato text-[15px]">
+                    <p className="font-lato text-[15px] text-[#024E82]">
                       ${product.price}
                     </p>
                   </Link>
@@ -202,7 +225,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
               </motion.div>
 
               {showButton && (
-                <button className="bg-[#024E82] hover:bg-[#024E82]/90 transition text-[16px] text-white py-4 font-lato px-10 whitespace-nowrap mt-20">
+                <button className="mt-20 whitespace-nowrap bg-[#024E82] px-10 py-4 font-lato text-[16px] text-white transition hover:bg-[#024E82]/90">
                   SHOP NOW
                 </button>
               )}

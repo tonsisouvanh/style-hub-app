@@ -89,7 +89,7 @@ const scaleFromLeftAnimate = {
 const fadeFromTopAnimate = {
   offscreen: {
     opacity: 0,
-    y: -100,
+    y: -50,
   },
   onscreen: {
     opacity: 1,
@@ -102,7 +102,7 @@ const fadeFromTopAnimate = {
 const fadeFromBottomAnimate = {
   offscreen: {
     opacity: 0,
-    y: 500,
+    y: 100,
   },
   onscreen: {
     opacity: 1,
@@ -112,8 +112,6 @@ const fadeFromBottomAnimate = {
     },
   },
 };
-
-
 
 const rotateAnimateFromLeft = {
   offscreen: {
@@ -285,5 +283,5 @@ export {
   fadeFromBottomAnimateSprin,
   scaleAnimate,
   fadeFromBottomAnimate,
-  scaleAnimateReverse
+  scaleAnimateReverse,
 };

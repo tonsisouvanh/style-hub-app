@@ -40,22 +40,22 @@ const Hero: React.FC<SlideProps> = ({ slides }) => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper lg:h-full hero-swiper-button"
+        className="mySwiper hero-swiper-button lg:h-full"
       >
         {slides.map((i, index) => {
           return (
             <SwiperSlide
               key={index}
-              className="w-full h-[25rem] lg:h-[50rem]"
+              className="h-[25rem] w-full lg:h-[50rem]"
               // className="w-full"
             >
-              <div className="relative w-full h-full">
+              <div className="relative h-full w-full">
                 <img
                   src={i.image}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
-                <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-end items-center gap-5">
+                <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-end gap-5">
                   {/* <div className="bg-white bg-opacity-50 p-7 backdrop-blur-lg rounded drop-shadow-lg space-y-2">
                     <h2 className="font-arimo text-2xl md:text-4xl lg:text-5xl font-bold text-black">
                       Welcome to Our Store
@@ -64,7 +64,10 @@ const Hero: React.FC<SlideProps> = ({ slides }) => {
                       Explore our latest collection
                     </p>
                   </div> */}
-                  <Link to="/all-products" className="font-lato bg-white fancy mb-5">
+                  <Link
+                    to="/all-products/all"
+                    className="fancy mb-5 bg-white font-lato"
+                  >
                     <span className="top-key"></span>
                     <span className="text">Shop Now!</span>
                     <span className="bottom-key-1"></span>

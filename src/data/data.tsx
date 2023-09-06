@@ -46,10 +46,10 @@ export const slides: Slide[] = [
 // }
 
 export const menuItems: MenuItem[] = [
-  { id: 2, text: "Sale", toPath: "/sale/:${status}" },
-  { id: 3, text: "ເຄື່ອງມາໃໝ່", toPath: "/arrival/:${status}" },
-  { id: 4, text: "ກ່ຽວກັບເຮົາ", toPath: "/about" },
-  { id: 5, text: "ຕິດຕໍ່", toPath: "/contact" },
+  { id: 2, text: "Sale", toPath: "/all-products/sale" },
+  { id: 3, text: "ເຄື່ອງມາໃໝ່", toPath: "/all-products/arrival" },
+  { id: 4, text: "ກ່ຽວກັບເຮົາ", toPath: "/404" },
+  { id: 5, text: "ຕິດຕໍ່", toPath: "/404" },
 ];
 
 export const newArrivalProducts: Product[] = [
@@ -328,7 +328,7 @@ export const mockProducts = [
     images: [],
     colors: ["White", "Black", "Blue", "Red"],
     sizes: ["S", "M", "L", "XL"],
-    categories: ["T-Shirts"], // Replaced with category title
+    categories: ["tops", "T-Shirts"], // Replaced with category title
     brand: "Your Brand",
     isNewArrival: true,
     isFeatured: false,
@@ -351,7 +351,7 @@ export const mockProducts = [
     images: [pro2, pro3], // Replace with actual image URLs or paths
     colors: ["Gray", "Black", "Navy"],
     sizes: ["S", "M", "L", "XL"],
-    categories: ["Hoodies"], // Replaced with category title
+    categories: ["tops", "Hoodies"], // Replaced with category title
     brand: "Your Brand",
     isNewArrival: false,
     isFeatured: true,
@@ -370,7 +370,7 @@ export const mockProducts = [
     images: [pro10, pro11, pro12], // Replace with actual image URLs or paths
     colors: ["Gray", "Black", "Navy"],
     sizes: ["28", "30", "32", "34"],
-    categories: ["Jeans"], // Replaced with category title
+    categories: ["bottoms", "Jeans"], // Replaced with category title
     brand: "Your Brand",
     isNewArrival: false,
     isFeatured: false,
@@ -405,7 +405,7 @@ export const mockProducts = [
     images: [pro7, pro8], // Replace with actual image URLs or paths
     colors: ["White", "Black", "Pink"],
     sizes: ["S", "M", "L"],
-    categories: ["T-Shirts", "Blouses"], // Replaced with category titles
+    categories: ["tops", "T-Shirts", "Blouses"], // Replaced with category titles
     brand: "Your Brand",
     isNewArrival: true,
     isFeatured: false,
@@ -420,7 +420,7 @@ export const mockProducts = [
     discount: null,
     images: [pro9, pro10], // Replace with actual image URLs or paths
     colors: ["Brown", "Black"],
-    sizes: ["One Size"],
+    sizes: ["M", "L"],
     categories: ["Bags"], // Replaced with category title
     brand: "Your Brand",
     isNewArrival: false,
@@ -473,7 +473,7 @@ export const mockProducts = [
 
     colors: ["Gray", "Beige", "Navy"],
     sizes: ["S", "M", "L", "XL"],
-    categories: ["Sweaters"], // Replaced with category title
+    categories: ["tops", "Sweaters"], // Replaced with category title
     brand: "Your Brand",
     isNewArrival: true,
     isFeatured: false,
@@ -484,16 +484,15 @@ export const mockProducts = [
     id: "product-10",
     title: "Denim Jacket",
     description: "Stylish denim jacket for a versatile look.",
-    price: 219000, // Price in LAK
+    price: 219000,
     discount: {
       type: "percentage",
       value: 10,
     },
-    images: [pro11, pro12], // Replace with actual image URLs or paths
-
+    images: [pro11, pro12],
     colors: ["Blue"],
     sizes: ["S", "M", "L", "XL"],
-    categories: ["Jackets"], // Replaced with category title
+    categories: ["tops", "Jackets"],
     brand: "Your Brand",
     isNewArrival: true,
     isFeatured: false,

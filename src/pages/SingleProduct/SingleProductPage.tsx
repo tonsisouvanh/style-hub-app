@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { singlepro } from "../../assets/images";
-import { newArrivalProducts, topSellers } from "../../data/data";
 import { AiFillStar } from "react-icons/ai";
 import Select from "../../components/CustomSelect/Select";
 import { motion } from "framer-motion";
@@ -9,38 +7,51 @@ import {
   fadeFromTopAnimate,
   scaleAnimate,
 } from "../../animation";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { mockProducts } from "../../data/data";
+import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
+import { FaHome } from "react-icons/fa";
+import { Option } from "../../types";
 const SingleProduct = () => {
   const [showReview, setShowReview] = useState<boolean>(false);
+  const [currentImage, setCurrentImage] = useState<number>(0);
   const { id } = useParams<{ id: string }>();
-  const options = [
-    { label: "Small S", value: "Option 1" },
-    { label: "Medium M", value: "Option 2" },
-    { label: "Large L", value: "Option 3" },
-    { label: "Extra Large XL", value: "Option 4" },
-  ];
+  // const options = [
+  //   { label: "Small S", value: "Option 1" },
+  //   { label: "Medium M", value: "Option 2" },
+  //   { label: "Large L", value: "Option 3" },
+  //   { label: "Extra Large XL", value: "Option 4" },
+  // ];
 
   const handleSelectChange = (value: string) => {
     console.log("Selected value:", value);
   };
 
+  const handleCurrentImage = (value: number) => {
+    setCurrentImage(value);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const allpros = [...newArrivalProducts, ...topSellers];
-  const singleproimg = allpros.find((i) => i.id === parseInt(id!));
+  const product = mockProducts.find((i) => i.id === id);
+
+  const options: Option[] = (product?.sizes || []).map((size) => ({
+    label: `${size}`,
+    value: `${size}`,
+  }));
 
   return (
     <>
       <div className="py-7">
         <div className="rounded-div space-y-32">
           {/*====================== Product info ======================*/}
-          <div className="flex flex-col items-center lg:flex-row lg:items-start gap-10">
+          <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start">
             {/* Left */}
-            <div className="overflow-hidden w-[25rem] lg:w-[38rem] px-5">
+            <div className="w-[25rem] overflow-hidden px-5 lg:w-[38rem]">
               <motion.img
-                className="w-full h-[32rem] object-cover"
-                src={singleproimg?.image}
+                className="h-[32rem] w-full object-cover"
+                src={product?.images[currentImage]}
                 alt=""
                 initial="offscreen"
                 animate="onscreen"
@@ -50,15 +61,16 @@ const SingleProduct = () => {
                 initial={"offscreen"}
                 animate={"onscreen"}
                 transition={{ staggerChildren: 0.2 }}
-                className="flex items-center gap-2 pt-5 overflow-x-scroll no-scrollbar"
+                className="no-scrollbar flex items-center justify-start gap-2 overflow-x-scroll pt-5"
               >
-                {[...Array(4)].map((_, index) => (
+                {product?.images.map((item, index) => (
                   <motion.img
                     variants={scaleAnimate}
                     key={index}
-                    className="w-full h-[7rem] object-cover"
-                    src={singlepro}
+                    className="h-[12rem] w-[10rem] object-cover"
+                    src={item}
                     alt=""
+                    onClick={() => handleCurrentImage(index)}
                   />
                 ))}
               </motion.div>
@@ -70,17 +82,38 @@ const SingleProduct = () => {
               transition={{ staggerChildren: 0.1 }}
               className="space-y-8"
             >
-              <motion.p
+              {/* <motion.p
                 variants={fadeFromTopAnimate}
                 className="uppercase font-arimo font-bold text-gray-500"
               >
                 home / shop / women / <span className="text-black">shop</span>{" "}
-              </motion.p>
+              </motion.p> */}
+              <motion.div
+                variants={fadeFromTopAnimate}
+                className="font-roboto bg-transparent"
+              >
+                <div className="flex items-center gap-x-2 text-lg text-gray-600 md:text-xl">
+                  <div className="flex items-center gap-x-1 text-[#024E82]">
+                    <FaHome />
+                    <Link to="/" className="hover:underline">
+                      Home
+                    </Link>
+                  </div>
+                  <span className=""> / </span>
+                  <div className="flex items-center gap-x-1 text-[#024E82]">
+                    <Link to="/all-products/all" className="hover:underline">
+                      All
+                    </Link>
+                  </div>
+                  <span className=""> / </span>
+                  {product?.title}
+                </div>
+              </motion.div>
               <motion.h2
                 variants={fadeFromTopAnimate}
-                className="text-[36px] font-arimo font-bold"
+                className="font-notosanslao text-[36px] font-bold"
               >
-                Plain White Shirt
+                {product?.title}
               </motion.h2>
               <motion.div
                 variants={fadeFromTopAnimate}
@@ -89,7 +122,7 @@ const SingleProduct = () => {
                 {[...Array(5)].map((_, index) => (
                   <AiFillStar
                     key={index}
-                    className={`text-orange-700 text-lg ${
+                    className={`text-lg text-orange-700 ${
                       index === 4 ? "opacity-50" : null
                     }`}
                   />
@@ -98,38 +131,58 @@ const SingleProduct = () => {
               </motion.div>
               <motion.div
                 variants={fadeFromTopAnimate}
-                className="font-lato font-[500] text-[24px]"
+                className="space-x-4 font-lato text-[24px] font-[500]"
               >
-                <span className="text-gray-500">$69.00</span>{" "}
-                <span className="text-[#024E82]">$59.00</span>
+                <span
+                  className={`text-gray-500 ${
+                    product?.discount && "line-through"
+                  }`}
+                >
+                  {formatPrice(product?.price || 0)}
+                </span>
+                {product?.discount && (
+                  <span className="text-[#024E82]">
+                    {formatPrice(
+                      calculateDiscountedPrice(
+                        product?.price,
+                        product.discount,
+                      ),
+                    )}
+                  </span>
+                )}
               </motion.div>
               <motion.p
                 variants={fadeFromTopAnimate}
                 className="text-[16px] text-gray-700"
               >
-                A classic t-shirt never goes out of style. This is our most
-                premium collection of shirt. This plain white shirt is made up
-                of pure cotton and has a premium finish.
+                {product?.description}
               </motion.p>
               <motion.div variants={fadeFromTopAnimate}>
+                {/* <ClickOutsideHandler > */}
                 <Select options={options} onChange={handleSelectChange} />
+                {/* </ClickOutsideHandler> */}
               </motion.div>
               <motion.button
                 variants={fadeFromTopAnimate}
-                className="bg-[#024E82] text-white px-10 py-5"
+                className="bg-[#024E82] px-10 py-5 text-white"
               >
                 ADD TO CART
               </motion.button>
               <motion.div
                 variants={fadeFromTopAnimate}
-                className="text-[14px] text-gray-700 font-lato"
+                className="font-lato text-[14px] text-gray-700"
               >
                 <p>
-                  <span className="text-black font-bold">Category:</span> Women,
-                  Polo, Casual
+                  <span className="font-bold text-black">Category:</span>{" "}
+                  {product?.categories.map((item, index) => (
+                    <span>
+                      {item}
+                      {index < product.categories.length - 1 && ", "}
+                    </span>
+                  ))}
                 </p>
                 <p>
-                  <span className="text-black font-bold">Tags:</span> Modern,
+                  <span className="font-bold text-black">Tags:</span> Modern,
                   Design, cotton
                 </p>
               </motion.div>
@@ -146,37 +199,26 @@ const SingleProduct = () => {
               <p
                 onClick={() => setShowReview(false)}
                 className={`${
-                  showReview && "opacity-70 bg-gray-100"
-                } border font-bold text-[16px] font-arimo px-6 py-3`}
+                  showReview && "bg-gray-100 opacity-70"
+                } border px-6 py-3 font-arimo text-[16px] font-bold`}
               >
                 Description
               </p>
               <p
                 onClick={() => setShowReview(true)}
                 className={`${
-                  !showReview && "opacity-70 bg-gray-100"
-                } border text-[16px] font-arimo px-6 py-3`}
+                  !showReview && "bg-gray-100 opacity-70"
+                } border px-6 py-3 font-arimo text-[16px]`}
               >
                 Reviews(0)
               </p>
             </div>
             {showReview ? (
-              <p className="px-14 py-16 border">great shirt</p>
-            ) : (
-              <p className="px-14 py-16 border">
-                A key objective is engaging digital marketing customers and
-                allowing them to interact with the brand through servicing and
-                delivery of digital media. Information is easy to access at a
-                fast rate through the use of digital communications. Users with
-                access to the Internet can use many digital mediums, such as
-                Facebook, YouTube, Forums, and Email etc. Through Digital
-                communications it creates a Multi-communication channel where
-                information can be quickly exchanged around the world by anyone
-                without any regard to whom they are.[28] Social segregation
-                plays no part through social mediums due to lack of face to face
-                communication and information being wide spread instead to a
-                selective audience.{" "}
+              <p className="border px-14 py-16 font-notosanslao">
+                ບໍ່ມີ Review
               </p>
+            ) : (
+              <p className="border px-14 py-16 ">{product?.description}</p>
             )}
           </motion.div>
         </div>
