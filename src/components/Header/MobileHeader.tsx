@@ -47,14 +47,14 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         {/* <UserWishlistCartIcons /> */}
       </div>
 
-      <div className="flex w-full justify-center" onClick={handleNavbarClose}>
+      {/* <div className="flex w-full justify-center" onClick={handleNavbarClose}>
         <Link
           to="/"
           className="w-fit text-2xl text-black marker:font-bold lg:flex"
         >
           <Logo />
         </Link>
-      </div>
+      </div> */}
 
       <SearchBar />
 

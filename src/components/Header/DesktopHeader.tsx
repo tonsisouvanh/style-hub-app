@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { fadeFromTopAnimate } from "../../animation";
 import Logo from "../Logo/Logo";
 import { menuItems } from "../../data/data";
+import { RiShoppingBag2Fill } from "react-icons/ri";
 type DesktopHeaderProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -17,15 +18,13 @@ type DesktopHeaderProps = {
 };
 
 const DesktopHeader: React.FC<DesktopHeaderProps> = ({
-  isOpen,
-  setIsOpen,
   toggleMenu,
   handleNavbarClose,
 }) => {
   const [submenuOpen, setSubmenuOpen] = useState<boolean>(false);
   return (
     <>
-      <nav className="sticky shadow z-10 top-0 bg-white py-3 font-notosanslao">
+      <nav className="sticky top-0 z-10 bg-white py-3 font-notosanslao shadow">
         <motion.div
           initial="offscreen"
           animate="onscreen"
@@ -34,129 +33,136 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
         >
           <div
             onClick={() => toggleMenu()}
-            className="cursor-pointer lg:hidden text-xl"
+            className="cursor-pointer text-xl lg:hidden"
           >
             <RxHamburgerMenu />
           </div>
 
           <Link
             to="/"
-            className="hidden items-center text-2xl text-black marker:font-bold lg:flex"
+            className="items-center text-2xl text-black marker:font-bold lg:flex"
           >
             <Logo />
           </Link>
 
           {/* Nav menu */}
-          <ul className="hidden lg:flex items-center gap-5 text-[1em]">
-            <li className="relative flex flex-col items-center w-fit">
-              <span
+          <ul className="hidden items-center gap-5 text-[1em] lg:flex">
+            <li className="relative flex w-fit flex-col items-center">
+              <Link
+                to="/all-products/all"
                 onClick={() => setSubmenuOpen(!submenuOpen)}
-                className="flex items-center cursor-pointer"
+                className="flex cursor-pointer items-center"
               >
-                ເຄື່ອງທັງໝົດ
-                <MdOutlineKeyboardArrowRight
+                Shop
+                {/* <MdOutlineKeyboardArrowRight
                   className={`transition-transform ${
                     submenuOpen ? "rotate-90" : ""
                   }`}
-                />
-              </span>
+                /> */}
+                <RiShoppingBag2Fill />
+              </Link>
 
-              <div
+              {/* <div
                 onMouseLeave={() => setSubmenuOpen(false)}
-                className="group absolute top-10 w-fit left-0"
+                className="group absolute left-0 top-10 w-fit"
               >
                 <div
-                  className={`bg-white text-black overflow-hidden transform max-h-0 scale-y-0 opacity-0 transition-all duration-300 origin-top ${
-                    submenuOpen ? "scale-y-100 opacity-100 max-h-full" : null
+                  className={`max-h-0 origin-top scale-y-0 transform overflow-hidden bg-white text-black opacity-0 transition-all duration-300 ${
+                    submenuOpen ? "max-h-full scale-y-100 opacity-100" : null
                   }`}
                 >
-                  <div className="flex items-start justify-start p-5">
-                    <div className="w-48 flex flex-col justify-center gap-1">
-                      <h3 className="text-lg font-bold">Men's Clothing</h3>
-                      <div className="w-32 h-50 border-b-gray-400 border-b-2 pb-2">
-                        <img
-                          src="https://s7g3.scene7.com/is/image/soloinvest/n00571A?$big_image_web$"
-                          alt=""
-                          className="w-full h-full object-cover"
-                        />
+                  <div className="flex items-start justify-start gap-5 p-5">
+                    <Link to="/all-products/all">
+                      <span>ທັງໝົດ</span>
+                    </Link>
+                    <div className="flex items-start justify-start">
+                      <div className="flex w-48 flex-col justify-center gap-1">
+                        <h3 className="text-lg font-bold">Men's Clothing</h3>
+                        <div className="h-50 w-32 border-b-2 border-b-gray-400 pb-2">
+                          <img
+                            src="https://s7g3.scene7.com/is/image/soloinvest/n00571A?$big_image_web$"
+                            alt=""
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                        <ul className="space-y-1">
+                          <li>
+                            <Link to="/">Shirts</Link>
+                          </li>
+                          <li>
+                            <Link to="/">T-Shirts</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Pants</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Jackets</Link>
+                          </li>
+                        </ul>
                       </div>
-                      <ul className="space-y-1">
-                        <li>
-                          <Link to="/">Shirts</Link>
-                        </li>
-                        <li>
-                          <Link to="/">T-Shirts</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Pants</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Jackets</Link>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="w-48 flex flex-col justify-center gap-1">
-                      <h3 className="text-lg font-bold">Women's Clothing</h3>
-                      <div className="w-32 h-50 border-b-gray-400 border-b-2 pb-2">
-                        <img
-                          src="https://s7g3.scene7.com/is/image/soloinvest/n00554A?$big_image_web$"
-                          alt=""
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="flex w-48 flex-col justify-center gap-1">
+                        <h3 className="text-lg font-bold">Women's Clothing</h3>
+                        <div className="h-50 w-32 border-b-2 border-b-gray-400 pb-2">
+                          <img
+                            src="https://s7g3.scene7.com/is/image/soloinvest/n00554A?$big_image_web$"
+                            alt=""
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                        <ul className="space-y-1">
+                          <li>
+                            <Link to="/">Dresses</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Tops</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Bottoms</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Outerwear</Link>
+                          </li>
+                        </ul>
                       </div>
-                      <ul className="space-y-1">
-                        <li>
-                          <Link to="/">Dresses</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Tops</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Bottoms</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Outerwear</Link>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="w-48 flex flex-col justify-center gap-1">
-                      <h3 className="text-lg font-bold">Kids' Clothing</h3>
-                      <div className="w-32 h-50 border-b-gray-400 border-b-2 pb-2">
-                        <img
-                          src="https://i.pinimg.com/564x/e4/4f/9c/e44f9c7a841f9f6cc295de9ca8d53fe0.jpg"
-                          alt=""
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="flex w-48 flex-col justify-center gap-1">
+                        <h3 className="text-lg font-bold">Kids' Clothing</h3>
+                        <div className="h-50 w-32 border-b-2 border-b-gray-400 pb-2">
+                          <img
+                            src="https://i.pinimg.com/564x/e4/4f/9c/e44f9c7a841f9f6cc295de9ca8d53fe0.jpg"
+                            alt=""
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                        <ul className="space-y-1">
+                          <li>
+                            <Link to="/">Boys</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Girls</Link>
+                          </li>
+                        </ul>
                       </div>
-                      <ul className="space-y-1">
-                        <li>
-                          <Link to="/">Boys</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Girls</Link>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="w-48">
-                      <h3 className="text-lg font-bold">Accessories</h3>
-                      <ul className="space-y-1">
-                        <li>
-                          <Link to="/">Hats</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Bags</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Shoes</Link>
-                        </li>
-                        <li>
-                          <Link to="/">Jewelry</Link>
-                        </li>
-                      </ul>
+                      <div className="w-48">
+                        <h3 className="text-lg font-bold">Accessories</h3>
+                        <ul className="space-y-1">
+                          <li>
+                            <Link to="/">Hats</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Bags</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Shoes</Link>
+                          </li>
+                          <li>
+                            <Link to="/">Jewelry</Link>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </li>
 
             {menuItems.map((item, index) => (
@@ -179,6 +185,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           {/* <div className="hidden lg:flex">
             <UserWishlistCartIcons />
           </div> */}
+          <UserWishlistCartIcons />
         </motion.div>
       </nav>
     </>

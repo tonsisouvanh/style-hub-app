@@ -1,21 +1,28 @@
-import { FaUser, FaHeart, FaShoppingCart } from "react-icons/fa";
+import { FiShoppingBag, FiHeart, FiUser } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { RootState } from "../../store/store";
 
 const UserWishlistCartIcons = () => {
+  const cartItems = useSelector((state: RootState) => state.cart);
+
   return (
-    <div className="flex justify-center space-x-4">
-      <div className="cursor-pointer p-2 rounded-full hover:bg-gray-300 transition-colors duration-300">
-        <FaUser size={24} color="#222" />
+    <div className="flex justify-center space-x-2">
+      <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
+        <FiUser size={24} color="#222" />
       </div>
-      <div className="cursor-pointer p-2 rounded-full hover:bg-gray-300 transition-colors duration-300">
-        <FaHeart size={24} color="#222" />
+      <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
+        <FiHeart size={24} color="#222" />
       </div>
-      <div className="cursor-pointer relative p-2 rounded-full hover:bg-gray-300 transition-colors duration-300">
-        <FaShoppingCart size={24} color="#222" />
-        {3 > 0 && (
-          <div className="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 rounded-full text-white text-xs px-1">
-            {3}
-          </div>
-        )}
+      <div className="relative cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
+        <Link to="/cart">
+          <FiShoppingBag size={24} color="#222" />
+          {cartItems.length > 0 && (
+            <div className="absolute right-2 top-2 -mr-1 -mt-1 rounded-full bg-cyan-800 px-1 text-xs text-white">
+              <span className="text-[0.7rem]">{cartItems.length}</span>
+            </div>
+          )}
+        </Link>
       </div>
     </div>
   );

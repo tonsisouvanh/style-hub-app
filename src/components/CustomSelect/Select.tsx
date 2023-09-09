@@ -48,8 +48,8 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
             />
           </div>
         ) : (
-          <div className="flex items-center justify-between gap-4 text-black">
-            <span>Select Size</span>
+          <div className="flex items-center justify-between gap-4 font-notosanslao text-black">
+            <span>ເລືອກຂະໜາດ</span>
             <IoIosArrowDown
               className={`transition duration-300 ${
                 isOpen ? "-rotate-180" : ""

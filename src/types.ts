@@ -3,6 +3,16 @@ export interface Category {
   title: string;
 }
 
+export interface CartItem {
+  id: string;
+  // image: string;
+  name: string;
+  price: number;
+  discount: Discount | null;
+  quantity: number;
+  size: string;
+}
+
 export interface Slide {
   id: number;
   image: string;
@@ -21,7 +31,7 @@ export interface MenuItem {
 
 export interface Discount {
   type: string;
-  value: number;
+  value: number | 0;
 }
 
 export interface Review {

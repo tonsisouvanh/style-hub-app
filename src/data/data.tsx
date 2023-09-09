@@ -48,7 +48,7 @@ export const slides: Slide[] = [
 export const menuItems: MenuItem[] = [
   { id: 2, text: "Sale", toPath: "/all-products/sale" },
   { id: 3, text: "ເຄື່ອງມາໃໝ່", toPath: "/all-products/arrival" },
-  { id: 4, text: "ກ່ຽວກັບເຮົາ", toPath: "/404" },
+  { id: 4, text: "ກ່ຽວກັບພໍ່ຄ້າ", toPath: "/404" },
   { id: 5, text: "ຕິດຕໍ່", toPath: "/404" },
 ];
 
@@ -325,7 +325,7 @@ export const mockProducts = [
       type: "percentage",
       value: 20,
     },
-    images: [],
+    images: [pro3],
     colors: ["White", "Black", "Blue", "Red"],
     sizes: ["S", "M", "L", "XL"],
     categories: ["tops", "T-Shirts"], // Replaced with category title

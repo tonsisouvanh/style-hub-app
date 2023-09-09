@@ -11,20 +11,19 @@ import { Link, useParams } from "react-router-dom";
 import { mockProducts } from "../../data/data";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
 import { FaHome } from "react-icons/fa";
-import { Option } from "../../types";
+import { CartItem, Option } from "../../types";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { RiShoppingBag2Fill } from "react-icons/ri";
+import OrderButton from "../../components/Button/OrderButton";
 const SingleProduct = () => {
   const [showReview, setShowReview] = useState<boolean>(false);
+  const [selectedSize, setSelectedSize] = useState<string>("");
   const [currentImage, setCurrentImage] = useState<number>(0);
+  const [productData, setProductData] = useState<CartItem[]>([]);
   const { id } = useParams<{ id: string }>();
-  // const options = [
-  //   { label: "Small S", value: "Option 1" },
-  //   { label: "Medium M", value: "Option 2" },
-  //   { label: "Large L", value: "Option 3" },
-  //   { label: "Extra Large XL", value: "Option 4" },
-  // ];
 
   const handleSelectChange = (value: string) => {
-    console.log("Selected value:", value);
+    setSelectedSize(value);
   };
 
   const handleCurrentImage = (value: number) => {
@@ -36,11 +35,27 @@ const SingleProduct = () => {
   }, []);
   const product = mockProducts.find((i) => i.id === id);
 
+  useEffect(() => {
+    if (product) {
+      // Create an array with a single item representing the selected product
+      const productItem: CartItem = {
+        id: product?.id,
+        name: product?.title,
+        price: product?.price,
+        discount: product?.discount,
+        quantity: 1,
+        size: selectedSize,
+      };
+
+      // Set the productData as an array with a single item
+      setProductData([productItem]);
+    }
+  }, [selectedSize]);
+
   const options: Option[] = (product?.sizes || []).map((size) => ({
     label: `${size}`,
     value: `${size}`,
   }));
-
   return (
     <>
       <div className="py-7">
@@ -48,9 +63,9 @@ const SingleProduct = () => {
           {/*====================== Product info ======================*/}
           <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start">
             {/* Left */}
-            <div className="w-[25rem] overflow-hidden px-5 lg:w-[38rem]">
+            <div className="relative w-[25rem] overflow-hidden border lg:w-[38rem]">
               <motion.img
-                className="h-[32rem] w-full object-cover"
+                className="h-auto w-full object-cover"
                 src={product?.images[currentImage]}
                 alt=""
                 initial="offscreen"
@@ -61,13 +76,13 @@ const SingleProduct = () => {
                 initial={"offscreen"}
                 animate={"onscreen"}
                 transition={{ staggerChildren: 0.2 }}
-                className="no-scrollbar flex items-center justify-start gap-2 overflow-x-scroll pt-5"
+                className="no-scrollbar absolute bottom-0 left-0 flex w-full items-center justify-start gap-2 overflow-x-scroll bg-black/50 p-4 pt-5 opacity-80"
               >
                 {product?.images.map((item, index) => (
                   <motion.img
                     variants={scaleAnimate}
                     key={index}
-                    className="h-[12rem] w-[10rem] object-cover"
+                    className="h-[5rem] w-[4rem] object-cover"
                     src={item}
                     alt=""
                     onClick={() => handleCurrentImage(index)}
@@ -162,12 +177,22 @@ const SingleProduct = () => {
                 <Select options={options} onChange={handleSelectChange} />
                 {/* </ClickOutsideHandler> */}
               </motion.div>
-              <motion.button
+
+              <motion.div
+                className="flex w-fit flex-col gap-2 font-notosanslao text-lg"
                 variants={fadeFromTopAnimate}
-                className="bg-[#024E82] px-10 py-5 text-white"
               >
-                ADD TO CART
-              </motion.button>
+                <button className="flex items-center gap-1 bg-sky-700 px-10 py-5 text-white transition duration-300 hover:scale-95 hover:bg-sky-800">
+                  <span>ເພີ່ມເຂົ້າກະເປົາ</span>
+                  <RiShoppingBag2Fill />
+                </button>
+                {/* <button className="flex items-center gap-1 bg-[#024E82] px-10 py-5 text-white">
+                  <span>ສົ່ງຫາພໍ່ຄ້າ</span>
+                  <IoLogoWhatsapp />
+                </button> */}
+                <OrderButton productData={productData} />
+              </motion.div>
+
               <motion.div
                 variants={fadeFromTopAnimate}
                 className="font-lato text-[14px] text-gray-700"
@@ -175,7 +200,7 @@ const SingleProduct = () => {
                 <p>
                   <span className="font-bold text-black">Category:</span>{" "}
                   {product?.categories.map((item, index) => (
-                    <span>
+                    <span key={index}>
                       {item}
                       {index < product.categories.length - 1 && ", "}
                     </span>

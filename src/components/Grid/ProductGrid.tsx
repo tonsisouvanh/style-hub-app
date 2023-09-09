@@ -11,10 +11,9 @@ const ProductGrid: React.FC<ProductGridProps> = ({ mockProducts }) => {
   if (!mockProducts) {
     return <h1>No products</h1>;
   }
-  // console.log(mockProducts?.map((item) => item.price));
 
   return (
-    <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
+    <div className="grid grid-cols-3 gap-4 md:grid-cols-5">
       {mockProducts.map((product) => (
         <div key={product.id}>
           <ProductCard product={product} />

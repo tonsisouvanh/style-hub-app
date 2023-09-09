@@ -90,9 +90,9 @@ const ProductsPage = () => {
         {/* Ad */}
         <div className="relative flex min-h-[10rem] w-full items-center justify-center sm:h-auto">
           <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/10">
-            <button className="cursor-pointer border-2 border-black bg-white/80 p-2 font-arimo font-bold">
+            {/* <button className="cursor-pointer border-2 border-black bg-white/80 p-2 font-arimo font-bold">
               Check out!
-            </button>
+            </button> */}
           </div>
           <img className="h-full w-full object-cover" src={adbanner} alt="" />
         </div>
