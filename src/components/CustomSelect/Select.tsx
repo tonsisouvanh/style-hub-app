@@ -3,16 +3,17 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Option } from "../../types";
 type SelectProps = {
   options: Option[];
-  onChange: (value: string) => void;
+  currOption: string;
+  onChange: (value: string, id: string | null) => void;
 };
 
-const Select: React.FC<SelectProps> = ({ options, onChange }) => {
+const Select: React.FC<SelectProps> = ({ options, onChange, currOption }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(currOption);
 
-  const handleOptionClick = (value: string) => {
+  const handleOptionClick = (value: string, id: string | null) => {
     setSelectedValue(value);
-    onChange(value);
+    onChange(value, id);
     setIsOpen(false);
   };
 
@@ -31,7 +32,6 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [setIsOpen]);
-
   return (
     <div ref={divRef} className="relative w-[15rem]">
       <div
@@ -60,17 +60,23 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
       </div>
 
       <div
-        className={`absolute z-10 mt-1 w-full rounded border border-gray-300 bg-white transition duration-300 ${
+        className={`absolute z-10 mt-1 w-full rounded border border-gray-300 bg-white transition duration-300 
+        
+        ${
           isOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible translate-y-20 opacity-0"
-        }`}
+        }
+        
+        `}
+        // variants={variants}
+        // animate={isOpen ? "open" : "closed"}
       >
         {options.map((option) => (
           <div
             key={option.value}
             className="cursor-pointer px-3 py-2 hover:bg-gray-100"
-            onClick={() => handleOptionClick(option.value)}
+            onClick={() => handleOptionClick(option.value, "")}
           >
             {option.label}
           </div>

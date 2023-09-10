@@ -15,12 +15,16 @@ import { CartItem, Option } from "../../types";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { RiShoppingBag2Fill } from "react-icons/ri";
 import OrderButton from "../../components/Button/OrderButton";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../feature/cart/CartSlice";
 const SingleProduct = () => {
+  const dispatch = useDispatch();
   const [showReview, setShowReview] = useState<boolean>(false);
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [currentImage, setCurrentImage] = useState<number>(0);
   const [productData, setProductData] = useState<CartItem[]>([]);
   const { id } = useParams<{ id: string }>();
+  const product = mockProducts.find((i) => i.id === id);
 
   const handleSelectChange = (value: string) => {
     setSelectedSize(value);
@@ -29,22 +33,38 @@ const SingleProduct = () => {
   const handleCurrentImage = (value: number) => {
     setCurrentImage(value);
   };
+  const handleAddToCart = () => {
+    const { id, title, price, discount } = product || {};
+    dispatch(
+      addToCart({
+        id: id || "",
+        image: product?.images[0] || "",
+        name: title || "",
+        price: price || 0,
+        quantity: 1,
+        discount: discount || { type: "", value: 0 },
+        selectedSize: product?.sizes[0] || "",
+        sizes: product?.sizes || [],
+      }),
+    );
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const product = mockProducts.find((i) => i.id === id);
 
   useEffect(() => {
     if (product) {
       // Create an array with a single item representing the selected product
       const productItem: CartItem = {
         id: product?.id,
+        image: product.images[0],
         name: product?.title,
         price: product?.price,
         discount: product?.discount,
         quantity: 1,
-        size: selectedSize,
+        selectedSize: selectedSize,
+        sizes: product.sizes,
       };
 
       // Set the productData as an array with a single item
@@ -56,6 +76,7 @@ const SingleProduct = () => {
     label: `${size}`,
     value: `${size}`,
   }));
+
   return (
     <>
       <div className="py-7">
@@ -63,7 +84,12 @@ const SingleProduct = () => {
           {/*====================== Product info ======================*/}
           <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start">
             {/* Left */}
-            <div className="relative w-[25rem] overflow-hidden border lg:w-[38rem]">
+            <motion.div
+              initial={"offscreen"}
+              animate={"onscreen"}
+              variants={fadeFromTopAnimate}
+              className="relative w-[25rem] overflow-hidden border lg:w-[38rem]"
+            >
               <motion.img
                 className="h-auto w-full object-cover"
                 src={product?.images[currentImage]}
@@ -72,10 +98,10 @@ const SingleProduct = () => {
                 animate="onscreen"
                 variants={fadeFromTopAnimate}
               />
-              <motion.div
-                initial={"offscreen"}
-                animate={"onscreen"}
-                transition={{ staggerChildren: 0.2 }}
+              <div
+                // initial={"offscreen"}
+                // animate={"onscreen"}
+                // transition={{ staggerChildren: 0.2 }}
                 className="no-scrollbar absolute bottom-0 left-0 flex w-full items-center justify-start gap-2 overflow-x-scroll bg-black/50 p-4 pt-5 opacity-80"
               >
                 {product?.images.map((item, index) => (
@@ -88,8 +114,8 @@ const SingleProduct = () => {
                     onClick={() => handleCurrentImage(index)}
                   />
                 ))}
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
             {/*====================== Right ======================*/}
             <motion.div
               initial={"offscreen"}
@@ -174,7 +200,12 @@ const SingleProduct = () => {
               </motion.p>
               <motion.div variants={fadeFromTopAnimate}>
                 {/* <ClickOutsideHandler > */}
-                <Select options={options} onChange={handleSelectChange} />
+                {/* <Select options={options} onChange={handleSelectChange} /> */}
+                <Select
+                  options={options}
+                  currOption={product.sizes[0]}
+                  onChange={(value) => handleSelectChange(value, product.id)}
+                />
                 {/* </ClickOutsideHandler> */}
               </motion.div>
 
@@ -182,7 +213,10 @@ const SingleProduct = () => {
                 className="flex w-fit flex-col gap-2 font-notosanslao text-lg"
                 variants={fadeFromTopAnimate}
               >
-                <button className="flex items-center gap-1 bg-sky-700 px-10 py-5 text-white transition duration-300 hover:scale-95 hover:bg-sky-800">
+                <button
+                  onClick={handleAddToCart}
+                  className="flex items-center gap-1 bg-sky-700 px-10 py-5 text-white transition duration-300 hover:scale-95 hover:bg-sky-800"
+                >
                   <span>ເພີ່ມເຂົ້າກະເປົາ</span>
                   <RiShoppingBag2Fill />
                 </button>
@@ -225,7 +259,7 @@ const SingleProduct = () => {
                 onClick={() => setShowReview(false)}
                 className={`${
                   showReview && "bg-gray-100 opacity-70"
-                } border px-6 py-3 font-arimo text-[16px] font-bold`}
+                } cursor-pointer border px-6 py-3 font-arimo text-[16px] font-bold`}
               >
                 Description
               </p>
@@ -233,7 +267,7 @@ const SingleProduct = () => {
                 onClick={() => setShowReview(true)}
                 className={`${
                   !showReview && "bg-gray-100 opacity-70"
-                } border px-6 py-3 font-arimo text-[16px]`}
+                } cursor-pointer border px-6 py-3 font-arimo text-[16px]`}
               >
                 Reviews(0)
               </p>

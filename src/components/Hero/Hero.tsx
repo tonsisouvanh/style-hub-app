@@ -55,7 +55,7 @@ const Hero: React.FC<SlideProps> = ({ slides }) => {
                   alt=""
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-end gap-5">
+                <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center gap-5">
                   {/* <div className="bg-white bg-opacity-50 p-7 backdrop-blur-lg rounded drop-shadow-lg space-y-2">
                     <h2 className="font-arimo text-2xl md:text-4xl lg:text-5xl font-bold text-black">
                       Welcome to Our Store

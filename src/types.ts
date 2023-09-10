@@ -5,12 +5,13 @@ export interface Category {
 
 export interface CartItem {
   id: string;
-  // image: string;
+  image: string;
   name: string;
   price: number;
   discount: Discount | null;
   quantity: number;
-  size: string;
+  selectedSize: string;
+  sizes: string[] | [];
 }
 
 export interface Slide {

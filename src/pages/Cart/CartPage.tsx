@@ -4,11 +4,59 @@ import { BsTrash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
-import { removeFromCart } from "../../feature/cart/CartSlice";
+import { removeFromCart, updateCartItem } from "../../feature/cart/CartSlice";
 import { FaHome } from "react-icons/fa";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import OrderButton from "../../components/Button/OrderButton";
+import Select from "../../components/CustomSelect/Select";
+
+const tableHeaders = [
+  {
+    label: "",
+    className:
+      "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
+  },
+  {
+    label: "Product",
+    className:
+      "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
+  },
+  {
+    label: "Price",
+    className:
+      "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
+  },
+  {
+    label: "Quantity",
+    className:
+      "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
+  },
+  {
+    label: "Size",
+    className:
+      "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
+  },
+  {
+    label: "Total",
+    className:
+      "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
+  },
+  {
+    label: "",
+    className:
+      "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
+  },
+];
+
+// Render the table headers using the map function
+<tr>
+  {tableHeaders.map((header, index) => (
+    <th key={index} scope="col" className={header.className}>
+      {header.label}
+    </th>
+  ))}
+</tr>;
 
 const CartPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart);
@@ -31,7 +79,15 @@ const CartPage = () => {
   const handleRemoveProduct = (id: string) => {
     dispatch(removeFromCart(id));
   };
+  const handleSelectChange = (value: string, id: string) => {
+    console.log(value, id);
 
+    const itemToUpdate = cartItems.find((item) => item.id === id);
+    if (itemToUpdate) {
+      const updatedItem = { ...itemToUpdate, selectedSize: value };
+      dispatch(updateCartItem(updatedItem));
+    }
+  };
   return (
     <div>
       <div className="rounded-div space-y-5 py-5">
@@ -51,54 +107,25 @@ const CartPage = () => {
           <span className=""> / </span>
           <span>Shopping Cart</span>
         </div>
-        {/* <div className="flex items-center gap-x-1 font-notosanslao text-[#024E82]"> */}
         <Link
           to="/all-products/all"
           className="sticky top-[4.6rem] flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
         >
-          <RiShoppingCartFill />
+          <RiShoppingCartFill className="text-2xl" />
 
           {cartItems && cartItems.length > 0 ? "ຊອບຕໍ່!" : "ຊອບເລີຍ!"}
         </Link>
-        {/* </div> */}
         {cartItems.length > 0 && cartItems ? (
           <>
-            <div className="hidden w-full overflow-x-scroll lg:flex">
+            <div className="hidden w-full lg:flex">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    ></th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    >
-                      Product
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    >
-                      Price
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    >
-                      Quantity
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    >
-                      Total
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    ></th>
+                    {tableHeaders.map((header, index) => (
+                      <th key={index} scope="col" className={header.className}>
+                        {header.label}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -136,6 +163,21 @@ const CartPage = () => {
                           )}
                         </div>
                       </td>
+                      <td>
+                        <Select
+                          options={
+                            product &&
+                            product.sizes.map((size) => ({
+                              value: size,
+                              label: size,
+                            }))
+                          }
+                          currOption={product.selectedSize}
+                          onChange={(value) =>
+                            handleSelectChange(value, product.id)
+                          }
+                        />
+                      </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className=" text-gray-900">{product.quantity}</div>
                       </td>
@@ -152,11 +194,11 @@ const CartPage = () => {
                         </div>
                       </td>
                       <td className="whitespace-nowrap">
-                        <div
-                          onClick={() => handleRemoveProduct(product.id)}
-                          className=" text-gray-900"
-                        >
-                          <TiDelete className="cursor-pointer text-lg" />
+                        <div className=" text-gray-900">
+                          <TiDelete
+                            onClick={() => handleRemoveProduct(product.id)}
+                            className="cursor-pointer text-lg"
+                          />
                         </div>
                       </td>
                     </tr>
@@ -164,7 +206,9 @@ const CartPage = () => {
                 </tbody>
               </table>
             </div>
-            <div className="w-full overflow-x-hidden lg:hidden">
+
+            {/* // * DATA GRID */}
+            <div className="w-full lg:hidden lg:overflow-x-hidden">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {cartItems.map((product) => (
                   <div
@@ -204,9 +248,23 @@ const CartPage = () => {
                         )}
                       </div>
                     </div>
-                    <div className="mb-2 w-fit border px-2 py-1 text-sm text-gray-600">
-                      {product.quantity}
+                    <div className="mb-2 flex items-center gap-12 font-notosanslao">
+                      {/* <span>Size: {product.selectedSize}</span> */}
+                      <span>ຈຳນວນ: {product.quantity} ໂຕ</span>
                     </div>
+                    <div className="mb-2">
+                      <Select
+                        options={product.sizes.map((size) => ({
+                          value: size,
+                          label: size,
+                        }))}
+                        currOption={product.selectedSize}
+                        onChange={(value) =>
+                          handleSelectChange(value, product.id)
+                        }
+                      />
+                    </div>
+
                     <div className="flex items-center justify-between font-notosanslao text-lg font-semibold text-cyan-700">
                       <span>
                         ລວມ: {formatPrice(product.price * product.quantity)}

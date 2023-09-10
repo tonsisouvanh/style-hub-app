@@ -1,10 +1,31 @@
+import { FacebookProvider, Page } from "react-facebook";
 import Logo from "../Logo/Logo";
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 w-full">
-      <div className="rounded-div py-10 px-4 sm:px-6 lg:py-20 lg:px-16 bg-[#E8E8E8]">
-        <div className="flex justify-center items-center">
+    <footer className="w-full bg-gray-100">
+      <div className="rounded-div bg-[#E8E8E8] px-4 py-10 sm:px-6 lg:px-16 lg:py-20">
+        <div className="flex items-center justify-center">
           <Logo />
+          {/* <div
+            className="fb-page"
+            data-href="https://www.facebook.com/profile.php?id=100092578272391"
+            data-tabs="timeline"
+            data-width=""
+            data-height="100"
+            data-small-header="true"
+            data-adapt-container-width="false"
+            data-hide-cover="false"
+            data-show-facepile="false"
+          >
+            <blockquote
+              cite="https://www.facebook.com/profile.php?id=100092578272391"
+              className="fb-xfbml-parse-ignore"
+            >
+              <a href="https://www.facebook.com/profile.php?id=100092578272391">
+                Cyberpunk996
+              </a>
+            </blockquote>
+          </div> */}
         </div>
 
         {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -83,7 +104,7 @@ const Footer = () => {
           </div> */}
         {/* </div> */}
 
-        <div className="flex gap-8 items-center justify-between border-t-black border-t-[0.5px] mt-20 pt-10">
+        <div className="mt-20 flex items-center justify-between gap-8 border-t-[0.5px] border-t-black pt-10">
           <div>
             <p>
               &copy; {new Date().getFullYear()} Developed by DevTons. All rights

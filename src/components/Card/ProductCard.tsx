@@ -5,7 +5,7 @@ import { Product } from "../../types";
 import { BsFillBagPlusFill, BsBagCheckFill } from "react-icons/bs";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
 import { RootState } from "../../store/store";
-
+import { BsSearch } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../feature/cart/CartSlice";
 
@@ -20,35 +20,39 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { id, title, price, discount } = product;
     dispatch(
       addToCart({
-        id,
+        id: id,
         image: product.images[0],
         name: title,
         price,
         quantity: 1,
         discount: discount,
+        selectedSize: product.sizes[0],
+        sizes: product.sizes,
       }),
     );
   };
-
   return (
     <>
       <div className="flex h-full flex-col justify-between gap-1 border hover:border-2">
         <Link to={`/single-product/${product.id}`} key={product.id}>
           <div className="flex flex-col items-center gap-2 ">
-            <div className="overflow-hidden">
+            <div className="group relative overflow-hidden">
+              <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
+                <BsSearch className="text-4xl text-cyan-700" />
+              </div>
               <img
                 src={product.images[0] || noimage}
                 alt={product.title}
                 className="h-full w-full object-cover transition duration-300 hover:scale-110"
               />
             </div>
-            <div className="flex flex-col items-center justify-center gap-1 font-notosanslao text-[0.8rem]  sm:text-[1rem] lg:text-[1.2rem]">
-              <p className="mt-2 font-bold  leading-none transition hover:text-gray-600">
+            <div className="flex-col items-center justify-center gap-1 px-1 font-notosanslao text-[0.7rem]  sm:text-[0.9rem] lg:text-[1rem]">
+              <p className="mb-2 mt-2 font-bold leading-none transition hover:text-gray-600">
                 {product.title}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-x-5 ">
                 <span
-                  className={`text-[0.8rem] text-gray-500  lg:text-[1.1rem] ${
+                  className={`text-[0.8rem] text-gray-500  lg:text-[0.9rem] ${
                     product?.discount && "line-through"
                   }`}
                 >
@@ -56,7 +60,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 </span>
 
                 {product?.discount && (
-                  <span className="text-[0.8rem] text-[#024E82] lg:text-[1.1rem]">
+                  <span className="text-[0.8rem] text-[#024E82] lg:text-[0.9rem]">
                     {formatPrice(
                       calculateDiscountedPrice(
                         product?.price,
