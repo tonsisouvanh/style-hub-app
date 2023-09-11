@@ -80,8 +80,6 @@ const CartPage = () => {
     dispatch(removeFromCart(id));
   };
   const handleSelectChange = (value: string, id: string) => {
-    console.log(value, id);
-
     const itemToUpdate = cartItems.find((item) => item.id === id);
     if (itemToUpdate) {
       const updatedItem = { ...itemToUpdate, selectedSize: value };

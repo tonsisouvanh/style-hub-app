@@ -3,13 +3,14 @@ import ProductGrid from "../../components/Grid/ProductGrid";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { useLocation, useParams } from "react-router-dom";
 import ProductSort from "../../components/ProductFilterSort/ProductSort";
-import { mockProducts } from "../../data/data";
 import CategoryControl from "../../components/Categories/CategoryControl";
 import { mockCategories } from "../../data/data";
 import { Product } from "../../types";
 import ProductFilter from "../../components/ProductFilterSort/ProductFilter";
 import { BiFilterAlt } from "react-icons/bi";
 import { adbanner } from "../../assets/images";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 const options = [
   { label: "ເຄື່ອງມາໃໝ່", value: "newarrival" },
   { label: "ລາຄາ: ໜ້ອຍ - ຫຼາຍ", value: "asc" },
@@ -18,6 +19,7 @@ const options = [
 ];
 
 const ProductsPage = () => {
+  const { data: products } = useSelector((state: RootState) => state.products);
   const location = useLocation();
   const { category } = useParams<{ category: string }>();
   const [selectedCate, setSelectedCate] = useState(category || "all");
@@ -42,6 +44,10 @@ const ProductsPage = () => {
   }, []);
 
   useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
+
+  useEffect(() => {
     const sortProducts = (products: Product[], sortOption: string) => {
       const sortedProducts = [...products]; // Create a new array to avoid mutating the original
       switch (sortOption) {
@@ -61,15 +67,15 @@ const ProductsPage = () => {
     let sortedProducts: Product[] = [];
 
     if (selectedCate === "all") {
-      sortedProducts = mockProducts;
+      sortedProducts = products;
     } else if (selectedCate === "sale") {
-      sortedProducts = mockProducts.filter(
+      sortedProducts = products.filter(
         (pro) => pro.discount && pro.discount !== null,
       );
     } else if (selectedCate === "arrival") {
-      sortedProducts = mockProducts.filter((pro) => pro.isNewArrival === true);
+      sortedProducts = products.filter((pro) => pro.isNewArrival === true);
     } else {
-      sortedProducts = mockProducts.filter((pro) =>
+      sortedProducts = products.filter((pro) =>
         pro.categories.includes(selectedCate),
       );
     }
@@ -88,7 +94,7 @@ const ProductsPage = () => {
           </h2>
         </div>
         {/* Ad */}
-        <div className="relative flex min-h-[10rem] w-full items-center justify-center sm:h-auto">
+        <div className="dflex relative hidden min-h-[10rem] w-full items-center justify-center sm:h-auto">
           <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/10">
             {/* <button className="cursor-pointer border-2 border-black bg-white/80 p-2 font-arimo font-bold">
               Check out!
@@ -127,7 +133,7 @@ const ProductsPage = () => {
             selectedCate={selectedCate}
           />
         </div>
-        <ProductGrid mockProducts={filteredProducts || []} />
+        <ProductGrid products={filteredProducts || []} />
         {/* <Pagination /> */}
       </div>
     </div>

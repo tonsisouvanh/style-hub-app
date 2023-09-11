@@ -3,7 +3,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Option } from "../../types";
 type SelectProps = {
   options: Option[];
-  currOption: string;
+  currOption: string | "";
   onChange: (value: string, id: string | null) => void;
 };
 
