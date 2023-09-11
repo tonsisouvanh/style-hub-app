@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Category } from "../../types";
+import React, { useState, useEffect } from "react";
+import { Category, Product } from "../../types";
 interface CategoryControlProps {
-  categories: Category[];
+  products: Product[];
   onSelectCategory: (category: string) => void;
   selectedCate: string;
 }
@@ -48,93 +48,56 @@ const fixedCategories: fixedCategory[] = [
 ];
 
 const CategoryControl: React.FC<CategoryControlProps> = ({
-  categories,
+  products,
   onSelectCategory,
   selectedCate,
 }) => {
+  const [categories, setCategories] = useState<Category[]>([]);
   const handleCategoryClick = (category: string) => {
     onSelectCategory(category);
   };
+
+  useEffect(() => {
+    const distinctCategoriesSet = new Set<string>();
+
+    products.forEach((product) => {
+      const { categories } = product;
+      categories.forEach((category) => {
+        distinctCategoriesSet.add(category);
+      });
+    });
+
+    const distinctCategories = Array.from(distinctCategoriesSet);
+
+    const categoryObjects = distinctCategories.map((category) => ({
+      id: category,
+      name: category,
+    }));
+
+    setCategories(categoryObjects);
+  }, [products]);
 
   return (
     <div
       className="flex items-center gap-2 overflow-x-scroll py-2 font-notosanslao"
       id=""
     >
-      {/* <div
-        className={`${
-          selectedCate === "all" &&
-          "bg-[#024E82] text-sm text-white md:text-base"
-        } cursor-pointer rounded-full border px-3 py-1`}
-        onClick={() => handleCategoryClick("all")}
-      >
-        <span>ທັງໝົດ</span>
-      </div>
-      <div
-        className={`${
-          selectedCate === "sale" &&
-          "bg-[#024E82] text-sm text-white md:text-base"
-        } cursor-pointer rounded-full border px-3 py-1`}
-        onClick={() => handleCategoryClick("sale")}
-      >
-        <span>ຫຼຸດລາຄາ</span>
-      </div>
-      <div
-        className={`${
-          selectedCate === "arrival" &&
-          "bg-[#024E82] text-sm text-white md:text-base"
-        } cursor-pointer rounded-full border px-3 py-1`}
-        onClick={() => handleCategoryClick("arrival")}
-      >
-        <span>ເຄື່ອງມາໃໝ່</span>
-      </div>
-
-      <div
-        className={`${
-          selectedCate === "tops" &&
-          "bg-[#024E82] text-sm text-white md:text-base"
-        } cursor-pointer rounded-full border px-3 py-1`}
-        onClick={() => handleCategoryClick("tops")}
-      >
-        <span>ເສື້ອ</span>
-      </div>
-      <div
-        className={`${
-          selectedCate === "bottoms" &&
-          "bg-[#024E82] text-sm text-white md:text-base"
-        } cursor-pointer rounded-full border px-3 py-1`}
-        onClick={() => handleCategoryClick("bottoms")}
-      >
-        <span>ສົ້ງ</span>
-      </div>
-      <div
-        className={`${
-          selectedCate === "shoes" &&
-          "bg-[#024E82] text-sm text-white md:text-base"
-        } cursor-pointer rounded-full border px-3 py-1`}
-        onClick={() => handleCategoryClick("shoes")}
-      >
-        <span>ເກີບ</span>
-      </div> */}
-
-      {/* <div> */}
       <CategoryButton
         fixedCategories={fixedCategories}
         selected={selectedCate}
         onClick={handleCategoryClick}
       />
-      {/* </div> */}
 
       {categories.map((category) => (
         <div
           key={category.id}
           className={`whitespace-nowrap transition hover:bg-[#024E82] hover:text-white ${
-            selectedCate === category.title && "bg-[#024E82] text-white"
+            selectedCate === category.name && "bg-[#024E82] text-white"
           } cursor-pointer whitespace-nowrap rounded-full border px-3 py-1`}
-          onClick={() => handleCategoryClick(category.title)}
+          onClick={() => handleCategoryClick(category.name)}
         >
           <span className="text-sm md:text-base">
-            {category.title[0] + category.title.slice(1)}
+            {category.name[0] + category.name.slice(1)}
           </span>
         </div>
       ))}

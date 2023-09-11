@@ -359,25 +359,6 @@ export const mockProducts = [
     reviews: [],
   },
   {
-    id: "product-3",
-    title: "Classic Denim Jeans",
-    description: "Timeless and durable denim jeans for everyday wear.",
-    price: 149000, // Price in LAK
-    discount: {
-      type: "fixed",
-      value: 30000,
-    },
-    images: [pro10, pro11, pro12], // Replace with actual image URLs or paths
-    colors: ["Gray", "Black", "Navy"],
-    sizes: ["28", "30", "32", "34"],
-    categories: ["bottoms", "Jeans"], // Replaced with category title
-    brand: "Your Brand",
-    isNewArrival: false,
-    isFeatured: false,
-    ratings: 4.2,
-    reviews: [],
-  },
-  {
     id: "product-4",
     title: "Casual Sneakers",
     description: "Stylish and comfortable sneakers for casual outings.",
@@ -504,43 +485,43 @@ export const mockProducts = [
 export const mockCategories: Category[] = [
   {
     id: "category-1",
-    title: "T-Shirts",
+    name: "T-Shirts",
   },
   {
     id: "category-2",
-    title: "Hoodies",
+    name: "Hoodies",
   },
   {
     id: "category-3",
-    title: "Jeans",
+    name: "Jeans",
   },
   {
     id: "category-4",
-    title: "Footwear",
+    name: "Footwear",
   },
   {
     id: "category-5",
-    title: "Blouses",
+    name: "Blouses",
   },
   {
     id: "category-6",
-    title: "Bags",
+    name: "Bags",
   },
   {
     id: "category-7",
-    title: "Polos",
+    name: "Polos",
   },
   {
     id: "category-8",
-    title: "Formal Shoes",
+    name: "Formal Shoes",
   },
   {
     id: "category-9",
-    title: "Sweaters",
+    name: "Sweaters",
   },
   {
     id: "category-10",
-    title: "Jackets",
+    name: "Jackets",
   },
 ];
 

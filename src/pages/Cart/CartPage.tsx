@@ -4,7 +4,11 @@ import { BsTrash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
-import { removeFromCart, updateCartItem } from "../../feature/cart/CartSlice";
+import {
+  clearCart,
+  removeFromCart,
+  updateCartItem,
+} from "../../feature/cart/CartSlice";
 import { FaHome } from "react-icons/fa";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -85,6 +89,9 @@ const CartPage = () => {
       const updatedItem = { ...itemToUpdate, selectedSize: value };
       dispatch(updateCartItem(updatedItem));
     }
+  };
+  const handleClearallitems = () => {
+    dispatch(clearCart());
   };
   return (
     <div>
@@ -288,6 +295,15 @@ const CartPage = () => {
 
         {/* //? Total section */}
         <div className="max-w-[30rem] rounded-lg bg-white p-4 font-notosanslao">
+          {cartItems.length > 0 && cartItems && (
+            <button
+              onClick={handleClearallitems}
+              className="mb-5 flex items-center gap-1 rounded-md bg-red-600 p-1 text-white hover:bg-red-700"
+            >
+              <BsTrash />
+              ລົບທັງໝົດ
+            </button>
+          )}
           <div className="mb-4 text-2xl font-semibold text-gray-800">
             ລວມລາຄາສິນຄ້າ
           </div>

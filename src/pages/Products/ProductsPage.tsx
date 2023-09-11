@@ -130,7 +130,7 @@ const ProductsPage = () => {
         </div>
         <div>
           <CategoryControl
-            categories={mockCategories}
+            products={products}
             onSelectCategory={onSelectCategory}
             selectedCate={selectedCate}
           />

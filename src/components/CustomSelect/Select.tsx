@@ -39,8 +39,10 @@ const Select: React.FC<SelectProps> = ({ options, onChange, currOption }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedValue ? (
-          <div className="flex items-center justify-between">
-            {options.find((option) => option.value === selectedValue)?.label}
+          <div className="flex items-center justify-between text-xl">
+            {options
+              .find((option) => option.value === selectedValue)
+              ?.label.toUpperCase()}
             <IoIosArrowDown
               className={`transition duration-300 ${
                 isOpen ? "-rotate-180" : ""
@@ -75,10 +77,10 @@ const Select: React.FC<SelectProps> = ({ options, onChange, currOption }) => {
         {options.map((option) => (
           <div
             key={option.value}
-            className="cursor-pointer px-3 py-2 hover:bg-gray-100"
+            className="cursor-pointer px-3 py-2 text-xl hover:bg-gray-100"
             onClick={() => handleOptionClick(option.value, "")}
           >
-            {option.label}
+            {option.label.toUpperCase()}
           </div>
         ))}
       </div>

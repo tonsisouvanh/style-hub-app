@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <Link to={`/single-product/${product.id}`} key={product.id}>
             <div className="flex flex-col items-center gap-2 ">
               <div className="group relative overflow-hidden">
-                <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
+                <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
                   <BsSearch className="text-4xl text-cyan-700" />
                 </div>
                 <img
