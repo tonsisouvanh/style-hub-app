@@ -67,7 +67,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
             onClick={() => setSubmenuOpen(!submenuOpen)}
             className="flex cursor-pointer items-center justify-center font-bold"
           >
-            <AiTwotoneShopping className="text-2xl text-cyan-700" />
+            <AiTwotoneShopping className="text-2xl text-black" />
             <span>Shop</span>
             <MdOutlineKeyboardArrowRight
               className={`transition-transform ${

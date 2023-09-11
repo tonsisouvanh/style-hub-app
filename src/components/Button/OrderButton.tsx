@@ -13,7 +13,8 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
   const dispatch = useDispatch();
   const handleOrderClick = () => {
     if (productData && productData.length > 0) {
-      const merchantPhoneNumber = "+8562056300100";
+      // const merchantPhoneNumber = "+8562056300100";
+      const merchantPhoneNumber = "+8562056373308";
 
       let whatsappMessage = `ສະບາຍດີຂໍຖາມຂໍ້ມູນສິນຄ້າ: \n\n`;
 
@@ -26,9 +27,8 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
         if (item.discount) {
           whatsappMessage += `ລາຄາຫຼຸດ: ${formatPrice(
             calculateDiscountedPrice(item.price, item.discount),
-          )}%\n`;
+          )}\n`;
         }
-        console.log(whatsappMessage);
         whatsappMessage += `\n`;
       });
       const encodedMessage = encodeURIComponent(whatsappMessage);

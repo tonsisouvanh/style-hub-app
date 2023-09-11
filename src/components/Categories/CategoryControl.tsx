@@ -40,7 +40,7 @@ const CategoryButton: React.FC<CategoryButtonsProps> = ({
 
 const fixedCategories: fixedCategory[] = [
   { id: "all", label: "ທັງໝົດ" },
-  { id: "sale", label: "ຫຼຸດລາຄາ" },
+  { id: "sale", label: "Sale" },
   { id: "arrival", label: "ເຄື່ອງມາໃໝ່" },
   { id: "tops", label: "ເສື້ອ" },
   { id: "bottoms", label: "ສົ້ງ" },

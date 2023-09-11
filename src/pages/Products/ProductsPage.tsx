@@ -76,7 +76,7 @@ const ProductsPage = () => {
       sortedProducts = products.filter((pro) => pro.isNewArrival === true);
     } else {
       sortedProducts = products.filter((pro) =>
-        pro.categories.includes(selectedCate),
+        pro.categories.includes(selectedCate.toLowerCase()),
       );
     }
 
@@ -103,7 +103,9 @@ const ProductsPage = () => {
           <img className="h-full w-full object-cover" src={adbanner} alt="" />
         </div>
         <div className="flex items-center justify-between font-notosanslao">
-          <span className="text-sm text-gray-600">Result: 397 items</span>
+          <span className="text-sm text-gray-600">
+            Result: {products.length} items
+          </span>
           <div className="flex items-center gap-8 text-[1rem]">
             <div
               onClick={() => handleOpenFilter(true)}
