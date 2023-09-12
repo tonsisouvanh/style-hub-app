@@ -8,8 +8,9 @@ import SearchBar from "../SearchBar/SearchBar";
 import Logo from "../Logo/Logo";
 import { AiFillHome } from "react-icons/ai";
 import { menuItems } from "../../data/data";
-import { mockCategories } from "../../data/data";
+import { Category } from "../../types";
 type MobileHeaderProps = {
+  categories: Category[];
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   toggleMenu: () => void;
@@ -17,6 +18,7 @@ type MobileHeaderProps = {
 };
 
 const MobileHeader: React.FC<MobileHeaderProps> = ({
+  categories,
   isOpen,
   setIsOpen,
   toggleMenu,
@@ -90,14 +92,14 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 >
                   ເຄື່ອງທັງໝົດ
                 </Link>
-                {mockCategories.map((item) => (
+                {categories.map((item) => (
                   <Link
                     key={item.id}
                     className="hover:opacity-70"
                     onClick={handleNavbarClose}
-                    to={`/all-products/${item.title}`}
+                    to={`/all-products/${item.name}`}
                   >
-                    {item.title}
+                    {item.name}
                   </Link>
                 ))}
               </div>

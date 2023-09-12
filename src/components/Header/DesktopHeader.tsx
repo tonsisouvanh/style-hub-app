@@ -10,7 +10,10 @@ import { fadeFromTopAnimate } from "../../animation";
 import Logo from "../Logo/Logo";
 import { menuItems } from "../../data/data";
 import { RiShoppingBag2Fill } from "react-icons/ri";
+import { Category } from "../../types";
 type DesktopHeaderProps = {
+  categories: Category[];
+
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   toggleMenu: () => void;
@@ -18,6 +21,7 @@ type DesktopHeaderProps = {
 };
 
 const DesktopHeader: React.FC<DesktopHeaderProps> = ({
+  categories,
   toggleMenu,
   handleNavbarClose,
 }) => {
@@ -47,7 +51,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 
           {/* Nav menu */}
           <ul className="hidden items-center gap-5 text-[1em] lg:flex">
-            <li className="relative flex w-fit flex-col items-center">
+            <li className="group relative flex w-fit flex-col items-center hover:border-b-2 hover:border-b-black">
               <Link
                 to="/all-products/all"
                 onClick={() => setSubmenuOpen(!submenuOpen)}
@@ -63,15 +67,14 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
               </Link>
 
               {/* <div
-                onMouseLeave={() => setSubmenuOpen(false)}
-                className="group absolute left-0 top-10 w-fit"
+                // onMouseLeave={() => setSubmenuOpen(false)}
+                className="absolute left-0 top-6 hidden w-fit bg-transparent group-hover:flex"
               >
                 <div
-                  className={`max-h-0 origin-top scale-y-0 transform overflow-hidden bg-white text-black opacity-0 transition-all duration-300 ${
-                    submenuOpen ? "max-h-full scale-y-100 opacity-100" : null
-                  }`}
+                  className={`h-auto overflow-hidden border bg-white p-4
+                  `}
                 >
-                  <div className="flex items-start justify-start gap-5 p-5">
+                  <div className="flex items-start justify-start gap-5 ">
                     <Link to="/all-products/all">
                       <span>ທັງໝົດ</span>
                     </Link>

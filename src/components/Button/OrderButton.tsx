@@ -22,13 +22,13 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
         whatsappMessage += `ລະຫັດ: ${item.id}\n`;
         whatsappMessage += `ຊື່: ${item.name}\n`;
         whatsappMessage += `ລາຄາປົກກະຕຶ: ${formatPrice(item.price)} ກີບ\n`;
-        whatsappMessage += `Size: ${item.selectedSize}      ຈຳນວນ: ${item.quantity}\n`;
-
         if (item.discount) {
           whatsappMessage += `ລາຄາຫຼຸດ: ${formatPrice(
             calculateDiscountedPrice(item.price, item.discount),
           )}\n`;
         }
+        whatsappMessage += `Size: ${item.selectedSize}      ຈຳນວນ: ${item.quantity}\n`;
+
         whatsappMessage += `\n`;
       });
       const encodedMessage = encodeURIComponent(whatsappMessage);
@@ -48,14 +48,15 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
       dispatch(clearCart());
       return;
     }
-    console.log("No info to send");
+    console.log("productData");
   };
   return (
     <button
+      disabled={productData && productData.length > 0 ? false : true}
       className="font-300 mt-4 flex w-full items-center justify-center gap-1 bg-[#438642] py-2 font-notosanslao text-lg text-white transition duration-300 hover:scale-95 hover:bg-[#438642]/70"
       onClick={handleOrderClick}
     >
-      <IoLogoWhatsapp className="" />
+      <IoLogoWhatsapp className="text-2xl" />
 
       <span>Whatsapp Now!</span>
     </button>

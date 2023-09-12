@@ -4,7 +4,6 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { useLocation, useParams } from "react-router-dom";
 import ProductSort from "../../components/ProductFilterSort/ProductSort";
 import CategoryControl from "../../components/Categories/CategoryControl";
-import { mockCategories } from "../../data/data";
 import { Product } from "../../types";
 import ProductFilter from "../../components/ProductFilterSort/ProductFilter";
 import { BiFilterAlt } from "react-icons/bi";

@@ -88,7 +88,7 @@ const SingleProduct = () => {
       {status === "loading" ? (
         <LoadingSpinner />
       ) : (
-        <div className="py-7">
+        <div className="py-7 font-notosanslao">
           <div className="rounded-div space-y-32">
             {/*====================== Product info ======================*/}
             <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start">
@@ -161,7 +161,7 @@ const SingleProduct = () => {
                 </motion.div>
                 <motion.h2
                   variants={fadeFromTopAnimate}
-                  className="font-notosanslao text-[36px] font-bold"
+                  className="text-[36px] font-bold"
                 >
                   {product?.title}
                 </motion.h2>
@@ -220,15 +220,15 @@ const SingleProduct = () => {
                 </motion.div>
 
                 <motion.div
-                  className="flex w-fit flex-col gap-2 font-notosanslao text-lg"
+                  className="flex w-fit flex-col gap-2 text-lg"
                   variants={fadeFromTopAnimate}
                 >
                   <button
                     onClick={handleAddToCart}
                     className="flex items-center gap-1 bg-sky-700 px-10 py-5 text-white transition duration-300 hover:scale-95 hover:bg-sky-800"
                   >
+                    <RiShoppingBag2Fill className="text-2xl" />
                     <span>ເພີ່ມເຂົ້າກະເປົາ</span>
-                    <RiShoppingBag2Fill />
                   </button>
                   {/* <button className="flex items-center gap-1 bg-[#024E82] px-10 py-5 text-white">
                   <span>ສົ່ງຫາພໍ່ຄ້າ</span>
@@ -283,9 +283,7 @@ const SingleProduct = () => {
                 </p>
               </div>
               {showReview ? (
-                <p className="border px-14 py-16 font-notosanslao">
-                  ບໍ່ມີ Review
-                </p>
+                <p className="border px-14 py-16">ບໍ່ມີ Review</p>
               ) : (
                 <p className="border px-14 py-16 ">{product?.description}</p>
               )}
