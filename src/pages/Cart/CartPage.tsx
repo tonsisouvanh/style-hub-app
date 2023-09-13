@@ -6,6 +6,8 @@ import { RootState } from "../../store/store";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
 import {
   clearCart,
+  decrementQuantity,
+  incrementQuantity,
   removeFromCart,
   updateCartItem,
 } from "../../feature/cart/CartSlice";
@@ -14,6 +16,9 @@ import { RiShoppingCartFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import OrderButton from "../../components/Button/OrderButton";
 import Select from "../../components/CustomSelect/Select";
+import { noimage } from "../../assets/images";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const tableHeaders = [
   {
@@ -32,12 +37,12 @@ const tableHeaders = [
       "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
   },
   {
-    label: "Quantity",
+    label: "Size",
     className:
       "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
   },
   {
-    label: "Size",
+    label: "Quantity",
     className:
       "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
   },
@@ -65,13 +70,14 @@ const tableHeaders = [
 const CartPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-
   const subtotal = cartItems?.reduce((total, item) => {
     let discountedPrice = item.price;
 
     if (item.discount?.type === "percentage") {
       const discountAmount = (item.price * item.discount?.value) / 100;
       discountedPrice = item.price - discountAmount;
+    } else {
+      discountedPrice = item.price - (item.discount?.value || 0);
     }
 
     return total + discountedPrice * item.quantity;
@@ -93,6 +99,14 @@ const CartPage = () => {
   const handleClearallitems = () => {
     dispatch(clearCart());
   };
+  const handleAddQuantity = (id: string, action: string | "incr") => {
+    if (id) {
+      action === "incr"
+        ? dispatch(incrementQuantity(id))
+        : dispatch(decrementQuantity(id));
+    }
+  };
+  console.log(cartItems);
   return (
     <div>
       <div className="rounded-div space-y-5 py-5">
@@ -114,7 +128,7 @@ const CartPage = () => {
         </div>
         <Link
           to="/all-products/all"
-          className="sticky top-[4.6rem] flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
+          className="sticky top-[4.6rem] z-50 flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
         >
           <RiShoppingCartFill className="text-2xl" />
 
@@ -137,10 +151,14 @@ const CartPage = () => {
                   {cartItems.map((product) => (
                     <tr className="text-md" key={product.id}>
                       <td className="whitespace-nowrap py-4 pl-2">
-                        <img
+                        <LazyLoadImage
+                          className="h-[5rem] w-[5rem] rounded object-cover"
                           src={product.image}
                           alt={product.name}
-                          className="h-[5rem] w-[5rem] rounded object-cover"
+                          effect="blur"
+                          width="100%"
+                          height="100%"
+                          placeholderSrc={noimage} // Set your placeholder image
                         />
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
@@ -184,7 +202,26 @@ const CartPage = () => {
                         />
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
-                        <div className=" text-gray-900">{product.quantity}</div>
+                        <div className="flex items-center gap-2">
+                          <div className=" border px-2 py-0 text-gray-900">
+                            {product.quantity}
+                          </div>
+
+                          <div className="flex items-center gap-5">
+                            <AiOutlinePlus
+                              className="cursor-pointer hover:text-cyan-700"
+                              onClick={() =>
+                                handleAddQuantity(product.id, "incr")
+                              }
+                            />
+                            <AiOutlineMinus
+                              className="cursor-pointer hover:text-cyan-700"
+                              onClick={() =>
+                                handleAddQuantity(product.id, "decr")
+                              }
+                            />
+                          </div>
+                        </div>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className=" text-gray-900">
@@ -200,9 +237,9 @@ const CartPage = () => {
                       </td>
                       <td className="whitespace-nowrap">
                         <div className=" text-gray-900">
-                          <TiDelete
+                          <BsTrash
                             onClick={() => handleRemoveProduct(product.id)}
-                            className="cursor-pointer text-lg"
+                            className="cursor-pointer text-lg text-red-600"
                           />
                         </div>
                       </td>
@@ -221,10 +258,14 @@ const CartPage = () => {
                     className="rounded-lg border bg-white p-4"
                   >
                     <div className="h-50 mb-4 w-full">
-                      <img
+                      <LazyLoadImage
+                        className="h-full w-full rounded object-cover"
                         src={product.image}
                         alt={product.name}
-                        className="h-full w-full rounded object-cover"
+                        effect="blur"
+                        // width="100%"
+                        // height="100%"
+                        placeholderSrc={noimage} // Set your placeholder image
                       />
                     </div>
                     <div className="mb-2 text-lg font-semibold text-gray-800">
@@ -255,7 +296,23 @@ const CartPage = () => {
                     </div>
                     <div className="mb-2 flex items-center gap-12 font-notosanslao">
                       {/* <span>Size: {product.selectedSize}</span> */}
-                      <span>ຈຳນວນ: {product.quantity} ໂຕ</span>
+                      <div>
+                        ຈຳນວນ:
+                        <span className="mx-2 border px-3 py-0">
+                          {product.quantity}
+                        </span>
+                        ໂຕ
+                      </div>
+                      <div className="flex items-center gap-5">
+                        <AiOutlinePlus
+                          className="cursor-pointer hover:text-cyan-700"
+                          onClick={() => handleAddQuantity(product.id, "incr")}
+                        />
+                        <AiOutlineMinus
+                          className="cursor-pointer hover:text-cyan-700"
+                          onClick={() => handleAddQuantity(product.id, "decr")}
+                        />
+                      </div>
                     </div>
                     <div className="mb-2">
                       <Select
@@ -307,10 +364,10 @@ const CartPage = () => {
           <div className="mb-4 text-2xl font-semibold text-gray-800">
             ລວມລາຄາສິນຄ້າ
           </div>
-          {/* <div className="mb-2 flex justify-between">
+          <div className="mb-2 flex justify-between">
             <span className="text-gray-600">Subtotal:</span>
-            <span className="text-gray-800">{formatPrice(20000)}</span>
-          </div> */}
+            <span className="text-gray-800">{formatPrice(subtotal)}</span>
+          </div>
           {/* <div className="mb-2 flex justify-between">
             <span className="text-gray-600">Shipping Fee:</span>
             <span className="text-gray-800">{formatPrice(0)}</span>

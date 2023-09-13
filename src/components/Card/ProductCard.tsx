@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { noimage } from "../../assets/images";
 import { Product } from "../../types";
@@ -8,6 +8,7 @@ import { RootState } from "../../store/store";
 import { BsSearch } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../feature/cart/CartSlice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface ProductCardProps {
   product: Product;
@@ -32,7 +33,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       }),
     );
   };
-
   return (
     <>
       {status === "loading" ? (
@@ -46,14 +46,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="flex h-full flex-col justify-between gap-1 border hover:border-2">
           <Link to={`/single-product/${product.id}`} key={product.id}>
             <div className="flex flex-col items-center gap-2 ">
-              <div className="group relative overflow-hidden">
+              <div className="relative h-auto w-full overflow-hidden">
                 <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
                   <BsSearch className="text-4xl text-cyan-700" />
                 </div>
-                <img
+                <LazyLoadImage
                   src={product.images[0] || noimage}
                   alt={product.title}
+                  width="100%"
+                  height="100%"
+                  effect="blur"
                   className="h-full w-full object-cover transition duration-300 hover:scale-110"
+                  placeholderSrc={noimage}
                 />
               </div>
               <div className="flex-col items-center justify-center gap-1 px-1 font-notosanslao text-[0.7rem]  sm:text-[0.9rem] lg:text-[1rem]">

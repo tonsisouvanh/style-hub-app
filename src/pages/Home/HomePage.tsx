@@ -6,8 +6,7 @@ import { slides } from "../../data/data";
 import Service from "../../components/Services/Service";
 import Promotion from "../../components/Promotion/Promotion";
 import Categories from "../../components/Categories/Categories";
-import { mockProducts } from "../../data/data";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 const Home = () => {

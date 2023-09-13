@@ -8,7 +8,6 @@ import {
   scaleAnimate,
 } from "../../animation";
 import { Link, useParams } from "react-router-dom";
-import { mockProducts } from "../../data/data";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
 import { FaHome } from "react-icons/fa";
 import { CartItem, Option } from "../../types";
@@ -19,6 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../feature/cart/CartSlice";
 import { RootState } from "../../store/store";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { noimage } from "../../assets/images";
+
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const { data: products, status } = useSelector(
@@ -97,16 +99,25 @@ const SingleProduct = () => {
                 initial={"offscreen"}
                 animate={"onscreen"}
                 variants={fadeFromTopAnimate}
-                className="relative w-[25rem] overflow-hidden border lg:w-[38rem]"
+                className="relative h-fit w-auto overflow-hidden lg:w-[38rem]"
               >
-                <motion.img
+                <LazyLoadImage
+                  className="h-auto w-full object-cover"
+                  src={product?.images[currentImage]}
+                  alt={product?.title}
+                  placeholderSrc={noimage} // Set your placeholder image
+                  effect="blur"
+                  width="100%"
+                  height="100%"
+                />
+                {/* <motion.img
                   className="h-auto w-full object-cover"
                   src={product?.images[currentImage]}
                   alt=""
                   initial="offscreen"
                   animate="onscreen"
                   variants={fadeFromTopAnimate}
-                />
+                /> */}
                 <div
                   // initial={"offscreen"}
                   // animate={"onscreen"}
@@ -114,11 +125,12 @@ const SingleProduct = () => {
                   className="no-scrollbar absolute bottom-0 left-0 flex w-full items-center justify-start gap-2 overflow-x-scroll bg-black/50 p-4 pt-5 opacity-80"
                 >
                   {product?.images.map((item, index) => (
-                    <motion.img
-                      variants={scaleAnimate}
+                    <LazyLoadImage
+                      // variants={scaleAnimate}
                       key={index}
                       className="h-[5rem] w-[4rem] object-cover"
                       src={item}
+                      effect="blur"
                       alt=""
                       onClick={() => handleCurrentImage(index)}
                     />

@@ -3,10 +3,10 @@ const SearchBar = () => {
     <div className="search flex items-center justify-center">
       <input
         type="text"
-        className="flex-1 search__input bg-gray-200 border border-gray-300 text-gray-700 py-[0.3em] px-4 rounded-l-full w-64 outline-none focus:outline-none"
+        className="search__input w-64 flex-1 rounded-l-full border border-gray-300 bg-gray-200 px-4 py-[0.3em] text-gray-700 outline-none focus:outline-none"
         placeholder="ພິມຄົ້ນຫາ"
       />
-      <button className="search__button bg-black text-white py-2 px-4 rounded-r-full hover:bg-gray-800">
+      <button className="search__button rounded-r-full bg-black px-4 py-2 text-white hover:bg-gray-800">
         <svg
           className="search__icon h-5 w-5 fill-current"
           aria-hidden="true"

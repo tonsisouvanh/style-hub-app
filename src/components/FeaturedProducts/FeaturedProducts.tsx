@@ -10,6 +10,8 @@ import "./FeaturedProduct.css";
 import { Product } from "../../types";
 import { noimage } from "../../assets/images";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 interface ProductProps {
   products: Product[];
   featuredTitle: string;
@@ -118,10 +120,18 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                         >
                           <div className="flex flex-col items-center transition duration-300 hover:scale-105 ">
                             <div className="">
-                              <img
+                              {/* <img
                                 src={product.images[0] || noimage}
                                 alt={product.title}
                                 className="h-full w-full object-cover"
+                              /> */}
+
+                              <LazyLoadImage
+                                className="h-full w-full object-cover"
+                                src={product.images[0] || noimage}
+                                alt={product.title}
+                                effect="blur"
+                                placeholderSrc={noimage} // Set your placeholder image
                               />
                             </div>
                             <div className="font-notosanslao">

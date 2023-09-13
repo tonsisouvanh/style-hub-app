@@ -13,43 +13,74 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
   const dispatch = useDispatch();
   const handleOrderClick = () => {
     if (productData && productData.length > 0) {
-      // const merchantPhoneNumber = "+8562056300100";
       const merchantPhoneNumber = "+8562056373308";
 
       let whatsappMessage = `ສະບາຍດີຂໍຖາມຂໍ້ມູນສິນຄ້າ: \n\n`;
 
-      productData.forEach((item) => {
-        whatsappMessage += `ລະຫັດ: ${item.id}\n`;
-        whatsappMessage += `ຊື່: ${item.name}\n`;
-        whatsappMessage += `ລາຄາປົກກະຕຶ: ${formatPrice(item.price)} ກີບ\n`;
-        if (item.discount) {
-          whatsappMessage += `ລາຄາຫຼຸດ: ${formatPrice(
-            calculateDiscountedPrice(item.price, item.discount),
-          )}\n`;
-        }
-        whatsappMessage += `Size: ${item.selectedSize}      ຈຳນວນ: ${item.quantity}\n`;
+      let totalOrderAmount = 0; // Initialize the total order amount
 
+      // productData.forEach((item) => {
+      //   whatsappMessage += `ລະຫັດ: ${item.id}\n`;
+      //   whatsappMessage += `ຊື່: ${item.name}\n`;
+      //   whatsappMessage += `ລາຄາປົກກະຕຶ: ${formatPrice(item.price)} ກີບ\n`;
+
+      //   // Calculate the subtotal for the current item
+      //   let itemSubtotal = item.quantity * item.price;
+      //   if (item.discount) {
+      //     itemSubtotal =
+      //       item.quantity * calculateDiscountedPrice(item.price, item.discount);
+      //   }
+
+      //   // Add the current item's subtotal to the total order amount
+      //   totalOrderAmount += itemSubtotal;
+
+      //   whatsappMessage += `Size: ${item.selectedSize}      ຈຳນວນ: ${item.quantity}\n`;
+      //   whatsappMessage += `Subtotal: ${formatPrice(itemSubtotal)} ກີບ\n`;
+      //   whatsappMessage += `\n`;
+      // });
+      productData.forEach((item) => {
+        whatsappMessage += `ລະຫັດ: http://copy.com/${item.id}\n`;
+
+        whatsappMessage += `ຊື່: ${item.name}\n`;
+
+        // Include the image URL for the current product
+        whatsappMessage += `ຮູບພາບ: ${item.image}\n`;
+
+        whatsappMessage += `ລາຄາປົກກະຕິ: ${formatPrice(item.price)} ກີບ\n`;
+
+        // Calculate the subtotal for the current item
+        let itemSubtotal = item.quantity * item.price;
+        if (item.discount) {
+          itemSubtotal =
+            item.quantity * calculateDiscountedPrice(item.price, item.discount);
+        }
+
+        // Add the current item's subtotal to the total order amount
+        totalOrderAmount += itemSubtotal;
+
+        whatsappMessage += `Size: ${item.selectedSize}      ຈຳນວນ: ${item.quantity}\n`;
+        whatsappMessage += `Subtotal: ${formatPrice(itemSubtotal)} ກີບ\n`;
         whatsappMessage += `\n`;
       });
+
+      whatsappMessage += `ລວມລາຄາທັງໝົດ: ${formatPrice(
+        totalOrderAmount,
+      )} ກີບ\n`;
+
       const encodedMessage = encodeURIComponent(whatsappMessage);
 
       const imageUrl =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQraoZ8bi1i0f-lNAEftxMflvBXubbFQEngu_hRgad242WED-XdKOqtvrDji79R-mG5lPI&usqp=CAU";
 
-      // Include the image link in the message
-      // const messageWithImage = `${encodedMessage}%0A%0A${encodeURIComponent(
-      //   imageUrl,
-      // )}`;
-
       // Create the WhatsApp link with the message and image
       const whatsappLink = `https://wa.me/${merchantPhoneNumber}?text=${encodedMessage}`;
 
       window.open(whatsappLink, "_blank");
-      dispatch(clearCart());
+      // dispatch(clearCart());
       return;
     }
-    console.log("productData");
   };
+
   return (
     <button
       disabled={productData && productData.length > 0 ? false : true}

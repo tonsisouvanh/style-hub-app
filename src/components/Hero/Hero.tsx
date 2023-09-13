@@ -66,7 +66,7 @@ const Hero: React.FC<SlideProps> = ({ slides }) => {
                   </div> */}
                   <Link
                     to="/all-products/all"
-                    className="fancy mb-5 bg-white font-lato font-notosanslao"
+                    className="fancy mb-5 bg-white font-notosanslao"
                   >
                     <span className="top-key"></span>
                     <span className="text">Shop now!</span>
