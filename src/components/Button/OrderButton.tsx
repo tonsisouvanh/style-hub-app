@@ -41,7 +41,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
 
         whatsappMessage += `Size: ${item.selectedSize}      ຈຳນວນ: ${item.quantity}\n`;
         whatsappMessage += `ລວມ: ${formatPrice(itemSubtotal)}\n`;
-        whatsappMessage += `\n`;
+        whatsappMessage += `\n\n\n`;
       });
 
       whatsappMessage += `ລວມລາຄາທັງໝົດ: ${formatPrice(totalOrderAmount)}\n`;
