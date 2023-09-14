@@ -106,7 +106,6 @@ const CartPage = () => {
         : dispatch(decrementQuantity(id));
     }
   };
-  console.log(cartItems);
   return (
     <div>
       <div className="rounded-div space-y-5 py-5">

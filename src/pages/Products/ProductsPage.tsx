@@ -26,6 +26,13 @@ const ProductsPage = () => {
   const [selectedSort, setSelectedSort] = useState<string>("");
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
 
+  const [offset, setOffset] = useState(0);
+  useEffect(() => {
+    window.onscroll = () => {
+      setOffset(window.pageYOffset);
+    };
+  }, []);
+
   const handleSelectChange = (value: string) => {
     setSelectedSort(value);
   };
@@ -101,38 +108,46 @@ const ProductsPage = () => {
           </div>
           <img className="h-full w-full object-cover" src={adbanner} alt="" />
         </div>
-        <div className="flex items-center justify-between font-notosanslao">
-          <span className="text-sm text-gray-600">
-            Result: {products.length} items
-          </span>
-          <div className="flex items-center gap-8 text-[1rem]">
-            <div
-              onClick={() => handleOpenFilter(true)}
-              className="flex cursor-pointer items-center gap-1"
-            >
-              <span>Filter </span>
-              <BiFilterAlt />
-            </div>
-
-            {isOpenFilter && (
-              <div className="fixed right-0 top-0 z-50 flex h-screen w-screen justify-end bg-black/80">
-                <ProductFilter handleOpenFilter={handleOpenFilter} />
+        <div
+          className={`${
+            offset >= 154
+              ? "sticky top-[4rem] z-50 border bg-white px-2 pt-2 sm:top-[4.3rem]"
+              : null
+          }`}
+        >
+          <div className={`flex items-center justify-between font-notosanslao`}>
+            <span className="text-sm text-gray-600">
+              Result: {products.length} items
+            </span>
+            <div className={`flex items-center gap-8 text-[1rem]`}>
+              <div
+                onClick={() => handleOpenFilter(true)}
+                className="flex cursor-pointer items-center gap-1"
+              >
+                <span>Filter </span>
+                <BiFilterAlt />
               </div>
-            )}
 
-            <ProductSort
-              options={options}
-              selectedSort={selectedSort}
-              onChange={handleSelectChange}
+              {isOpenFilter && (
+                <div className="fixed right-0 top-0 z-50 flex h-screen w-screen justify-end bg-black/80">
+                  <ProductFilter handleOpenFilter={handleOpenFilter} />
+                </div>
+              )}
+
+              <ProductSort
+                options={options}
+                selectedSort={selectedSort}
+                onChange={handleSelectChange}
+              />
+            </div>
+          </div>
+          <div>
+            <CategoryControl
+              products={products}
+              onSelectCategory={onSelectCategory}
+              selectedCate={selectedCate}
             />
           </div>
-        </div>
-        <div>
-          <CategoryControl
-            products={products}
-            onSelectCategory={onSelectCategory}
-            selectedCate={selectedCate}
-          />
         </div>
         <ProductGrid products={filteredProducts || []} />
         {/* <Pagination /> */}
