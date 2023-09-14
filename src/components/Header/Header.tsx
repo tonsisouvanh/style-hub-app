@@ -37,7 +37,6 @@ const Header: React.FC = () => {
     }));
 
     setCategories(categoryObjects);
-    console.log(categories);
   }, [products]);
 
   return (

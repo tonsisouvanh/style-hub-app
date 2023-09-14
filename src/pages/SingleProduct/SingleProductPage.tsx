@@ -26,6 +26,8 @@ const SingleProduct = () => {
   const { data: products, status } = useSelector(
     (state: RootState) => state.products,
   );
+  const cartItems = useSelector((state: RootState) => state.cart);
+
   const [showReview, setShowReview] = useState<boolean>(false);
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [currentImage, setCurrentImage] = useState<number>(0);
@@ -34,6 +36,10 @@ const SingleProduct = () => {
 
   const product = products.find((i) => i.id === id);
 
+  const productFoundInCart = cartItems.findIndex(
+    (cart) => cart.id === product?.id,
+  );
+  console.log(productFoundInCart);
   const handleSelectChange = (value: string) => {
     setSelectedSize(value);
   };
@@ -42,16 +48,17 @@ const SingleProduct = () => {
     setCurrentImage(value);
   };
   const handleAddToCart = () => {
-    const { id, title, price, discount } = product || {};
+    const { id, title, price, discount, images } = product || {};
     dispatch(
       addToCart({
         id: id || "",
-        image: product?.images[0] || "",
+        images: images || [],
+        selectedImg: product?.images[currentImage] || "",
         name: title || "",
         price: price || 0,
         quantity: 1,
         discount: discount || { type: "", value: 0 },
-        selectedSize: product?.sizes[0] || "",
+        selectedSize: selectedSize || "",
         sizes: product?.sizes || [],
       }),
     );
@@ -63,10 +70,10 @@ const SingleProduct = () => {
 
   useEffect(() => {
     if (product) {
-      // Create an array with a single item representing the selected product
       const productItem: CartItem = {
         id: product?.id,
-        image: product.images[0],
+        images: product.images,
+        selectedImg: product.images[currentImage] || "",
         name: product?.title,
         price: product?.price,
         discount: product?.discount,
@@ -84,7 +91,6 @@ const SingleProduct = () => {
     label: `${size}`,
     value: `${size}`,
   }));
-
   return (
     <>
       {status === "loading" ? (
@@ -99,31 +105,20 @@ const SingleProduct = () => {
                 initial={"offscreen"}
                 animate={"onscreen"}
                 variants={fadeFromTopAnimate}
-                className="relative h-fit w-auto overflow-hidden lg:w-[38rem]"
+                className="md:max-w-[25rem]m relative h-auto overflow-hidden "
               >
-                <LazyLoadImage
-                  className="h-auto w-full object-cover"
-                  src={product?.images[currentImage]}
-                  alt={product?.title}
-                  placeholderSrc={noimage} // Set your placeholder image
-                  effect="blur"
-                  width="100%"
-                  height="100%"
-                />
-                {/* <motion.img
-                  className="h-auto w-full object-cover"
-                  src={product?.images[currentImage]}
-                  alt=""
-                  initial="offscreen"
-                  animate="onscreen"
-                  variants={fadeFromTopAnimate}
-                /> */}
-                <div
-                  // initial={"offscreen"}
-                  // animate={"onscreen"}
-                  // transition={{ staggerChildren: 0.2 }}
-                  className="no-scrollbar absolute bottom-0 left-0 flex w-full items-center justify-start gap-2 overflow-x-scroll bg-black/50 p-4 pt-5 opacity-80"
-                >
+                <div className="h-[25rem] w-[20rem]  md:h-[35rem] md:w-[30rem]">
+                  <LazyLoadImage
+                    className="h-full w-full object-cover"
+                    src={product?.images[currentImage]}
+                    alt={product?.title}
+                    placeholderSrc={noimage} // Set your placeholder image
+                    effect="blur"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+                {/* <div className="no-scrollbar absolute bottom-0 left-0 flex w-full items-center justify-start gap-2 overflow-x-scroll bg-black/50 p-4 pt-5 opacity-80">
                   {product?.images.map((item, index) => (
                     <LazyLoadImage
                       // variants={scaleAnimate}
@@ -135,7 +130,7 @@ const SingleProduct = () => {
                       onClick={() => handleCurrentImage(index)}
                     />
                   ))}
-                </div>
+                </div> */}
               </motion.div>
               {/*====================== Right ======================*/}
               <motion.div
@@ -173,7 +168,7 @@ const SingleProduct = () => {
                 </motion.div>
                 <motion.h2
                   variants={fadeFromTopAnimate}
-                  className="text-[36px] font-bold"
+                  className="font-notosanslao text-[36px] font-bold"
                 >
                   {product?.title}
                 </motion.h2>
@@ -219,6 +214,29 @@ const SingleProduct = () => {
                 >
                   {product?.description}
                 </motion.p>
+                <motion.div variants={fadeFromTopAnimate} className="space-y-1">
+                  <p className="text-[16px] text-gray-700">ເລືອກແບບເຄື່ອງ:</p>
+
+                  <motion.div
+                    variants={fadeFromTopAnimate}
+                    className="flex w-full flex-wrap items-center justify-start gap-2"
+                  >
+                    {product?.images.map((item, index) => (
+                      <LazyLoadImage
+                        // variants={scaleAnimate}
+                        key={index}
+                        className={`h-[5rem] w-[4rem] cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700 ${
+                          index === currentImage &&
+                          "border-[0.2rem] border-sky-700"
+                        }`}
+                        src={item}
+                        effect="blur"
+                        alt=""
+                        onClick={() => handleCurrentImage(index)}
+                      />
+                    ))}
+                  </motion.div>
+                </motion.div>
                 <motion.div variants={fadeFromTopAnimate}>
                   {/* <ClickOutsideHandler > */}
                   {/* <Select options={options} onChange={handleSelectChange} /> */}
@@ -240,12 +258,13 @@ const SingleProduct = () => {
                     className="flex items-center gap-1 bg-sky-700 px-10 py-5 text-white transition duration-300 hover:scale-95 hover:bg-sky-800"
                   >
                     <RiShoppingBag2Fill className="text-2xl" />
-                    <span>ເພີ່ມເຂົ້າກະເປົາ</span>
+                    <span>
+                      {productFoundInCart > -1
+                        ? "ເພີ່ມແລ້ວ"
+                        : "ເພີ່ມເຂົ້າກະເປົາ"}
+                    </span>
                   </button>
-                  {/* <button className="flex items-center gap-1 bg-[#024E82] px-10 py-5 text-white">
-                  <span>ສົ່ງຫາພໍ່ຄ້າ</span>
-                  <IoLogoWhatsapp />
-                </button> */}
+
                   <OrderButton productData={productData} />
                 </motion.div>
 

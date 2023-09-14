@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { noimage } from "../../assets/images";
 import { Product } from "../../types";
@@ -9,7 +9,6 @@ import { BsSearch } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../feature/cart/CartSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
 interface ProductCardProps {
   product: Product;
 }
@@ -18,14 +17,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart);
   const { status } = useSelector((state: RootState) => state.products);
+
   const handleAddToCart = () => {
     const { id, title, price, discount } = product;
     dispatch(
       addToCart({
         id: id,
-        image: product.images[0],
+        images: product.images,
+        selectedImg: product.images[0],
         name: title,
-        price,
+        price: price,
         quantity: 1,
         discount: discount,
         selectedSize: product.sizes[0],
@@ -43,11 +44,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div className="skeleton-button mt-2 h-10 w-1/2 animate-pulse bg-gray-200"></div>
         </div>
       ) : (
-        <div className="flex h-full flex-col justify-between gap-1 border hover:border-2">
+        <div className="group flex h-full flex-col justify-between gap-1 border hover:border-2">
           <Link to={`/single-product/${product.id}`} key={product.id}>
             <div className="flex flex-col items-center gap-2 ">
               <div className="relative h-auto w-full overflow-hidden">
-                <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
+                <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
                   <BsSearch className="text-4xl text-cyan-700" />
                 </div>
                 <LazyLoadImage
@@ -60,6 +61,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                   placeholderSrc={noimage}
                 />
               </div>
+
               <div className="flex-col items-center justify-center gap-1 px-1 font-notosanslao text-[0.7rem]  sm:text-[0.9rem] lg:text-[1rem]">
                 <p className="mb-2 mt-2 font-bold leading-none transition hover:text-gray-600">
                   {product.title}

@@ -5,7 +5,8 @@ export interface Category {
 
 export interface CartItem {
   id: string;
-  image: string;
+  images: string[];
+  selectedImg: string;
   name: string;
   price: number;
   discount: Discount | null;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import { BsTrash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,8 @@ import Select from "../../components/CustomSelect/Select";
 import { noimage } from "../../assets/images";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-
+import { fadeFromTopAnimate } from "../../animation";
+import { motion } from "framer-motion";
 const tableHeaders = [
   {
     label: "",
@@ -70,6 +71,11 @@ const tableHeaders = [
 const CartPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+  const [currentImage, setCurrentImage] = useState<{
+    img: string;
+    proId: string;
+  }>();
+
   const subtotal = cartItems?.reduce((total, item) => {
     let discountedPrice = item.price;
 
@@ -86,6 +92,10 @@ const CartPage = () => {
   const shippingFee = 0; // Replace with the shipping fee
   const total = subtotal + shippingFee;
 
+  const handleCurrentImage = (img: string, proId: string) => {
+    setCurrentImage({ img: img, proId: proId });
+    console.log(img, proId);
+  };
   const handleRemoveProduct = (id: string) => {
     dispatch(removeFromCart(id));
   };
@@ -106,6 +116,8 @@ const CartPage = () => {
         : dispatch(decrementQuantity(id));
     }
   };
+
+  console.log(cartItems);
   return (
     <div>
       <div className="rounded-div space-y-5 py-5">
@@ -152,7 +164,7 @@ const CartPage = () => {
                       <td className="whitespace-nowrap py-4 pl-2">
                         <LazyLoadImage
                           className="h-[5rem] w-[5rem] rounded object-cover"
-                          src={product.image}
+                          src={product.selectedImg}
                           alt={product.name}
                           effect="blur"
                           width="100%"
@@ -259,14 +271,51 @@ const CartPage = () => {
                     <div className="h-50 mb-4 w-full">
                       <LazyLoadImage
                         className="h-full w-full rounded object-cover"
-                        src={product.image}
+                        // src={currentImage?.img || product.selectedImg}
+                        src={product.selectedImg}
                         alt={product.name}
                         effect="blur"
                         // width="100%"
                         // height="100%"
-                        placeholderSrc={noimage} // Set your placeholder image
+                        placeholderSrc={noimage}
                       />
                     </div>
+                    <motion.div
+                      variants={fadeFromTopAnimate}
+                      className="flex w-full flex-wrap items-center justify-start gap-2"
+                    >
+                      {/* {product?.images.map((item, index) => (
+                        <LazyLoadImage
+                          key={index}
+                          className={`h-[5rem] w-[4rem] cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700 ${
+                            item === currentImage?.img &&
+                            product.id === currentImage.proId &&
+                            "border-[0.2rem] border-sky-700"
+                          }`}
+                          src={item}
+                          effect="blur"
+                          alt=""
+                          onClick={(img: string, proId: string) =>
+                            handleCurrentImage(img, proId)
+                          }
+                        />
+                      ))} */}
+                      {/* {product?.images.map((item, index) => (
+                        <LazyLoadImage
+                          key={index}
+                          className={`h-[5rem] w-[4rem] cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700 ${
+                            item === currentImage?.img &&
+                            currentImage?.proId === product?.id
+                              ? "border-[0.2rem] border-sky-700"
+                              : ""
+                          }`}
+                          src={item}
+                          effect="blur"
+                          alt=""
+                          onClick={() => handleCurrentImage(item, product.id)}
+                        />
+                      ))} */}
+                    </motion.div>
                     <div className="mb-2 text-lg font-semibold text-gray-800">
                       {product.name}
                     </div>
@@ -335,9 +384,9 @@ const CartPage = () => {
                         className="group relative"
                       >
                         <BsTrash className="cursor-pointer text-3xl text-red-600 transition duration-300 hover:scale-110" />
-                        <p className="absolute -left-[0.8rem] -top-[2rem] whitespace-nowrap px-1 text-[0.7rem] text-black opacity-0 group-hover:opacity-100">
+                        {/* <p className="absolute -left-[0.8rem] -top-[2rem] whitespace-nowrap px-1 text-[0.7rem] text-black opacity-0 group-hover:opacity-100">
                           ລົບສິນຄ້າ
-                        </p>
+                        </p> */}
                       </span>
                     </div>
                   </div>
