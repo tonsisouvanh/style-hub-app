@@ -6,6 +6,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { noimage } from "../../../assets/images";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { fadeFromTopAnimate } from "../../../animation";
 
 const tableHeaders = [
   {
@@ -58,6 +59,7 @@ interface CartTableProps {
   handleRemoveProduct: (id: string) => void;
   handleSelectChange: (value: string, id: string) => void;
   handleAddQuantity: (id: string, action: string | "incr") => void;
+  handleSelectImage: (image: string, proId: string) => void;
 }
 
 const CartTable: React.FC<CartTableProps> = ({
@@ -65,6 +67,7 @@ const CartTable: React.FC<CartTableProps> = ({
   handleRemoveProduct,
   handleSelectChange,
   handleAddQuantity,
+  handleSelectImage,
 }) => {
   return (
     <table className="min-w-full divide-y divide-gray-200">
@@ -90,6 +93,22 @@ const CartTable: React.FC<CartTableProps> = ({
                 height="100%"
                 placeholderSrc={noimage} // Set your placeholder image
               />
+              <div className="flex w-full flex-wrap items-center justify-start gap-1">
+                {product?.images.map((image, index) => (
+                  <LazyLoadImage
+                    key={index}
+                    className={`h-[1.8rem] w-full cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700
+                ${
+                  image === product.selectedImg &&
+                  "border-[0.2rem] border-sky-700"
+                }`}
+                    src={image}
+                    effect="blur"
+                    alt=""
+                    onClick={() => handleSelectImage(image, product.id)}
+                  />
+                ))}
+              </div>
             </td>
             <td className="whitespace-nowrap px-6 py-4">
               <div className=" text-gray-900">{product.name}</div>
@@ -127,6 +146,7 @@ const CartTable: React.FC<CartTableProps> = ({
                 }
                 currOption={product.selectedSize}
                 onChange={(value) => handleSelectChange(value, product.id)}
+                textSize=""
               />
             </td>
             <td className="whitespace-nowrap px-6 py-4">

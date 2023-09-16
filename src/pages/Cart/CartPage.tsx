@@ -20,10 +20,6 @@ import CartTable from "./layout/CartTable";
 const CartPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  const [currentImage, setCurrentImage] = useState<{
-    img: string;
-    proId: string;
-  }>();
 
   const subtotal = cartItems?.reduce((total, item) => {
     let discountedPrice = item.price;
@@ -41,10 +37,6 @@ const CartPage = () => {
   const shippingFee = 0; // Replace with the shipping fee
   const total = subtotal + shippingFee;
 
-  const handleCurrentImage = (img: string, proId: string) => {
-    setCurrentImage({ img: img, proId: proId });
-    console.log(img, proId);
-  };
   const handleRemoveProduct = (id: string) => {
     dispatch(removeFromCart(id));
   };
@@ -63,6 +55,14 @@ const CartPage = () => {
       action === "incr"
         ? dispatch(incrementQuantity(id))
         : dispatch(decrementQuantity(id));
+    }
+  };
+
+  const handleSelectImage = (image: string, proId: string) => {
+    const itemToUpdate = cartItems.find((item) => item.id === proId);
+    if (itemToUpdate) {
+      const updatedItem = { ...itemToUpdate, selectedImg: image };
+      dispatch(updateCartItem(updatedItem));
     }
   };
 
@@ -102,6 +102,7 @@ const CartPage = () => {
                 handleSelectChange={handleSelectChange}
                 handleAddQuantity={handleAddQuantity}
                 cartItems={cartItems}
+                handleSelectImage={handleSelectImage}
               />
             </div>
 
@@ -112,6 +113,7 @@ const CartPage = () => {
                 handleSelectChange={handleSelectChange}
                 handleAddQuantity={handleAddQuantity}
                 cartItems={cartItems}
+                handleSelectImage={handleSelectImage}
               />
             </div>
           </>

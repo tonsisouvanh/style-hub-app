@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CartItem } from "../../../types";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { noimage } from "../../../assets/images";
@@ -14,64 +14,46 @@ interface CartGridProps {
   handleRemoveProduct: (id: string) => void;
   handleSelectChange: (value: string, id: string) => void;
   handleAddQuantity: (id: string, action: string | "incr") => void;
+  handleSelectImage: (image: string, proId: string) => void;
 }
 const CartGrid: React.FC<CartGridProps> = ({
   cartItems,
   handleRemoveProduct,
   handleSelectChange,
   handleAddQuantity,
+  handleSelectImage,
 }) => {
   return (
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
       {cartItems.map((product) => (
         <div key={product.id} className="rounded-lg border bg-white p-4">
-          <div className="h-50 mb-4 w-full">
+          <div className=" mb-4 w-full">
             <LazyLoadImage
               className="h-full w-full rounded object-cover"
-              // src={currentImage?.img || product.selectedImg}
               src={product.selectedImg}
               alt={product.name}
               effect="blur"
-              // width="100%"
-              // height="100%"
               placeholderSrc={noimage}
             />
           </div>
           <motion.div
             variants={fadeFromTopAnimate}
-            className="flex w-full flex-wrap items-center justify-start gap-2"
+            className="mb-2 flex w-full flex-wrap items-center justify-start gap-2"
           >
-            {/* {product?.images.map((item, index) => (
-            <LazyLoadImage
-              key={index}
-              className={`h-[5rem] w-[4rem] cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700 ${
-                item === currentImage?.img &&
-                product.id === currentImage.proId &&
-                "border-[0.2rem] border-sky-700"
-              }`}
-              src={item}
-              effect="blur"
-              alt=""
-              onClick={(img: string, proId: string) =>
-                handleCurrentImage(img, proId)
-              }
-            />
-          ))} */}
-            {/* {product?.images.map((item, index) => (
-            <LazyLoadImage
-              key={index}
-              className={`h-[5rem] w-[4rem] cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700 ${
-                item === currentImage?.img &&
-                currentImage?.proId === product?.id
-                  ? "border-[0.2rem] border-sky-700"
-                  : ""
-              }`}
-              src={item}
-              effect="blur"
-              alt=""
-              onClick={() => handleCurrentImage(item, product.id)}
-            />
-          ))} */}
+            {product?.images.map((image, index) => (
+              <LazyLoadImage
+                key={index}
+                className={`h-[2rem] w-full cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700 sm:h-[3rem]
+                ${
+                  image === product.selectedImg &&
+                  "border-[0.2rem] border-sky-700"
+                }`}
+                src={image}
+                effect="blur"
+                alt=""
+                onClick={() => handleSelectImage(image, product.id)}
+              />
+            ))}
           </motion.div>
           <div className="mb-2 text-lg font-semibold text-gray-800">
             {product.name}
