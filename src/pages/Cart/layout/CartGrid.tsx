@@ -22,7 +22,7 @@ const CartGrid: React.FC<CartGridProps> = ({
   handleAddQuantity,
 }) => {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
       {cartItems.map((product) => (
         <div key={product.id} className="rounded-lg border bg-white p-4">
           <div className="h-50 mb-4 w-full">
@@ -77,10 +77,10 @@ const CartGrid: React.FC<CartGridProps> = ({
             {product.name}
           </div>
           <div className="mb-2 font-notosanslao text-sm text-gray-600">
-            <div className="flex items-center justify-start gap-x-5  text-gray-900 ">
-              <span className="text-lg">ລາຄາ:</span>
+            <div className="flex flex-wrap items-center justify-start gap-x-2 text-sm text-gray-900 md:gap-x-5 md:text-lg ">
+              <span className="">ລາຄາ:</span>
               <span
-                className={`text-lg  text-gray-500 ${
+                className={`  text-gray-500 ${
                   product?.discount && "line-through"
                 }`}
               >
@@ -88,7 +88,7 @@ const CartGrid: React.FC<CartGridProps> = ({
               </span>
 
               {product?.discount && (
-                <span className="text-lg text-[#024E82]">
+                <span className=" text-[#024E82]">
                   {formatPrice(
                     calculateDiscountedPrice(product?.price, product.discount),
                   )}
@@ -96,14 +96,13 @@ const CartGrid: React.FC<CartGridProps> = ({
               )}
             </div>
           </div>
-          <div className="mb-2 flex items-center gap-12 font-notosanslao">
+          <div className="mb-2 flex items-center gap-1 font-notosanslao text-sm md:gap-12 md:text-lg">
             {/* <span>Size: {product.selectedSize}</span> */}
             <div>
               ຈຳນວນ:
               <span className="mx-2 border px-3 py-0">{product.quantity}</span>
-              ໂຕ
             </div>
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-2 md:gap-5">
               <AiOutlinePlus
                 className="cursor-pointer hover:text-cyan-700"
                 onClick={() => handleAddQuantity(product.id, "incr")}
@@ -122,19 +121,19 @@ const CartGrid: React.FC<CartGridProps> = ({
               }))}
               currOption={product.selectedSize}
               onChange={(value) => handleSelectChange(value, product.id)}
+              textSize={"text-sm"}
             />
           </div>
 
-          <div className="flex items-center justify-between font-notosanslao text-lg font-semibold text-cyan-700">
-            <span>ລວມ: {formatPrice(product.price * product.quantity)}</span>
+          <div className="flex items-center justify-between font-notosanslao font-semibold text-cyan-700">
+            <span className="text-sm md:text-lg">
+              ລວມ: {formatPrice(product.price * product.quantity)}
+            </span>
             <span
               onClick={() => handleRemoveProduct(product.id)}
               className="group relative"
             >
-              <BsTrash className="cursor-pointer text-3xl text-red-600 transition duration-300 hover:scale-110" />
-              {/* <p className="absolute -left-[0.8rem] -top-[2rem] whitespace-nowrap px-1 text-[0.7rem] text-black opacity-0 group-hover:opacity-100">
-              ລົບສິນຄ້າ
-            </p> */}
+              <BsTrash className="cursor-pointer text-xl text-red-600 transition duration-300 hover:scale-110 md:text-3xl" />
             </span>
           </div>
         </div>

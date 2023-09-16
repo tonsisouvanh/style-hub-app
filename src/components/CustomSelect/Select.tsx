@@ -4,10 +4,16 @@ import { Option } from "../../types";
 type SelectProps = {
   options: Option[];
   currOption: string | "";
+  textSize: string;
   onChange: (value: string, id: string | null) => void;
 };
 
-const Select: React.FC<SelectProps> = ({ options, onChange, currOption }) => {
+const Select: React.FC<SelectProps> = ({
+  options,
+  onChange,
+  currOption,
+  textSize = "text-xl",
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(currOption);
 
@@ -33,13 +39,13 @@ const Select: React.FC<SelectProps> = ({ options, onChange, currOption }) => {
     };
   }, [setIsOpen]);
   return (
-    <div ref={divRef} className="relative w-[15rem]">
+    <div ref={divRef} className="relative w-full">
       <div
         className="cursor-pointer rounded border border-gray-300 px-3 py-2"
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedValue ? (
-          <div className="flex items-center justify-between text-xl">
+          <div className={`flex items-center justify-between ${textSize}`}>
             {options
               .find((option) => option.value === selectedValue)
               ?.label.toUpperCase()}
@@ -71,13 +77,11 @@ const Select: React.FC<SelectProps> = ({ options, onChange, currOption }) => {
         }
         
         `}
-        // variants={variants}
-        // animate={isOpen ? "open" : "closed"}
       >
         {options.map((option) => (
           <div
             key={option.value}
-            className="cursor-pointer px-3 py-2 text-xl hover:bg-gray-100"
+            className={`cursor-pointer px-3 py-2 ${textSize} hover:bg-gray-100`}
             onClick={() => handleOptionClick(option.value, "")}
           >
             {option.label.toUpperCase()}

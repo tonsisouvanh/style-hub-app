@@ -61,7 +61,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                   placeholderSrc={noimage}
                 />
               </div>
-
               <div className="flex-col items-center justify-center gap-1 px-1 font-notosanslao text-[0.7rem]  sm:text-[0.9rem] lg:text-[1rem]">
                 <p className="mb-2 mt-2 font-bold leading-none transition hover:text-gray-600">
                   {product.title}

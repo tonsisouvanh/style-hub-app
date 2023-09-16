@@ -67,12 +67,14 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity += 1;
       }
+      syncCartWithLocalStorage(state);
     },
     decrementQuantity: (state, action: PayloadAction<string>) => {
       const item = state.find((item) => item.id === action.payload);
       if (item && item.quantity > 1) {
         item.quantity -= 1;
       }
+      syncCartWithLocalStorage(state);
     },
   },
 });

@@ -87,7 +87,7 @@ const CartPage = () => {
         </div>
         <Link
           to="/all-products/all"
-          className="sticky top-[4.6rem] z-50 flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
+          className="sticky top-[4.6rem] z-40 flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
         >
           <RiShoppingCartFill className="text-2xl" />
 
@@ -120,7 +120,7 @@ const CartPage = () => {
         )}
 
         {/* //* CART SUMMARY */}
-        <div className="max-w-[30rem] rounded-lg bg-white p-4 font-notosanslao">
+        <div className="max-w-[30rem]  rounded-lg bg-white p-4 font-notosanslao">
           {cartItems.length > 0 && cartItems && (
             <button
               onClick={handleClearallitems}
@@ -130,10 +130,10 @@ const CartPage = () => {
               ລົບທັງໝົດ
             </button>
           )}
-          <div className="mb-4 text-2xl font-semibold text-gray-800">
+          <div className="mb-4 text-xl font-semibold text-gray-800 md:text-2xl">
             ລວມລາຄາສິນຄ້າ
           </div>
-          <div className="mb-2 flex justify-between">
+          <div className="mb-2 flex justify-between text-lg">
             <span className="text-gray-600">ລວມ:</span>
             <span className="text-gray-800">{formatPrice(subtotal)}</span>
           </div>
