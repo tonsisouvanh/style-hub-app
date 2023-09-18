@@ -21,12 +21,10 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
 
         whatsappMessage += `ຊື່: ${item.name}\n`;
 
-        // Include the image URL for the current product
         whatsappMessage += `ຮູບພາບ: ${item.selectedImg}\n`;
 
         whatsappMessage += `ລາຄາປົກກະຕິ: ${formatPrice(item.price)}\n`;
 
-        // Calculate the subtotal for the current item
         let itemSubtotal = item.quantity * item.price;
         if (item.discount) {
           whatsappMessage += `ລາຄາ sale: ${formatPrice(
@@ -36,7 +34,6 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
             item.quantity * calculateDiscountedPrice(item.price, item.discount);
         }
 
-        // Add the current item's subtotal to the total order amount
         totalOrderAmount += itemSubtotal;
 
         whatsappMessage += `Size: ${item.selectedSize}      ຈຳນວນ: ${item.quantity}\n`;
@@ -48,7 +45,6 @@ const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
 
       const encodedMessage = encodeURIComponent(whatsappMessage);
 
-      // Create the WhatsApp link with the message and image
       const whatsappLink = `https://wa.me/${merchantPhoneNumber}?text=${encodedMessage}`;
 
       window.open(whatsappLink, "_blank");

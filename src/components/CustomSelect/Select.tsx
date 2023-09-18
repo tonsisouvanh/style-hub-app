@@ -28,7 +28,7 @@ const Select: React.FC<SelectProps> = ({
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (divRef.current && !divRef.current.contains(event.target as Node)) {
-        setIsOpen(false); // Call the onClickOutside callback when clicked outside
+        setIsOpen(false);
       }
     };
 

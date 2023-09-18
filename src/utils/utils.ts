@@ -7,10 +7,10 @@ export function formatPrice(price: number, decimalPlaces = 0): string {
     .toLocaleString("en-US", {
       style: "currency",
       currency: "LAK",
-      currencyDisplay: "symbol", // Show currency symbol instead of code
+      currencyDisplay: "symbol",
       minimumFractionDigits: decimalPlaces,
     })
-    .replace("LAK", lakSymbol); // Replace LAK with ₭
+    .replace("LAK", lakSymbol);
 }
 
 export const calculateDiscountedPrice = (

@@ -1,4 +1,3 @@
-// src/store/cartSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "../../types";
 
@@ -47,19 +46,14 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action: PayloadAction<string>) => {
-      // Find the index of the item to remove
       const index = state.findIndex((item) => item.id === action.payload);
       if (index !== -1) {
-        // Remove the item from the cart
         state.splice(index, 1);
-        // Sync the updated cart with localStorage
         syncCartWithLocalStorage(state);
       }
     },
     clearCart: (state) => {
-      // Clear the entire cart by setting it to an empty array
       state.length = 0;
-      // Also, clear the cart from localStorage
       syncCartWithLocalStorage(state);
     },
     incrementQuantity: (state, action: PayloadAction<string>) => {

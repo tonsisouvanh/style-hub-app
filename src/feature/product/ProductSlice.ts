@@ -1,16 +1,13 @@
-// productSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { collection, getDocs } from "firebase/firestore"; // Import Firestore functions from the Firebase package
-import { db } from "../../firebase"; // Import your Firebase configuration
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 import { Product } from "../../types";
 
-// Define an asynchronous thunk to fetch products from Firestore
 export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchProducts",
   async () => {
     const querySnapshot = await getDocs(collection(db, "products"));
 
-    // Perform specific error checks here, if needed
     if (!querySnapshot) {
       throw new Error("An error occurred while fetching products.");
     }

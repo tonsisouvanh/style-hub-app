@@ -47,7 +47,7 @@ const CartGrid: React.FC<CartGridProps> = ({
               {product?.images.map((image, index) => (
                 <LazyLoadImage
                   key={index}
-                  className={`h-[2rem] w-full cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700 sm:h-[3rem]
+                  className={`h-[3rem] w-[3rem] cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700
                 ${
                   image === product.selectedImg &&
                   "border-[0.2rem] border-sky-700"

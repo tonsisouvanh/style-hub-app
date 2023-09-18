@@ -1,4 +1,3 @@
-// src/store/store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "../feature/cart/CartSlice";
 import productReducer, { fetchProducts } from "../feature/product/ProductSlice";
@@ -15,7 +14,6 @@ export const store = configureStore({
   },
 });
 
-// Fetch products when the store initializes
 store.dispatch(fetchProducts());
 
 export type RootState = ReturnType<typeof store.getState>;

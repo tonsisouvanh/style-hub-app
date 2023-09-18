@@ -54,7 +54,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     const sortProducts = (products: Product[], sortOption: string) => {
-      const sortedProducts = [...products]; // Create a new array to avoid mutating the original
+      const sortedProducts = [...products];
       switch (sortOption) {
         case "asc":
           sortedProducts.sort((a, b) => a.price - b.price);

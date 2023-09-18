@@ -44,7 +44,6 @@ const tableHeaders = [
       "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500",
   },
 ];
-// Render the table headers using the map function
 <tr>
   {tableHeaders.map((header, index) => (
     <th key={index} scope="col" className={header.className}>
@@ -90,7 +89,7 @@ const CartTable: React.FC<CartTableProps> = ({
                 effect="blur"
                 width="100%"
                 height="100%"
-                placeholderSrc={noimage} // Set your placeholder image
+                placeholderSrc={noimage}
               />
               <div className="flex w-full flex-wrap items-center justify-start gap-1">
                 {product?.images.map((image, index) => (

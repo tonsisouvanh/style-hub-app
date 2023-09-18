@@ -125,7 +125,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                                 src={product.images[0] || noimage}
                                 alt={product.title}
                                 effect="blur"
-                                placeholderSrc={noimage} // Set your placeholder image
+                                placeholderSrc={noimage}
                               />
                             </div>
                             <div className="font-notosanslao">

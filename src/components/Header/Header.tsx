@@ -40,21 +40,7 @@ const Header: React.FC = () => {
   }, [products]);
 
   return (
-    // JSX code representing your component's structure and content
     <>
-      {/* {isOpen ? (
-        <MobileHeader
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          toggleMenu={toggleMenu}
-        />
-      ) : (
-        <DesktopHeader
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          toggleMenu={toggleMenu}
-        />
-      )} */}
       <MobileHeader
         categories={categories}
         isOpen={isOpen}

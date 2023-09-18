@@ -9,7 +9,7 @@ type Option = {
 type SelectProps = {
   options: Option[];
   onChange: (value: string) => void;
-  selectedSort: string; // Add this prop
+  selectedSort: string;
 };
 
 const ProductSort: React.FC<SelectProps> = ({
@@ -26,8 +26,6 @@ const ProductSort: React.FC<SelectProps> = ({
 
   return (
     <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
-      {/* <span>Sort</span>
-      <BiSort /> */}
       <div className="relative">
         <div className="whitespace-nowrap font-notosanslao">
           {selectedSort ? (

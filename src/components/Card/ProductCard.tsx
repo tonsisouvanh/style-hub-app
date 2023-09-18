@@ -68,7 +68,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     alt={product.title}
                     effect="blur"
                     className="h-full w-full object-cover transition duration-300 hover:scale-110"
-                    // placeholderSrc={noimage}
                   />
                 </div>
               </div>

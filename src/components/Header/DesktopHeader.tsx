@@ -56,11 +56,6 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 className="flex cursor-pointer items-center"
               >
                 Shop
-                {/* <MdOutlineKeyboardArrowRight
-                  className={`transition-transform ${
-                    submenuOpen ? "rotate-90" : ""
-                  }`}
-                /> */}
                 <RiShoppingBag2Fill />
               </Link>
 

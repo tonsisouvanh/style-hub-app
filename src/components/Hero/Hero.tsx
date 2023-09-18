@@ -43,11 +43,7 @@ const Hero: React.FC<SlideProps> = ({ slides }) => {
       >
         {slides.map((i, index) => {
           return (
-            <SwiperSlide
-              key={index}
-              className="h-[25rem] w-full lg:h-[50rem]"
-              // className="w-full"
-            >
+            <SwiperSlide key={index} className="h-[25rem] w-full lg:h-[50rem]">
               <div className="relative h-full w-full">
                 <img
                   src={i.image}
