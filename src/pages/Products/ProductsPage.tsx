@@ -117,7 +117,7 @@ const ProductsPage = () => {
             <div className={`flex items-center gap-8 text-[1rem]`}>
               <div
                 onClick={() => handleOpenFilter(true)}
-                className="flex cursor-pointer items-center gap-1"
+                className=" hidden cursor-pointer items-center gap-1"
               >
                 <span>Filter </span>
                 <BiFilterAlt />
