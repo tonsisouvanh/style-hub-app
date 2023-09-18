@@ -24,7 +24,7 @@ const CartGrid: React.FC<CartGridProps> = ({
   handleSelectImage,
 }) => {
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
       {cartItems.map((product) => (
         <div key={product.id} className="rounded-lg border bg-white p-4">
           <div className=" mb-4 w-full">
@@ -55,7 +55,7 @@ const CartGrid: React.FC<CartGridProps> = ({
               />
             ))}
           </motion.div>
-          <div className="mb-2 text-lg font-semibold text-gray-800">
+          <div className="mb-2 text-sm font-semibold text-gray-800 md:text-lg">
             {product.name}
           </div>
           <div className="mb-2 font-notosanslao text-sm text-gray-600">

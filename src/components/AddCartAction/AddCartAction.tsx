@@ -2,10 +2,9 @@ import React from "react";
 import "./AddCartAction.css";
 const AddCartAction = () => {
   return (
-    // <div data-tooltip="Price:-$20" className="AdCartAction-button">
     <div
       data-tooltip="Price:-$20"
-      className="AdCartAction-button h-[3rem] cursor-pointer mt-2"
+      className="AdCartAction-button mt-2 h-[3rem] cursor-pointer"
     >
       <div className="AdCartAction-button-wrapper">
         <div className="AdCartAction-text">Buy Now</div>

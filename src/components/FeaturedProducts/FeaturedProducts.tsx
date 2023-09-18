@@ -120,12 +120,6 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                         >
                           <div className="flex flex-col items-center transition duration-300 hover:scale-105 ">
                             <div className="">
-                              {/* <img
-                                src={product.images[0] || noimage}
-                                alt={product.title}
-                                className="h-full w-full object-cover"
-                              /> */}
-
                               <LazyLoadImage
                                 className="h-full w-full object-cover"
                                 src={product.images[0] || noimage}
@@ -138,9 +132,6 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                               <p className="mt-2 text-[0.8rem] font-bold leading-none transition hover:text-gray-600 md:text-[0.9rem]">
                                 {product.title}
                               </p>
-                              {/* <p className="text-[#024E82] text-[15px]">
-                                ${product.price}
-                              </p> */}
                               <div className="flex flex-col items-center justify-center ">
                                 <span
                                   className={`text-[1rem] text-gray-500  lg:text-[1.1rem] ${
@@ -172,11 +163,6 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                 )}
                 {/* card */}
               </motion.div>
-              {/* {showButton && (
-                <button className="bg-[#024E82] hover:bg-[#024E82]/90 transition text-[16px] text-white py-4 font-lato px-10 whitespace-nowrap mt-20">
-                  SHOP NOW
-                </button>
-              )} */}
             </div>
           </div>
         </motion.section>

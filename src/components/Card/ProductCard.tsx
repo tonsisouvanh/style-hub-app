@@ -48,7 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <Link to={`/single-product/${product.id}`} key={product.id}>
             <div className="flex flex-col items-center gap-2 ">
               <div className="relative h-auto w-full overflow-hidden">
-                <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
+                <div className="absolute left-0 top-0 z-[1] flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
                   <BsSearch className="text-4xl text-cyan-700" />
                 </div>
                 <LazyLoadImage
@@ -62,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 />
               </div>
               <div className="flex-col items-center justify-center gap-1 px-1 font-notosanslao text-[0.7rem]  sm:text-[0.9rem] lg:text-[1rem]">
-                <p className="mb-2 mt-2 font-bold leading-none transition hover:text-gray-600">
+                <p className="mb-2 mt-2 text-center font-bold leading-none transition hover:text-gray-600">
                   {product.title}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-x-5 ">

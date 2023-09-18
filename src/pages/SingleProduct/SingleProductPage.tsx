@@ -2,16 +2,11 @@ import React, { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import Select from "../../components/CustomSelect/Select";
 import { motion } from "framer-motion";
-import {
-  fadeFromBottomAnimate,
-  fadeFromTopAnimate,
-  scaleAnimate,
-} from "../../animation";
+import { fadeFromBottomAnimate, fadeFromTopAnimate } from "../../animation";
 import { Link, useParams } from "react-router-dom";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
 import { FaHome } from "react-icons/fa";
 import { CartItem, Option } from "../../types";
-import { IoLogoWhatsapp } from "react-icons/io";
 import { RiShoppingBag2Fill } from "react-icons/ri";
 import OrderButton from "../../components/Button/OrderButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +34,6 @@ const SingleProduct = () => {
   const productFoundInCart = cartItems.findIndex(
     (cart) => cart.id === product?.id,
   );
-  console.log(productFoundInCart);
   const handleSelectChange = (value: string) => {
     setSelectedSize(value);
   };
@@ -82,7 +76,6 @@ const SingleProduct = () => {
         sizes: product.sizes,
       };
 
-      // Set the productData as an array with a single item
       setProductData([productItem]);
     }
   }, [selectedSize]);
@@ -112,25 +105,12 @@ const SingleProduct = () => {
                     className="h-full w-full object-cover"
                     src={product?.images[currentImage]}
                     alt={product?.title}
-                    placeholderSrc={noimage} // Set your placeholder image
+                    placeholderSrc={noimage}
                     effect="blur"
                     width="100%"
                     height="100%"
                   />
                 </div>
-                {/* <div className="no-scrollbar absolute bottom-0 left-0 flex w-full items-center justify-start gap-2 overflow-x-scroll bg-black/50 p-4 pt-5 opacity-80">
-                  {product?.images.map((item, index) => (
-                    <LazyLoadImage
-                      // variants={scaleAnimate}
-                      key={index}
-                      className="h-[5rem] w-[4rem] object-cover"
-                      src={item}
-                      effect="blur"
-                      alt=""
-                      onClick={() => handleCurrentImage(index)}
-                    />
-                  ))}
-                </div> */}
               </motion.div>
               {/*====================== Right ======================*/}
               <motion.div
@@ -139,12 +119,6 @@ const SingleProduct = () => {
                 transition={{ staggerChildren: 0.1 }}
                 className="space-y-8"
               >
-                {/* <motion.p
-                variants={fadeFromTopAnimate}
-                className="uppercase font-arimo font-bold text-gray-500"
-              >
-                home / shop / women / <span className="text-black">shop</span>{" "}
-              </motion.p> */}
                 <motion.div
                   variants={fadeFromTopAnimate}
                   className="font-roboto bg-transparent"
@@ -223,7 +197,6 @@ const SingleProduct = () => {
                   >
                     {product?.images.map((item, index) => (
                       <LazyLoadImage
-                        // variants={scaleAnimate}
                         key={index}
                         className={`h-[5rem] w-[4rem] cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700 ${
                           index === currentImage &&
@@ -238,15 +211,13 @@ const SingleProduct = () => {
                   </motion.div>
                 </motion.div>
                 <motion.div variants={fadeFromTopAnimate}>
-                  {/* <ClickOutsideHandler > */}
-                  {/* <Select options={options} onChange={handleSelectChange} /> */}
                   <span>SIZE:</span>
                   <Select
                     options={options}
                     currOption={product?.sizes[0] || ""}
                     onChange={(value) => handleSelectChange(value, product.id)}
+                    textSize=""
                   />
-                  {/* </ClickOutsideHandler> */}
                 </motion.div>
 
                 <motion.div
