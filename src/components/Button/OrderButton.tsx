@@ -10,7 +10,7 @@ interface OrderButtonProps {
 const OrderButton: React.FC<OrderButtonProps> = ({ productData }) => {
   const handleOrderClick = () => {
     if (productData && productData.length > 0) {
-      const merchantPhoneNumber = "+8562056373308";
+      const merchantPhoneNumber = "+8562056300100";
 
       let whatsappMessage = `ສະບາຍດີຂໍຖາມຂໍ້ມູນສິນຄ້າ: \n\n`;
 

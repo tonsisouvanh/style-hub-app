@@ -1,50 +1,23 @@
-import { FaHeadset, FaLock, FaShippingFast, FaUndo } from "react-icons/fa";
+import { FaLock, FaShippingFast, FaMoneyBill } from "react-icons/fa";
+import { BsWhatsapp } from "react-icons/bs";
 import { motion } from "framer-motion";
-import {
-  bounceAnimate,
-  fadeFromBottomAnimateSprin,
-  fadeFromTopAnimate,
-  flipAnimate,
-  rotateAndScaleAnimate,
-  rotateAnimateFromLeft,
-  scaleAnimate,
-  scaleAnimateReverse,
-  scaleFromLeftAnimate,
-  staggeredFadeInAnimate,
-} from "../../animation";
-// interface ProductProps {
-//   products: Product[];
-//   featuredTitle: string;
-//   featuredDesc: string;
-// }
-
-// interface Product {
-//   id: number;
-//   image: string;
-//   title: string;
-//   price: string;
-// }
+import { scaleAnimate, scaleAnimateReverse } from "../../animation";
 
 const services = [
   {
     icon: <FaShippingFast />,
-    title: "Free Shipping",
-    description: "Enjoy free shipping on all orders",
+    title: "Shipping",
+    description: "ລູກຄ້າໃຊ້ບໍລິການຂົນສົ່ງທີ່ສະດວກ ແລະ ເກັບຄ່າສົ່ງປາຍທາງ",
   },
   {
-    icon: <FaHeadset />,
-    title: "Support 24/7",
-    description: "24/7 customer support for any assistance",
+    icon: <BsWhatsapp />,
+    title: "ຕິດຕໍ່",
+    description: "ສາມາດແຊັດຫາພໍ່ຕ້າໂດຍຕົງຜ່ານ WhatsApp",
   },
   {
-    icon: <FaUndo />,
-    title: "30 Days Return",
-    description: "30 days return policy for hassle-free returns",
-  },
-  {
-    icon: <FaLock />,
-    title: "100% Payment Secure",
-    description: "Secure payment options to protect your information",
+    icon: <FaMoneyBill />,
+    title: "ການຊຳລະຄ່າເຄື່ອງ",
+    description: "ລູກຄ້າຊຳລະຜ່ານ BCEL ONE",
   },
 ];
 
@@ -60,20 +33,17 @@ const Service = () => {
     >
       <div className="rounded-div w-full">
         <div className="px-4 sm:px-6 lg:px-8">
-          <motion.div
-            // transition={{ staggerChildren: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
+          <motion.div className=" grid gap-8 font-notosanslao md:grid-cols-fluid">
             {services.map((service, index) => (
               <motion.div
                 key={index}
                 className="flex flex-col items-center text-center"
                 variants={scaleAnimateReverse}
               >
-                <div className="text-3xl text-[#024E82] mb-4">
+                <div className="mb-4 text-3xl text-[#024E82]">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                <h3 className="mb-2 text-xl font-semibold">{service.title}</h3>
                 <p className="text-gray-700">{service.description}</p>
               </motion.div>
             ))}
