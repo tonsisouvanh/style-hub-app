@@ -40,7 +40,7 @@ const Service = () => {
                 className="flex flex-col items-center text-center"
                 variants={scaleAnimateReverse}
               >
-                <div className="mb-4 text-3xl text-[#024E82]">
+                <div className="mb-4 text-4xl text-[#024E82]">
                   {service.icon}
                 </div>
                 <h3 className="mb-2 text-xl font-semibold">{service.title}</h3>

@@ -29,7 +29,7 @@ const ProductSort: React.FC<SelectProps> = ({
       {/* <span>Sort</span>
       <BiSort /> */}
       <div className="relative">
-        <div className="font-notosanslao whitespace-nowrap">
+        <div className="whitespace-nowrap font-notosanslao">
           {selectedSort ? (
             <div className="flex items-center gap-1">
               {options.find((option) => option.value === selectedSort)?.label}
@@ -40,7 +40,7 @@ const ProductSort: React.FC<SelectProps> = ({
               />
             </div>
           ) : (
-            <div className="text-black flex items-center gap-1">
+            <div className="flex items-center gap-1 text-black">
               <span>Sort</span>
               <BiSort
                 className={`transition duration-300 ${
@@ -52,7 +52,8 @@ const ProductSort: React.FC<SelectProps> = ({
         </div>
 
         <div
-          className={`absolute z-10 mt-1 right-0 top-8 bg-white border border-gray-300 rounded w-fit transition duration-300 ${
+          onMouseLeave={() => setIsOpen(false)}
+          className={`absolute right-0 top-8 z-10 mt-1 w-fit rounded border border-gray-300 bg-white transition duration-300 ${
             isOpen
               ? "visible translate-y-0 opacity-100"
               : "invisible translate-y-20 opacity-0"
@@ -61,7 +62,7 @@ const ProductSort: React.FC<SelectProps> = ({
           {options.map((option) => (
             <div
               key={option.value}
-              className="px-3 py-2 cursor-pointer hover:bg-gray-100 whitespace-nowrap font-notosanslao"
+              className="cursor-pointer whitespace-nowrap px-3 py-2 font-notosanslao hover:bg-gray-100"
               onClick={() => handleOptionClick(option.value)}
             >
               {option.label}

@@ -1,10 +1,11 @@
 import { FacebookProvider, Page } from "react-facebook";
 import Logo from "../Logo/Logo";
+import SocialMediaLinks from "../SocialMediaLink/SocialMediaLinks";
 const Footer = () => {
   return (
-    <footer className="w-full bg-gray-100">
+    <footer id="footer" className="w-full bg-gray-100">
       <div className="rounded-div bg-[#E8E8E8] px-4 py-10 sm:px-6 lg:px-16 lg:py-20">
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-10">
           <Logo />
           {/* <div
             className="fb-page"
@@ -26,8 +27,10 @@ const Footer = () => {
               </a>
             </blockquote>
           </div> */}
+          <div>
+            <SocialMediaLinks />
+          </div>
         </div>
-
         {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4 uppercase">
