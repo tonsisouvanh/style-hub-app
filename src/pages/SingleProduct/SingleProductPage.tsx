@@ -215,7 +215,7 @@ const SingleProduct = () => {
                   <Select
                     options={options}
                     currOption={product?.sizes[0] || ""}
-                    onChange={(value) => handleSelectChange(value, product.id)}
+                    onChange={(value) => handleSelectChange(value)}
                     textSize=""
                   />
                 </motion.div>

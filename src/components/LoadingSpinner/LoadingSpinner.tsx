@@ -1,4 +1,3 @@
-import React from "react";
 import "./LoadingSpinner.css";
 import { cyberpunk } from "../../assets/images";
 const LoadingSpinner = () => {

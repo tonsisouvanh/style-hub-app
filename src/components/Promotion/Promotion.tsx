@@ -1,4 +1,3 @@
-import React from "react";
 import { FaTags, FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { scaleAnimate } from "../../animation";
@@ -13,36 +12,36 @@ const Promotion = () => {
       className="w-full"
     >
       <div className="rounded-div">
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid gap-4 md:grid-cols-2">
           {/* first */}
-          <div className=" bg-black flex flex-col items-center text-center gap-2 p-16 md:p-28">
-            <div className="text-3xl text-white mb-4">
+          <div className=" flex flex-col items-center gap-2 bg-black p-16 text-center md:p-28">
+            <div className="mb-4 text-3xl text-white">
               <FaHeart />
             </div>
-            <h3 className="text-[32px] uppercase text-white mb-2">
+            <h3 className="mb-2 text-[32px] uppercase text-white">
               Peace of Mind
             </h3>
-            <p className="text-white font-lato">
+            <p className="font-lato text-white">
               A one-stop platform for all your fashion needs, hassle-free. Buy
               with a peace of mind.
             </p>
-            <button className="mt-5 whitespace-nowrap bg-white px-8 py-2 font-lato text-[14px] rounded-sm text-[#024E82]">
+            <button className="mt-5 whitespace-nowrap rounded-sm bg-white px-8 py-2 font-lato text-[14px] text-[#024E82]">
               BUY NOW
             </button>
           </div>
 
           {/* second */}
-          <div className=" bg-black flex flex-col items-center text-center gap-2 p-16 md:p-28">
-            <div className="text-3xl text-white mb-4">
+          <div className=" flex flex-col items-center gap-2 bg-black p-16 text-center md:p-28">
+            <div className="mb-4 text-3xl text-white">
               <FaTags />
             </div>
-            <h3 className="text-[32px] uppercase text-white mb-2">
+            <h3 className="mb-2 text-[32px] uppercase text-white">
               Buy 2 Get 1 Free
             </h3>
-            <p className="text-white font-lato">
+            <p className="font-lato text-white">
               End of season sale. Buy any 2 items of your choice and get 1 free.
             </p>
-            <button className="mt-5 whitespace-nowrap bg-white px-8 py-2 font-lato text-[14px] rounded-sm text-[#024E82]">
+            <button className="mt-5 whitespace-nowrap rounded-sm bg-white px-8 py-2 font-lato text-[14px] text-[#024E82]">
               BUY NOW
             </button>
           </div>

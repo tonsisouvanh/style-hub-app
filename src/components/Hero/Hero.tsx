@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
@@ -19,7 +19,6 @@ interface Slide {
   image: string;
   caption: string;
 }
-
 const Hero: React.FC<SlideProps> = ({ slides }) => {
   return (
     <motion.div

@@ -1,7 +1,7 @@
 import { FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
-const Breadcrumb = ({ pathname = "", txtFrom = "" }) => {
-  const segments = pathname.split("/").filter((segment) => segment !== "");
+const Breadcrumb = ({ txtFrom = "" }) => {
+  // const segments = pathname.split("/").filter((segment) => segment !== "");
   return (
     <div className="bg-transparent font-lato">
       <div className="flex items-center gap-x-2 text-lg text-gray-600 md:text-xl">

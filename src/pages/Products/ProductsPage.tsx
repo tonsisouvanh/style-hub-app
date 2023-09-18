@@ -1,7 +1,7 @@
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState } from "react";
 import ProductGrid from "../../components/Grid/ProductGrid";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ProductSort from "../../components/ProductFilterSort/ProductSort";
 import CategoryControl from "../../components/Categories/CategoryControl";
 import { Product } from "../../types";
@@ -19,7 +19,6 @@ const options = [
 
 const ProductsPage = () => {
   const { data: products } = useSelector((state: RootState) => state.products);
-  const location = useLocation();
   const { category } = useParams<{ category: string }>();
   const [selectedCate, setSelectedCate] = useState(category || "all");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>();
@@ -93,7 +92,7 @@ const ProductsPage = () => {
   return (
     <div className="py-7">
       <div className="rounded-div space-y-5">
-        <Breadcrumb pathname={location.pathname} txtFrom="All" />
+        <Breadcrumb txtFrom="All" />
         <div>
           <h2 className="font-notosanslao text-2xl font-bold md:text-4xl">
             {selectedCate === "all" ? "ທັງໝົດ" : selectedCate}

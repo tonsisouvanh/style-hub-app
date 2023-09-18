@@ -1,6 +1,6 @@
 // productSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { collection, getDocs, query } from "firebase/firestore"; // Import Firestore functions from the Firebase package
+import { collection, getDocs } from "firebase/firestore"; // Import Firestore functions from the Firebase package
 import { db } from "../../firebase"; // Import your Firebase configuration
 import { Product } from "../../types";
 

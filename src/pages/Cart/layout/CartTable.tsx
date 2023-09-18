@@ -6,7 +6,6 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { noimage } from "../../../assets/images";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { fadeFromTopAnimate } from "../../../animation";
 
 const tableHeaders = [
   {

@@ -1,4 +1,4 @@
-import { FaLock, FaShippingFast, FaMoneyBill } from "react-icons/fa";
+import { FaShippingFast, FaMoneyBill } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { scaleAnimate, scaleAnimateReverse } from "../../animation";

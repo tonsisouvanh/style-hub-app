@@ -1,4 +1,3 @@
-import { FacebookProvider, Page } from "react-facebook";
 import Logo from "../Logo/Logo";
 import SocialMediaLinks from "../SocialMediaLink/SocialMediaLinks";
 const Footer = () => {
@@ -7,26 +6,7 @@ const Footer = () => {
       <div className="rounded-div bg-[#E8E8E8] px-4 py-10 sm:px-6 lg:px-16 lg:py-20">
         <div className="flex flex-col items-center justify-center gap-10">
           <Logo />
-          {/* <div
-            className="fb-page"
-            data-href="https://www.facebook.com/profile.php?id=100092578272391"
-            data-tabs="timeline"
-            data-width=""
-            data-height="100"
-            data-small-header="true"
-            data-adapt-container-width="false"
-            data-hide-cover="false"
-            data-show-facepile="false"
-          >
-            <blockquote
-              cite="https://www.facebook.com/profile.php?id=100092578272391"
-              className="fb-xfbml-parse-ignore"
-            >
-              <a href="https://www.facebook.com/profile.php?id=100092578272391">
-                Cyberpunk996
-              </a>
-            </blockquote>
-          </div> */}
+
           <div>
             <SocialMediaLinks />
           </div>

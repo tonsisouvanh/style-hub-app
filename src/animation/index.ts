@@ -142,24 +142,6 @@ const rotateAnimateFromRight = {
 };
 
 // ==================== use staggeredFadeIn as parent and fadeIn as child
-const staggeredFadeIn = {
-  initial: {},
-  animate: {
-    transition: {
-      staggerChildren: 0.5,
-    },
-  },
-};
-const fadeIn = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-  },
-};
 
 // ==== usage:
 // <motion.div

@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { AiOutlineClose, AiTwotoneShopping } from "react-icons/ai";
-import { FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
-import UserWishlistCartIcons from "./UserWishlistCartIcons ";
 import SearchBar from "../SearchBar/SearchBar";
-import Logo from "../Logo/Logo";
 import { AiFillHome } from "react-icons/ai";
 import { menuItems } from "../../data/data";
 import { Category } from "../../types";
@@ -119,27 +116,6 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           </li>
         ))}
       </ul>
-
-      {/* <div className="mt-10 space-y-4">
-        <div className="text-3xl font-poppins font-bold text-gray-800">
-          Style<span className="text-cyan-800">HUB</span>
-        </div>
-        <div className="flex justify-center gap-4">
-          <div className="p-2 cursor-pointer rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-300">
-            <FaFacebook size={24} color="#4267B2" />
-          </div>
-          <div className="p-2 cursor-pointer rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-300">
-            <FaInstagram size={24} color="#C13584" />
-          </div>
-          <div className="p-2 cursor-pointer rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-300">
-            <FaTwitter size={24} color="#1DA1F2" />
-          </div>
-        </div>
-      </div> */}
-
-      {/* <div className="hidden lg:flex">
-        <UserWishlistCartIcons />
-      </div> */}
     </nav>
   );
 };

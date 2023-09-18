@@ -1,4 +1,3 @@
-import React from "react";
 import { FaTiktok, FaWhatsapp, FaInstagram, FaFacebook } from "react-icons/fa";
 
 const socialMediaData = [

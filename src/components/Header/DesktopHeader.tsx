@@ -1,6 +1,5 @@
 import SearchBar from "../SearchBar/SearchBar";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 import { Link } from "react-router-dom";
 import UserWishlistCartIcons from "./UserWishlistCartIcons ";
@@ -21,7 +20,6 @@ type DesktopHeaderProps = {
 };
 
 const DesktopHeader: React.FC<DesktopHeaderProps> = ({
-  categories,
   toggleMenu,
   handleNavbarClose,
 }) => {
@@ -184,10 +182,6 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           <div className="hidden lg:flex">
             <SearchBar />
           </div>
-
-          {/* <div className="hidden lg:flex">
-            <UserWishlistCartIcons />
-          </div> */}
           <UserWishlistCartIcons />
         </motion.div>
       </nav>
