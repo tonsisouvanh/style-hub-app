@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProductCard from "../Card/ProductCard";
 import { Product } from "../../types";
 interface ProductGridProps {
-  products: Product[]; // Pass the array of products as a prop
+  products: Product[];
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {

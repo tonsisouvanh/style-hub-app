@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import ProductGrid from "../../components/Grid/ProductGrid";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { useLocation, useParams } from "react-router-dom";
@@ -101,11 +101,7 @@ const ProductsPage = () => {
         </div>
         {/* Ad */}
         <div className="dflex relative hidden min-h-[10rem] w-full items-center justify-center sm:h-auto">
-          <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/10">
-            {/* <button className="cursor-pointer border-2 border-black bg-white/80 p-2 font-arimo font-bold">
-              Check out!
-            </button> */}
-          </div>
+          <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/10"></div>
           <img className="h-full w-full object-cover" src={adbanner} alt="" />
         </div>
         <div
@@ -150,7 +146,6 @@ const ProductsPage = () => {
           </div>
         </div>
         <ProductGrid products={filteredProducts || []} />
-        {/* <Pagination /> */}
       </div>
     </div>
   );

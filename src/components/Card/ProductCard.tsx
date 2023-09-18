@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { noimage } from "../../assets/images";
 import { Product } from "../../types";
@@ -17,6 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart);
   const { status } = useSelector((state: RootState) => state.products);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleAddToCart = () => {
     const { id, title, price, discount } = product;
@@ -34,9 +35,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       }),
     );
   };
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = product.images[0] || noimage;
+
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+  }, [product.images]);
+
   return (
     <>
-      {status === "loading" ? (
+      {status === "loading" || !imageLoaded ? (
         <div className="flex h-full flex-col justify-between gap-1 border p-4 hover:border-2">
           <div className="skeleton-image h-48 w-full animate-pulse bg-gray-200"></div>
           <div className="skeleton-title mt-2 h-4 w-2/3 animate-pulse bg-gray-200"></div>
@@ -51,15 +62,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 <div className="absolute left-0 top-0 z-[1] flex h-full w-full items-center justify-center bg-gray-100/50 opacity-0 transition duration-300 group-hover:opacity-100">
                   <BsSearch className="text-4xl text-cyan-700" />
                 </div>
-                <LazyLoadImage
-                  src={product.images[0] || noimage}
-                  alt={product.title}
-                  width="100%"
-                  height="100%"
-                  effect="blur"
-                  className="h-full w-full object-cover transition duration-300 hover:scale-110"
-                  placeholderSrc={noimage}
-                />
+                <div className="h-full w-full">
+                  <LazyLoadImage
+                    src={product.images[0] || noimage}
+                    alt={product.title}
+                    effect="blur"
+                    className="h-full w-full object-cover transition duration-300 hover:scale-110"
+                    // placeholderSrc={noimage}
+                  />
+                </div>
               </div>
               <div className="flex-col items-center justify-center gap-1 px-1 font-notosanslao text-[0.7rem]  sm:text-[0.9rem] lg:text-[1rem]">
                 <p className="mb-2 mt-2 text-center font-bold leading-none transition hover:text-gray-600">
