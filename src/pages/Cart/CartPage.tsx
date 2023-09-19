@@ -15,11 +15,13 @@ import { Link } from "react-router-dom";
 import OrderButton from "../../components/Button/OrderButton";
 import CartGrid from "./layout/CartGrid";
 import CartTable from "./layout/CartTable";
+import { useEffect, useState } from "react";
+import ConfirmModal from "../../components/Modal/ConfirmModal";
 
 const CartPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-
+  const [openConfirmModal, setOpenConfirmModal] = useState<boolean>(false);
   const subtotal = cartItems?.reduce((total, item) => {
     let discountedPrice = item.price;
 
@@ -35,6 +37,10 @@ const CartPage = () => {
 
   const shippingFee = 0; // Replace with the shipping fee
   const total = subtotal + shippingFee;
+
+  const hanldeConfirmModal = (value: boolean) => {
+    setOpenConfirmModal(value);
+  };
 
   const handleRemoveProduct = (id: string) => {
     dispatch(removeFromCart(id));
@@ -64,9 +70,15 @@ const CartPage = () => {
       dispatch(updateCartItem(updatedItem));
     }
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
+      <ConfirmModal
+        openConfirmModal={openConfirmModal}
+        hanldeConfirmModal={hanldeConfirmModal}
+      />
       <div className="rounded-div space-y-5 py-5">
         <div className="flex items-center gap-x-2 text-lg text-gray-600 md:text-xl">
           <div className="flex items-center gap-x-1 text-[#024E82]">
@@ -86,7 +98,7 @@ const CartPage = () => {
         </div>
         <Link
           to="/all-products/all"
-          className="sticky top-[4.6rem] z-40 flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
+          className="sticky top-[4.6rem] z-[10] flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
         >
           <RiShoppingCartFill className="text-2xl" />
 
@@ -147,7 +159,11 @@ const CartPage = () => {
             <span className="text-xl font-semibold">ລວມທັງໝົດ:</span>
             <span className="text-xl text-cyan-700">{formatPrice(total)}</span>
           </div>
-          <OrderButton productData={cartItems} />
+          <OrderButton
+            setOpenConfirmModal={setOpenConfirmModal}
+            openConfirmModal={openConfirmModal}
+            productData={cartItems}
+          />
         </div>
       </div>
     </div>

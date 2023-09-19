@@ -25,8 +25,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
 
   return (
     <nav
-      className={`z-50 origin-top scale-y-0 space-y-5 overflow-y-scroll px-5 py-3 font-notosanslao opacity-0 transition duration-300 ${
-        isOpen ? "scale-y-100 opacity-100" : ""
+      className={`z-[5] origin-top scale-y-0 space-y-5 overflow-y-scroll px-5 py-3 font-notosanslao transition duration-300 ${
+        isOpen ? "scale-y-100" : ""
       } fixed left-0 top-0 h-screen w-screen border-b-[1px] bg-white text-center lg:hidden`}
     >
       <div className="mb-3 flex items-center justify-between">

@@ -15,13 +15,14 @@ import { RootState } from "../../store/store";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { noimage } from "../../assets/images";
+import { toast } from "react-toastify";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const { data: products, status } = useSelector(
     (state: RootState) => state.products,
   );
-  const cartItems = useSelector((state: RootState) => state.cart);
+  // const cartItems = useSelector((state: RootState) => state.cart);
 
   const [showReview, setShowReview] = useState<boolean>(false);
   const [selectedSize, setSelectedSize] = useState<string>("");
@@ -31,9 +32,9 @@ const SingleProduct = () => {
 
   const product = products.find((i) => i.id === id);
 
-  const productFoundInCart = cartItems.findIndex(
-    (cart) => cart.id === product?.id,
-  );
+  // const productFoundInCart = cartItems.findIndex(
+  //   (cart) => cart.id === product?.id,
+  // );
   const handleSelectChange = (value: string) => {
     setSelectedSize(value);
   };
@@ -56,6 +57,7 @@ const SingleProduct = () => {
         sizes: product?.sizes || [],
       }),
     );
+    toast.success("ເພີ່ມແລ້ວ");
   };
 
   useEffect(() => {
@@ -229,11 +231,7 @@ const SingleProduct = () => {
                     className="flex items-center gap-1 bg-sky-700 px-10 py-5 text-white transition duration-300 hover:scale-95 hover:bg-sky-800"
                   >
                     <RiShoppingBag2Fill className="text-2xl" />
-                    <span>
-                      {productFoundInCart > -1
-                        ? "ເພີ່ມແລ້ວ"
-                        : "ເພີ່ມເຂົ້າກະເປົາ"}
-                    </span>
+                    <span>ເພີ່ມເຂົ້າກະເປົາ</span>
                   </button>
 
                   <OrderButton productData={productData} />

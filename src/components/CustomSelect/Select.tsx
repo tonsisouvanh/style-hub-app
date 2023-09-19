@@ -68,7 +68,7 @@ const Select: React.FC<SelectProps> = ({
       </div>
 
       <div
-        className={`absolute z-10 mt-1 w-full rounded border border-gray-300 bg-white transition duration-300 
+        className={`absolute z-[3] mt-1 w-full rounded border border-gray-300 bg-white transition duration-300 
         
         ${
           isOpen

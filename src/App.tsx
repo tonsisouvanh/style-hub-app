@@ -8,12 +8,26 @@ import ProductsPage from "./pages/Products/ProductsPage";
 import AboutPage from "./pages/About/AboutPage";
 import NotFoundPage from "./pages/404/NotFoundPage";
 import CartPage from "./pages/Cart/CartPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
       <Router>
         <Header />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />

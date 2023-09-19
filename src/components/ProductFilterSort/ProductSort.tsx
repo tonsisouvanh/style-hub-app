@@ -51,7 +51,7 @@ const ProductSort: React.FC<SelectProps> = ({
 
         <div
           onMouseLeave={() => setIsOpen(false)}
-          className={`absolute right-0 top-8 z-10 mt-1 w-fit rounded border border-gray-300 bg-white transition duration-300 ${
+          className={`absolute right-0 top-8 z-[2] mt-1 w-fit rounded border border-gray-300 bg-white transition duration-300 ${
             isOpen
               ? "visible translate-y-0 opacity-100"
               : "invisible translate-y-20 opacity-0"

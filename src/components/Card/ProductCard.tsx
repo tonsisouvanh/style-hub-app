@@ -2,39 +2,43 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { noimage } from "../../assets/images";
 import { Product } from "../../types";
-import { BsFillBagPlusFill, BsBagCheckFill } from "react-icons/bs";
+import { BsFillBagPlusFill } from "react-icons/bs";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
 import { RootState } from "../../store/store";
 import { BsSearch } from "react-icons/bs";
-import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../../feature/cart/CartSlice";
+import { useSelector } from "react-redux";
+// import { addToCart } from "../../feature/cart/CartSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 interface ProductCardProps {
   product: Product;
+  handleAddCartModal: (value: boolean, proId: string) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state: RootState) => state.cart);
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  handleAddCartModal,
+}) => {
+  // const dispatch = useDispatch();
+  // const cartItems = useSelector((state: RootState) => state.cart);
   const { status } = useSelector((state: RootState) => state.products);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const handleAddToCart = () => {
-    const { id, title, price, discount } = product;
-    dispatch(
-      addToCart({
-        id: id,
-        images: product.images,
-        selectedImg: product.images[0],
-        name: title,
-        price: price,
-        quantity: 1,
-        discount: discount,
-        selectedSize: product.sizes[0],
-        sizes: product.sizes,
-      }),
-    );
-  };
+  // const handleAddToCart = () => {
+  //   const { id, title, price, discount } = product;
+  //   dispatch(
+  //     addToCart({
+  //       id: id,
+  //       images: product.images,
+  //       selectedImg: product.images[0],
+  //       name: title,
+  //       price: price,
+  //       quantity: 1,
+  //       discount: discount,
+  //       selectedSize: product.sizes[0],
+  //       sizes: product.sizes,
+  //     }),
+  //   );
+  // };
 
   useEffect(() => {
     const img = new Image();
@@ -99,20 +103,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
           </Link>
 
-          {cartItems.find((item) => item.id === product.id) ? (
+          {/* {cartItems.find((item) => item.id === product.id) ? (
             <div className="group flex w-full cursor-pointer items-center justify-center gap-1 bg-cyan-700 py-2 font-notosanslao text-white lg:py-3">
               <span>ເພີ່ມແລ້ວ</span>
               <BsBagCheckFill className="text-lg transition group-hover:scale-110 lg:text-2xl" />
             </div>
           ) : (
             <div
-              onClick={handleAddToCart}
+              // onClick={handleAddToCart}
+              onClick={() => handleAddCartModal(true, product?.id)}
               className="group flex w-full cursor-pointer items-center justify-center gap-1 bg-black py-2 font-notosanslao text-white lg:py-3"
             >
               <span>ເພີ່ມ</span>
               <BsFillBagPlusFill className="text-lg text-white transition group-hover:scale-110 lg:text-2xl" />
             </div>
-          )}
+          )} */}
+          <div
+            // onClick={handleAddToCart}
+            onClick={() => handleAddCartModal(true, product?.id)}
+            className="group flex w-full cursor-pointer items-center justify-center gap-1 bg-black py-2 font-notosanslao text-white lg:py-3"
+          >
+            <span>ເພີ່ມ</span>
+            <BsFillBagPlusFill className="text-lg text-white transition group-hover:scale-110 lg:text-2xl" />
+          </div>
         </div>
       )}
     </>

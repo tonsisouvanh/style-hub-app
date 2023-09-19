@@ -10,6 +10,7 @@ import { BiFilterAlt } from "react-icons/bi";
 import { adbanner } from "../../assets/images";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import AddCartModal from "../../components/AddCartAction/AddCartModal";
 const options = [
   { label: "ເຄື່ອງມາໃໝ່", value: "newarrival" },
   { label: "ລາຄາ: ໜ້ອຍ - ຫຼາຍ", value: "asc" },
@@ -24,6 +25,8 @@ const ProductsPage = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>();
   const [selectedSort, setSelectedSort] = useState<string>("");
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
+  const [openAddCartModal, setOpenAddCartModal] = useState<boolean>(false);
+  const [proId, setProId] = useState<string>("");
 
   const [offset, setOffset] = useState(0);
   useEffect(() => {
@@ -31,6 +34,11 @@ const ProductsPage = () => {
       setOffset(window.pageYOffset);
     };
   }, []);
+
+  const handleAddCartModal = (value: boolean, proId: string) => {
+    setOpenAddCartModal(value);
+    setProId(proId);
+  };
 
   const handleSelectChange = (value: string) => {
     setSelectedSort(value);
@@ -91,6 +99,11 @@ const ProductsPage = () => {
 
   return (
     <div className="py-7">
+      <AddCartModal
+        openAddCartModal={openAddCartModal}
+        handleAddCartModal={handleAddCartModal}
+        proId={proId}
+      />
       <div className="rounded-div space-y-5">
         <Breadcrumb txtFrom="All" />
         <div>
@@ -106,7 +119,7 @@ const ProductsPage = () => {
         <div
           className={`${
             offset >= 154
-              ? "sticky top-[4rem] z-50 border bg-white px-2 pt-2 sm:top-[4.3rem]"
+              ? "sticky top-[4rem] z-[3] border bg-white px-2 pt-2 sm:top-[4.3rem]"
               : null
           }`}
         >
@@ -144,7 +157,10 @@ const ProductsPage = () => {
             />
           </div>
         </div>
-        <ProductGrid products={filteredProducts || []} />
+        <ProductGrid
+          handleAddCartModal={handleAddCartModal}
+          products={filteredProducts || []}
+        />
       </div>
     </div>
   );

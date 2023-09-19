@@ -26,12 +26,18 @@ const cartSlice = createSlice({
     //     });
     //   }
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      const { id } = action.payload;
-      const existingItem = state.find((item) => item.id === id);
+      const { id, selectedSize, selectedImg } = action.payload;
+      const existingItem = state.find(
+        (item) =>
+          item.id === id &&
+          item.selectedSize === selectedSize &&
+          item.selectedImg === selectedImg,
+      );
+
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += action.payload.quantity;
       } else {
-        state.push({ ...action.payload, quantity: 1 });
+        state.push({ ...action.payload, quantity: action.payload.quantity });
       }
       syncCartWithLocalStorage(state);
     },
