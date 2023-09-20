@@ -6,9 +6,8 @@ import { fadeFromBottomAnimate, fadeFromTopAnimate } from "../../animation";
 import { Link, useParams } from "react-router-dom";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
 import { FaHome } from "react-icons/fa";
-import { CartItem, Option } from "../../types";
+import { Option } from "../../types";
 import { RiShoppingBag2Fill } from "react-icons/ri";
-import OrderButton from "../../components/Button/OrderButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../feature/cart/CartSlice";
 import { RootState } from "../../store/store";
@@ -16,6 +15,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { noimage } from "../../assets/images";
 import { toast } from "react-toastify";
+import ConfirmModal from "../../components/Modal/ConfirmModal";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
@@ -25,9 +25,11 @@ const SingleProduct = () => {
   // const cartItems = useSelector((state: RootState) => state.cart);
 
   const [showReview, setShowReview] = useState<boolean>(false);
-  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [selectedSize, setSelectedSize] = useState<string>();
   const [currentImage, setCurrentImage] = useState<number>(0);
-  const [productData, setProductData] = useState<CartItem[]>([]);
+  // const [productData, setProductData] = useState<CartItem[]>([]);
+  const [openConfirmModal, setOpenConfirmModal] = useState<boolean>(false);
+
   const { id } = useParams<{ id: string }>();
 
   const product = products.find((i) => i.id === id);
@@ -38,50 +40,55 @@ const SingleProduct = () => {
   const handleSelectChange = (value: string) => {
     setSelectedSize(value);
   };
-
+  const hanldeConfirmModal = (value: boolean) => {
+    setOpenConfirmModal(value);
+  };
   const handleCurrentImage = (value: number) => {
     setCurrentImage(value);
   };
   const handleAddToCart = () => {
     const { id, title, price, discount, images } = product || {};
-    dispatch(
-      addToCart({
-        id: id || "",
-        images: images || [],
-        selectedImg: product?.images[currentImage] || "",
-        name: title || "",
-        price: price || 0,
-        quantity: 1,
-        discount: discount || { type: "", value: 0 },
-        selectedSize: selectedSize || "",
-        sizes: product?.sizes || [],
-      }),
-    );
-    toast.success("ເພີ່ມແລ້ວ");
+    if (selectedSize && selectedSize !== "") {
+      dispatch(
+        addToCart({
+          id: id || "",
+          images: images || [],
+          selectedImg: product?.images[currentImage] || "",
+          name: title || "",
+          price: price || 0,
+          quantity: 1,
+          discount: discount || { type: "", value: 0 },
+          selectedSize: selectedSize || "",
+          sizes: product?.sizes || [],
+        }),
+      );
+      toast.success("ເພີ່ມແລ້ວ");
+      return;
+    }
+    toast.warning("ຍັງບໍ່ໄດ້ເລືອກ size");
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    if (product) {
-      const productItem: CartItem = {
-        id: product?.id,
-        images: product.images,
-        selectedImg: product.images[currentImage] || "",
-        name: product?.title,
-        price: product?.price,
-        discount: product?.discount,
-        quantity: 1,
-        selectedSize: selectedSize,
-        sizes: product.sizes,
-      };
+  // useEffect(() => {
+  //   if (product) {
+  //     const productItem: CartItem = {
+  //       id: product?.id,
+  //       images: product.images,
+  //       selectedImg: product.images[currentImage] || "",
+  //       name: product?.title,
+  //       price: product?.price,
+  //       discount: product?.discount,
+  //       quantity: 1,
+  //       selectedSize: selectedSize || "",
+  //       sizes: product.sizes,
+  //     };
 
-      setProductData([productItem]);
-    }
-  }, [selectedSize]);
-
+  //     setProductData([productItem]);
+  //   }
+  // }, [selectedSize]);
   const options: Option[] = (product?.sizes || []).map((size) => ({
     label: `${size}`,
     value: `${size}`,
@@ -92,6 +99,10 @@ const SingleProduct = () => {
         <LoadingSpinner />
       ) : (
         <div className="py-7 font-notosanslao">
+          <ConfirmModal
+            openConfirmModal={openConfirmModal}
+            hanldeConfirmModal={hanldeConfirmModal}
+          />
           <div className="rounded-div space-y-32">
             {/*====================== Product info ======================*/}
             <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start">
@@ -216,7 +227,6 @@ const SingleProduct = () => {
                   <span>SIZE:</span>
                   <Select
                     options={options}
-                    currOption={product?.sizes[0] || ""}
                     onChange={(value) => handleSelectChange(value)}
                     textSize=""
                   />
@@ -234,7 +244,17 @@ const SingleProduct = () => {
                     <span>ເພີ່ມເຂົ້າກະເປົາ</span>
                   </button>
 
-                  <OrderButton productData={productData} />
+                  {/* <OrderButton
+                    productData={productData}
+                    setOpenConfirmModal={setOpenConfirmModal}
+                    isDirectional={true}
+                  /> */}
+                  <Link
+                    to="/cart"
+                    className="flex items-center justify-center bg-sky-700 px-10 py-5 text-white transition duration-300 hover:scale-95 hover:bg-sky-800"
+                  >
+                    <span>ໄປທີ່ກະເປົ໋າ</span>
+                  </Link>
                 </motion.div>
 
                 <motion.div

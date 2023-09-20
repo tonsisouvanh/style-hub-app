@@ -3,7 +3,6 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Option } from "../../types";
 type SelectProps = {
   options: Option[];
-  currOption: string | "";
   textSize: string;
   onChange: (value: string, id: string | null) => void;
 };
@@ -11,11 +10,10 @@ type SelectProps = {
 const Select: React.FC<SelectProps> = ({
   options,
   onChange,
-  currOption,
   textSize = "text-xl",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(currOption);
+  const [selectedValue, setSelectedValue] = useState<string>("");
 
   const handleOptionClick = (value: string, id: string | null) => {
     setSelectedValue(value);
@@ -38,6 +36,7 @@ const Select: React.FC<SelectProps> = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, [setIsOpen]);
+
   return (
     <div ref={divRef} className="relative w-full">
       <div
@@ -78,6 +77,11 @@ const Select: React.FC<SelectProps> = ({
         
         `}
       >
+        {/* <div
+          className={`cursor-pointer px-3 py-2 ${textSize} hover:bg-gray-100`}
+        >
+          ຂະໜາດ
+        </div> */}
         {options.map((option) => (
           <div
             key={option.value}

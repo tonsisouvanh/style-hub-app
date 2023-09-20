@@ -1,7 +1,6 @@
 import React from "react";
 import { CartItem } from "../../../types";
 import { calculateDiscountedPrice, formatPrice } from "../../../utils/utils";
-import Select from "../../../components/CustomSelect/Select";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { noimage } from "../../../assets/images";
@@ -63,9 +62,9 @@ interface CartTableProps {
 const CartTable: React.FC<CartTableProps> = ({
   cartItems,
   handleRemoveProduct,
-  handleSelectChange,
+  // handleSelectChange,
   handleAddQuantity,
-  handleSelectImage,
+  // handleSelectImage,
 }) => {
   return (
     <table className="min-w-full divide-y divide-gray-200">
@@ -91,7 +90,7 @@ const CartTable: React.FC<CartTableProps> = ({
                 height="100%"
                 placeholderSrc={noimage}
               />
-              <div className="flex w-full flex-wrap items-center justify-start gap-1">
+              {/* <div className="flex w-full flex-wrap items-center justify-start gap-1">
                 {product?.images.map((image, index) => (
                   <LazyLoadImage
                     key={index}
@@ -106,7 +105,7 @@ const CartTable: React.FC<CartTableProps> = ({
                     onClick={() => handleSelectImage(image, product.id)}
                   />
                 ))}
-              </div>
+              </div> */}
             </td>
             <td className="whitespace-nowrap px-6 py-4">
               <div className=" text-gray-900">{product.name}</div>
@@ -133,8 +132,8 @@ const CartTable: React.FC<CartTableProps> = ({
                 )}
               </div>
             </td>
-            <td>
-              <Select
+            <td className="">
+              {/* <Select
                 options={
                   product &&
                   product.sizes.map((size) => ({
@@ -145,7 +144,8 @@ const CartTable: React.FC<CartTableProps> = ({
                 currOption={product.selectedSize}
                 onChange={(value) => handleSelectChange(value, product.id)}
                 textSize=""
-              />
+              /> */}
+              {product.selectedSize.toUpperCase()}
             </td>
             <td className="whitespace-nowrap px-6 py-4">
               <div className="flex items-center gap-2">

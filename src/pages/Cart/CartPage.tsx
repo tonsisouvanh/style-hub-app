@@ -161,7 +161,6 @@ const CartPage = () => {
           </div>
           <OrderButton
             setOpenConfirmModal={setOpenConfirmModal}
-            openConfirmModal={openConfirmModal}
             productData={cartItems}
           />
         </div>

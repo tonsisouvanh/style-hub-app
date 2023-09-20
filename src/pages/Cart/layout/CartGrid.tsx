@@ -2,11 +2,9 @@ import React from "react";
 import { CartItem } from "../../../types";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { noimage } from "../../../assets/images";
-import { fadeFromTopAnimate } from "../../../animation";
-import { motion } from "framer-motion";
+// import { fadeFromTopAnimate } from "../../../animation";
 import { calculateDiscountedPrice, formatPrice } from "../../../utils/utils";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import Select from "../../../components/CustomSelect/Select";
 import { BsTrash } from "react-icons/bs";
 
 interface CartGridProps {
@@ -19,9 +17,9 @@ interface CartGridProps {
 const CartGrid: React.FC<CartGridProps> = ({
   cartItems,
   handleRemoveProduct,
-  handleSelectChange,
+  // handleSelectChange,
   handleAddQuantity,
-  handleSelectImage,
+  // handleSelectImage,
 }) => {
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
@@ -40,7 +38,7 @@ const CartGrid: React.FC<CartGridProps> = ({
                 placeholderSrc={noimage}
               />
             </div>
-            <motion.div
+            {/* <motion.div
               variants={fadeFromTopAnimate}
               className="mb-2 flex w-full flex-wrap items-center justify-start gap-2"
             >
@@ -58,7 +56,7 @@ const CartGrid: React.FC<CartGridProps> = ({
                   onClick={() => handleSelectImage(image, product.id)}
                 />
               ))}
-            </motion.div>
+            </motion.div> */}
           </div>
           <div>
             <div className="mb-2 text-sm font-semibold text-gray-800 md:text-lg">
@@ -107,7 +105,7 @@ const CartGrid: React.FC<CartGridProps> = ({
               </div>
             </div>
             <div className="mb-2">
-              <Select
+              {/* <Select
                 options={product.sizes.map((size) => ({
                   value: size,
                   label: size,
@@ -115,7 +113,8 @@ const CartGrid: React.FC<CartGridProps> = ({
                 currOption={product.selectedSize}
                 onChange={(value) => handleSelectChange(value, product.id)}
                 textSize={"text-sm"}
-              />
+              /> */}
+              {product.selectedSize.toLocaleUpperCase()}
             </div>
 
             <div className="flex items-center justify-between font-notosanslao font-semibold text-cyan-700">

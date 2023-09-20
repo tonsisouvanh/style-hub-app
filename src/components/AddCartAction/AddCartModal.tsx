@@ -19,9 +19,7 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
   proId,
 }) => {
   const dispatch = useDispatch();
-  const { data: products, status } = useSelector(
-    (state: RootState) => state.products,
-  );
+  const { data: products } = useSelector((state: RootState) => state.products);
   const [currentImage, setCurrentImage] = useState<number>(0);
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);

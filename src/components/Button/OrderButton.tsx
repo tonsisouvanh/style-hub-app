@@ -1,25 +1,62 @@
 import React from "react";
-import { CartItem } from "../../types";
-// import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
+import { CartItem, Product } from "../../types";
 import { IoLogoWhatsapp } from "react-icons/io";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../store/store";
 
 interface OrderButtonProps {
   productData: CartItem[];
-  setOpenConfirmModal: (value: boolean) => void;
-  openConfirmModal: boolean;
+  product?: Product;
+  setOpenConfirmModal?: (value: boolean) => void;
+  isDirectional?: boolean;
 }
 
 const OrderButton: React.FC<OrderButtonProps> = ({
   productData,
+  // product,
   setOpenConfirmModal,
-  // openConfirmModal,
+  // isDirectional,
 }) => {
   const handleModal = () => {
-    setOpenConfirmModal(true);
+    // if (isDirectional) {
+    //   if (product) {
+    //     const merchantPhoneNumber = "+8562056300100";
+    //     let whatsappMessage = `ສະບາຍດີຂໍຖາມຂໍ້ມູນສິນຄ້າ: \n\n`;
+    //     let totalOrderAmount = 0;
+    //     product.forEach((item) => {
+    //       whatsappMessage += `ລະຫັດ: http://copy.com/${item.id}\n`;
+    //       whatsappMessage += `ຊື່: ${item.name}\n`;
+    //       whatsappMessage += `ຮູບພາບ: ${item.selectedImg}\n`;
+    //       whatsappMessage += `ລາຄາປົກກະຕິ: ${formatPrice(item.price)}\n`;
+    //       let itemSubtotal = item.quantity * item.price;
+    //       if (item.discount) {
+    //         whatsappMessage += `ລາຄາ sale: ${formatPrice(
+    //           calculateDiscountedPrice(item?.price, item.discount),
+    //         )}\n`;
+    //         itemSubtotal =
+    //           item.quantity *
+    //           calculateDiscountedPrice(item.price, item.discount);
+    //       }
+    //       totalOrderAmount += itemSubtotal;
+    //       whatsappMessage += `Size: ${item.selectedSize}      ຈຳນວນ: ${item.quantity}\n`;
+    //       whatsappMessage += `ລວມ: ${formatPrice(itemSubtotal)}\n`;
+    //       whatsappMessage += `\n\n\n`;
+    //     });
+    //     whatsappMessage += `ລວມລາຄາທັງໝົດ: ${formatPrice(totalOrderAmount)}\n`;
+    //     const encodedMessage = encodeURIComponent(whatsappMessage);
+    //     const whatsappLink = `https://wa.me/${merchantPhoneNumber}?text=${encodedMessage}`;
+    //     window.open(whatsappLink, "_blank");
+    //     return;
+    //   } else {
+    //     toast.warning("ຍັງບໍ່ໄດ້ເລືອກ size");
+    //   }
+    // } else {
+    //   if (setOpenConfirmModal) {
+    //     setOpenConfirmModal(true);
+    //   }
+    // }
+    if (setOpenConfirmModal) {
+      setOpenConfirmModal(true);
+    }
   };
-
   return (
     <button
       disabled={productData && productData.length > 0 ? false : true}
