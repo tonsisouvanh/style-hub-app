@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { calculateDiscountedPrice, formatPrice } from "../../utils/utils";
+import { toast } from "react-toastify";
 interface ConfirmModalProps {
   openConfirmModal: boolean;
   hanldeConfirmModal: (value: boolean) => void;
@@ -41,6 +42,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
       const whatsappLink = `https://wa.me/${merchantPhoneNumber}?text=${encodedMessage}`;
       window.open(whatsappLink, "_blank");
       return;
+    } else {
+      toast.warning("ບໍ່ມີເຄື່ອງໃນກະເປົາ");
     }
   };
   return (

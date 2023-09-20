@@ -59,7 +59,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({
   };
   return (
     <button
-      disabled={productData && productData.length > 0 ? false : true}
+      // disabled={productData && productData.length > 0 ? false : true}
       className="font-300 mt-4 flex min-w-[10rem] cursor-pointer items-center justify-center gap-1 bg-[#438642] px-4 py-2 font-notosanslao text-lg text-white transition duration-300 hover:scale-95 hover:bg-[#438642]/70"
       onClick={handleModal}
     >

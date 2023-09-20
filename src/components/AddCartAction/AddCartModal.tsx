@@ -87,7 +87,7 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
                 <div className="flex flex-col gap-5">
                   {/* main image */}
                   <div className="flex items-end gap-1">
-                    <div className="h-[10rem] w-auto">
+                    <div className="min-h-[15rem] w-[12rem]">
                       <LazyLoadImage
                         className="h-full w-full object-cover"
                         src={
