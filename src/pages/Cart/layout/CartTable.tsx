@@ -55,7 +55,12 @@ interface CartTableProps {
   cartItems: CartItem[];
   handleRemoveProduct: (id: string) => void;
   handleSelectChange: (value: string, id: string) => void;
-  handleAddQuantity: (id: string, action: string | "incr") => void;
+  handleAddQuantity: (
+    id: string,
+    size: string,
+    img: string,
+    action: string | "incr",
+  ) => void;
   handleSelectImage: (image: string, proId: string) => void;
 }
 
@@ -156,11 +161,25 @@ const CartTable: React.FC<CartTableProps> = ({
                 <div className="flex items-center gap-5">
                   <AiOutlinePlus
                     className="cursor-pointer hover:text-cyan-700"
-                    onClick={() => handleAddQuantity(product.id, "incr")}
+                    onClick={() =>
+                      handleAddQuantity(
+                        product.id,
+                        product.selectedSize,
+                        product.selectedImg,
+                        "incr",
+                      )
+                    }
                   />
                   <AiOutlineMinus
                     className="cursor-pointer hover:text-cyan-700"
-                    onClick={() => handleAddQuantity(product.id, "decr")}
+                    onClick={() =>
+                      handleAddQuantity(
+                        product.id,
+                        product.selectedSize,
+                        product.selectedImg,
+                        "decr",
+                      )
+                    }
                   />
                 </div>
               </div>

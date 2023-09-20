@@ -58,19 +58,39 @@ const cartSlice = createSlice({
         syncCartWithLocalStorage(state);
       }
     },
+
     clearCart: (state) => {
       state.length = 0;
       syncCartWithLocalStorage(state);
     },
-    incrementQuantity: (state, action: PayloadAction<string>) => {
-      const item = state.find((item) => item.id === action.payload);
+    incrementQuantity: (
+      state,
+      action: PayloadAction<{ id: string; size: string; img: string }>,
+    ) => {
+      const { id, size, img } = action.payload;
+      const item = state.find(
+        (item) =>
+          item.id === id &&
+          item.selectedSize === size &&
+          item.selectedImg === img,
+      );
       if (item) {
         item.quantity += 1;
       }
       syncCartWithLocalStorage(state);
     },
-    decrementQuantity: (state, action: PayloadAction<string>) => {
-      const item = state.find((item) => item.id === action.payload);
+    decrementQuantity: (
+      state,
+      action: PayloadAction<{ id: string; size: string; img: string }>,
+    ) => {
+      const { id, size, img } = action.payload;
+
+      const item = state.find(
+        (item) =>
+          item.id === id &&
+          item.selectedSize === size &&
+          item.selectedImg === img,
+      );
       if (item && item.quantity > 1) {
         item.quantity -= 1;
       }

@@ -55,11 +55,16 @@ const CartPage = () => {
   const handleClearallitems = () => {
     dispatch(clearCart());
   };
-  const handleAddQuantity = (id: string, action: string | "incr") => {
-    if (id) {
+  const handleAddQuantity = (
+    id: string,
+    size: string,
+    img: string,
+    action: string | "incr",
+  ) => {
+    if (id && size && img) {
       action === "incr"
-        ? dispatch(incrementQuantity(id))
-        : dispatch(decrementQuantity(id));
+        ? dispatch(incrementQuantity({ id, size, img }))
+        : dispatch(decrementQuantity({ id, size, img }));
     }
   };
 
