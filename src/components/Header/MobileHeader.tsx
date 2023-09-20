@@ -105,15 +105,14 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         </li>
 
         {menuItems.map((item, index) => (
-          <li
+          <Link
             key={index}
-            className="border-b-[1px] py-3 text-center transition hover:bg-black hover:text-white"
+            to={item.toPath}
+            className="border-b-[1px] py-3 transition hover:bg-black hover:text-white"
             onClick={handleNavbarClose}
           >
-            <Link to={item.toPath} className="cursor-pointer ">
-              {item.text}
-            </Link>
-          </li>
+            <li className="cursor-pointer">{item.text}</li>
+          </Link>
         ))}
       </ul>
     </nav>

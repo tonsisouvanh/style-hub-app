@@ -35,8 +35,8 @@ const ProductsPage = () => {
     };
   }, []);
 
-  const handleAddCartModal = (value: boolean, proId: string) => {
-    setOpenAddCartModal(value);
+  const handleAddCartModal = (isOpen: boolean, proId: string) => {
+    setOpenAddCartModal(isOpen);
     setProId(proId);
   };
 
@@ -98,71 +98,74 @@ const ProductsPage = () => {
   }, [selectedCate, selectedSort]);
 
   return (
-    <div className="py-7">
-      <AddCartModal
-        openAddCartModal={openAddCartModal}
-        handleAddCartModal={handleAddCartModal}
-        proId={proId}
-      />
-      <div className="rounded-div space-y-5">
-        <Breadcrumb txtFrom="All" />
-        <div>
-          <h2 className="font-notosanslao text-2xl font-bold md:text-4xl">
-            {selectedCate === "all" ? "ທັງໝົດ" : selectedCate}
-          </h2>
-        </div>
-        {/* Ad */}
-        <div className="dflex relative hidden min-h-[10rem] w-full items-center justify-center sm:h-auto">
-          <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/10"></div>
-          <img className="h-full w-full object-cover" src={adbanner} alt="" />
-        </div>
-        <div
-          className={`${
-            offset >= 154
-              ? "sticky top-[4rem] z-[3] border bg-white px-2 pt-2 sm:top-[4.3rem]"
-              : null
-          }`}
-        >
-          <div className={`flex items-center justify-between font-notosanslao`}>
-            <span className="text-sm text-gray-600">
-              Result: {products.length} items
-            </span>
-            <div className={`flex items-center gap-8 text-[1rem]`}>
-              <div
-                onClick={() => handleOpenFilter(true)}
-                className=" hidden cursor-pointer items-center gap-1"
-              >
-                <span>Filter </span>
-                <BiFilterAlt />
-              </div>
-
-              {isOpenFilter && (
-                <div className="fixed right-0 top-0 z-50 flex h-screen w-screen justify-end bg-black/80">
-                  <ProductFilter handleOpenFilter={handleOpenFilter} />
+    <>
+      <div className="py-7">
+        <AddCartModal
+          openAddCartModal={openAddCartModal}
+          handleAddCartModal={handleAddCartModal}
+          proId={proId}
+        />
+        <div className="rounded-div space-y-5">
+          <Breadcrumb txtFrom="All" />
+          <div>
+            <h2 className="font-notosanslao text-2xl font-bold md:text-4xl">
+              {selectedCate === "all" ? "ທັງໝົດ" : selectedCate}
+            </h2>
+          </div>
+          {/* Ad */}
+          <div className="dflex relative hidden min-h-[10rem] w-full items-center justify-center sm:h-auto">
+            <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/10"></div>
+            <img className="h-full w-full object-cover" src={adbanner} alt="" />
+          </div>
+          <div
+            className={`${
+              offset >= 154 &&
+              "sticky top-[4rem] z-[3] border bg-white px-2 pt-2 sm:top-[4.3rem]"
+            }`}
+          >
+            <div
+              className={`flex items-center justify-between font-notosanslao`}
+            >
+              <span className="text-sm text-gray-600">
+                Result: {products.length} items
+              </span>
+              <div className={`flex items-center gap-8 text-[1rem]`}>
+                <div
+                  onClick={() => handleOpenFilter(true)}
+                  className=" hidden cursor-pointer items-center gap-1"
+                >
+                  <span>Filter </span>
+                  <BiFilterAlt />
                 </div>
-              )}
 
-              <ProductSort
-                options={options}
-                selectedSort={selectedSort}
-                onChange={handleSelectChange}
+                {isOpenFilter && (
+                  <div className="fixed right-0 top-0 z-50 flex h-screen w-screen justify-end bg-black/80">
+                    <ProductFilter handleOpenFilter={handleOpenFilter} />
+                  </div>
+                )}
+
+                <ProductSort
+                  options={options}
+                  selectedSort={selectedSort}
+                  onChange={handleSelectChange}
+                />
+              </div>
+            </div>
+            <div>
+              <CategoryControl
+                products={products}
+                onSelectCategory={onSelectCategory}
+                selectedCate={selectedCate}
               />
             </div>
           </div>
-          <div>
-            <CategoryControl
-              products={products}
-              onSelectCategory={onSelectCategory}
-              selectedCate={selectedCate}
-            />
-          </div>
+          <ProductGrid
+            handleAddCartModal={handleAddCartModal}
+            products={filteredProducts || []}
+          />
         </div>
-        <ProductGrid
-          handleAddCartModal={handleAddCartModal}
-          products={filteredProducts || []}
-        />
       </div>
-    </div>
+    </>
   );
 };
 

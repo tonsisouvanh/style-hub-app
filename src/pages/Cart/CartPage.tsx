@@ -103,7 +103,7 @@ const CartPage = () => {
         </div>
         <Link
           to="/all-products/all"
-          className="sticky top-[4.6rem] z-[10] flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
+          className="sticky top-[4.6rem] z-[4] flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
         >
           <RiShoppingCartFill className="text-2xl" />
 
