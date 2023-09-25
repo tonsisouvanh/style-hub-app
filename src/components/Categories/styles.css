@@ -1,0 +1,34 @@
+.category-control-swiper-button .swiper-button-prev,
+.category-control-swiper-button .swiper-button-next {
+  /* height: auto; */
+  width: 1.8rem;
+  /* background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)); */
+  /* background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0),
+    #ff0000
+  ); */
+  color: #fff; /* Replace with your desired color */
+}
+
+.category-control-swiper-button .swiper-button-prev {
+  left: 0;
+  background: linear-gradient(to right, #757575, #eb8fa900);
+}
+.category-control-swiper-button .swiper-button-next {
+  right: 0;
+  background: linear-gradient(to left, #757575, #eb8fa900);
+}
+.category-control-swiper-button .swiper-button-prev::after,
+.category-control-swiper-button .swiper-button-next::after {
+  color: #fff; /* Replace with your desired color */
+  font-size: 1rem;
+}
+
+.category-control-swiper-button .swiper-pagination-bullet {
+  background-color: #fff; /* Replace with your desired color */
+}
+
+.category-control-swiper-button .swiper-pagination-bullet-active {
+  background-color: #fff; /* Replace with your desired color */
+}
