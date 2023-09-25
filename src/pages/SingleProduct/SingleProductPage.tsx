@@ -104,16 +104,16 @@ const SingleProduct = () => {
             hanldeConfirmModal={hanldeConfirmModal}
           />
           <div className="rounded-div space-y-32">
-            {/*====================== Product info ======================*/}
+            {/* Product info */}
             <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start">
               {/* Left */}
               <motion.div
                 initial={"offscreen"}
                 animate={"onscreen"}
                 variants={fadeFromTopAnimate}
-                className="md:max-w-[25rem]m relative h-auto overflow-hidden "
+                className="md:max-w-[25rem]m relative h-auto overflow-hidden"
               >
-                <div className="h-[25rem] w-[20rem]  md:h-[35rem] md:w-[30rem]">
+                <div className="h-[25rem] w-[20rem] md:h-[35rem] md:w-[30rem]">
                   <LazyLoadImage
                     className="h-full w-full object-cover"
                     src={product?.images[currentImage]}
@@ -125,7 +125,7 @@ const SingleProduct = () => {
                   />
                 </div>
               </motion.div>
-              {/*====================== Right ======================*/}
+              {/* Right */}
               <motion.div
                 initial={"offscreen"}
                 animate={"onscreen"}
@@ -134,7 +134,7 @@ const SingleProduct = () => {
               >
                 <motion.div
                   variants={fadeFromTopAnimate}
-                  className="font-roboto bg-transparent"
+                  className="font-roboto bg-transparent text-[16px] text-gray-700"
                 >
                   <div className="flex items-center gap-x-2 text-lg text-gray-600 md:text-xl">
                     <div className="flex items-center gap-x-1 text-[#024E82]">
@@ -155,7 +155,7 @@ const SingleProduct = () => {
                 </motion.div>
                 <motion.h2
                   variants={fadeFromTopAnimate}
-                  className="font-notosanslao text-[36px] font-bold"
+                  className="font-notosanslao text-[24px] font-bold lg:text-[36px]"
                 >
                   {product?.title}
                 </motion.h2>
@@ -167,7 +167,7 @@ const SingleProduct = () => {
                     <AiFillStar
                       key={index}
                       className={`text-lg text-orange-700 ${
-                        index === 4 ? "opacity-50" : null
+                        index === 4 ? "opacity-50" : ""
                       }`}
                     />
                   ))}
@@ -175,7 +175,7 @@ const SingleProduct = () => {
                 </motion.div>
                 <motion.div
                   variants={fadeFromTopAnimate}
-                  className="space-x-4 font-lato text-[24px] font-[500]"
+                  className="space-x-4 font-lato text-[20px] font-[500]"
                 >
                   <span
                     className={`text-gray-500 ${
@@ -203,7 +203,6 @@ const SingleProduct = () => {
                 </motion.p>
                 <motion.div variants={fadeFromTopAnimate} className="space-y-1">
                   <p className="text-[16px] text-gray-700">ເລືອກແບບເຄື່ອງ:</p>
-
                   <motion.div
                     variants={fadeFromTopAnimate}
                     className="flex w-full flex-wrap items-center justify-start gap-2"
@@ -231,9 +230,8 @@ const SingleProduct = () => {
                     textSize=""
                   />
                 </motion.div>
-
                 <motion.div
-                  className="flex w-fit flex-col gap-2 text-lg"
+                  className="flex w-fit items-center gap-2 text-lg"
                   variants={fadeFromTopAnimate}
                 >
                   <button
@@ -243,12 +241,6 @@ const SingleProduct = () => {
                     <RiShoppingBag2Fill className="text-2xl" />
                     <span>ເພີ່ມເຂົ້າກະເປົາ</span>
                   </button>
-
-                  {/* <OrderButton
-                    productData={productData}
-                    setOpenConfirmModal={setOpenConfirmModal}
-                    isDirectional={true}
-                  /> */}
                   <Link
                     to="/cart"
                     className="flex items-center justify-center bg-sky-700 px-10 py-5 text-white transition duration-300 hover:scale-95 hover:bg-sky-800"
@@ -256,7 +248,6 @@ const SingleProduct = () => {
                     <span>ໄປທີ່ກະເປົ໋າ</span>
                   </Link>
                 </motion.div>
-
                 <motion.div
                   variants={fadeFromTopAnimate}
                   className="font-lato text-[14px] text-gray-700"

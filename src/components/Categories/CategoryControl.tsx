@@ -79,7 +79,7 @@ const CategoryControl: React.FC<CategoryControlProps> = ({
 
   return (
     <div
-      className="flex items-center gap-2 overflow-x-scroll py-2 font-notosanslao"
+      className="no-scrollbar flex items-center gap-2 overflow-x-auto py-2 font-notosanslao"
       id=""
     >
       <CategoryButton
@@ -93,7 +93,7 @@ const CategoryControl: React.FC<CategoryControlProps> = ({
           key={category.id}
           className={`whitespace-nowrap transition hover:bg-[#024E82] hover:text-white ${
             selectedCate === category.name && "bg-[#024E82] text-white"
-          } cursor-pointer whitespace-nowrap rounded-full border px-3 py-1`}
+          } cursor-pointer whitespace-nowrap rounded-full border px-3 py-1 text-base md:text-lg`}
           onClick={() => handleCategoryClick(category.name)}
         >
           <span className="text-sm md:text-base">

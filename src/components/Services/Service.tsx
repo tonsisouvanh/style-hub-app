@@ -33,18 +33,22 @@ const Service = () => {
     >
       <div className="rounded-div w-full">
         <div className="px-4 sm:px-6 lg:px-8">
-          <motion.div className=" grid gap-8 font-notosanslao md:grid-cols-fluid">
+          <motion.div className="grid gap-8 font-notosanslao md:grid-cols-fluid">
             {services.map((service, index) => (
               <motion.div
                 key={index}
                 className="flex flex-col items-center text-center"
                 variants={scaleAnimateReverse}
               >
-                <div className="mb-4 text-4xl text-[#024E82]">
+                <div className="mb-4 text-3xl text-[#024E82] sm:text-4xl lg:text-5xl">
                   {service.icon}
                 </div>
-                <h3 className="mb-2 text-xl font-semibold">{service.title}</h3>
-                <p className="text-gray-700">{service.description}</p>
+                <h3 className="mb-2 text-lg font-semibold sm:text-xl lg:text-2xl">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-gray-700 sm:text-base lg:text-lg">
+                  {service.description}
+                </p>
               </motion.div>
             ))}
           </motion.div>

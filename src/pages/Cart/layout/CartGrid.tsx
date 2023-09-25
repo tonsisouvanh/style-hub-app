@@ -43,35 +43,16 @@ const CartGrid: React.FC<CartGridProps> = ({
                 placeholderSrc={noimage}
               />
             </div>
-            {/* <motion.div
-              variants={fadeFromTopAnimate}
-              className="mb-2 flex w-full flex-wrap items-center justify-start gap-2"
-            >
-              {product?.images.map((image, index) => (
-                <LazyLoadImage
-                  key={index}
-                  className={`h-[3rem] w-[3rem] cursor-pointer object-cover hover:border-[0.2rem] hover:border-sky-700
-                ${
-                  image === product.selectedImg &&
-                  "border-[0.2rem] border-sky-700"
-                }`}
-                  src={image}
-                  effect="blur"
-                  alt=""
-                  onClick={() => handleSelectImage(image, product.id)}
-                />
-              ))}
-            </motion.div> */}
           </div>
           <div>
-            <div className="mb-2 text-sm font-semibold text-gray-800 md:text-lg">
+            <div className="mb-2 font-notosanslao text-base font-semibold text-gray-800 md:text-lg">
               {product.name}
             </div>
-            <div className="mb-2 font-notosanslao text-sm text-gray-600">
-              <div className="flex flex-wrap items-center justify-start gap-x-2 text-sm text-gray-900 md:gap-x-5 md:text-lg ">
+            <div className="mb-2 font-notosanslao text-base text-gray-600">
+              <div className="flex flex-wrap items-center justify-start gap-x-2 text-base text-gray-900 md:gap-x-5 md:text-lg">
                 <span className="">ລາຄາ:</span>
                 <span
-                  className={`  text-gray-500 ${
+                  className={`text-gray-500 ${
                     product?.discount && "line-through"
                   }`}
                 >
@@ -79,7 +60,7 @@ const CartGrid: React.FC<CartGridProps> = ({
                 </span>
 
                 {product?.discount && (
-                  <span className=" text-[#024E82]">
+                  <span className="text-[#024E82]">
                     {formatPrice(
                       calculateDiscountedPrice(
                         product?.price,
@@ -90,28 +71,11 @@ const CartGrid: React.FC<CartGridProps> = ({
                 )}
               </div>
             </div>
-            <div className="mb-2 flex items-center gap-1 font-notosanslao text-sm md:gap-12 md:text-lg">
-              {/* <span>Size: {product.selectedSize}</span> */}
-              <div>
-                ຈຳນວນ:
-                <span className="mx-2 border px-3 py-0">
-                  {product.quantity}
-                </span>
-              </div>
-              <div className="flex items-center gap-2 md:gap-5">
-                <AiOutlinePlus
-                  className="cursor-pointer hover:text-cyan-700"
-                  onClick={() =>
-                    handleAddQuantity(
-                      product.id,
-                      product.selectedSize,
-                      product.selectedImg,
-                      "incr",
-                    )
-                  }
-                />
-                <AiOutlineMinus
-                  className="cursor-pointer hover:text-cyan-700"
+            <div className="mb-2 flex items-center gap-1 font-notosanslao text-base md:gap-12 md:text-lg">
+              {/* <div>ຈຳນວນ:</div> */}
+              <div className="flex items-center gap-1">
+                <button
+                  className="flex h-6 w-6 items-center justify-center rounded-full border text-base text-gray-500 hover:bg-sky-200 hover:text-cyan-700 focus:outline-none"
                   onClick={() =>
                     handleAddQuantity(
                       product.id,
@@ -120,24 +84,32 @@ const CartGrid: React.FC<CartGridProps> = ({
                       "decr",
                     )
                   }
-                />
+                >
+                  <AiOutlineMinus />
+                </button>
+                <span className="rounded border border-gray-300 px-2 py-0 text-sm">
+                  {product.quantity}
+                </span>
+                <button
+                  className="flex h-6 w-6 items-center justify-center rounded-full border text-base text-gray-500 hover:bg-sky-200 hover:text-cyan-700 focus:outline-none"
+                  onClick={() =>
+                    handleAddQuantity(
+                      product.id,
+                      product.selectedSize,
+                      product.selectedImg,
+                      "incr",
+                    )
+                  }
+                >
+                  <AiOutlinePlus />
+                </button>
               </div>
             </div>
-            <div className="mb-2">
-              {/* <Select
-                options={product.sizes.map((size) => ({
-                  value: size,
-                  label: size,
-                }))}
-                currOption={product.selectedSize}
-                onChange={(value) => handleSelectChange(value, product.id)}
-                textSize={"text-sm"}
-              /> */}
+            <div className="mb-2 text-base">
               {product.selectedSize.toLocaleUpperCase()}
             </div>
-
             <div className="flex items-center justify-between font-notosanslao font-semibold text-cyan-700">
-              <span className="text-sm md:text-lg">
+              <span className="text-base md:text-lg">
                 ລວມ: {formatPrice(product.price * product.quantity)}
               </span>
               <span

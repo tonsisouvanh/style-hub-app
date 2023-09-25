@@ -70,17 +70,18 @@ const FeaturedProducts: React.FC<ProductProps> = ({
               >
                 <motion.h1
                   variants={fadeFromTopAnimate}
-                  className={`text-center text-[36px] font-bold`}
+                  className="text-center text-xl font-bold sm:text-2xl lg:text-3xl"
                 >
                   {featuredTitle}
                 </motion.h1>
                 <motion.p
                   variants={fadeFromTopAnimate}
-                  className="mb-10 mt-4 text-center text-[18px]"
+                  className="mb-4 mt-2 text-center text-base sm:text-lg lg:text-xl"
                 >
                   {featuredDesc}
                 </motion.p>
               </motion.div>
+
               {/* card container */}
               <motion.div
                 variants={fadeFromTopAnimate}
@@ -129,12 +130,12 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                               />
                             </div>
                             <div className="font-notosanslao">
-                              <p className="mt-2 text-[0.8rem] font-bold leading-none transition hover:text-gray-600 md:text-[0.9rem]">
+                              <p className="mt-2 text-sm font-bold leading-none transition hover:text-gray-600 md:text-base">
                                 {product.title}
                               </p>
                               <div className="flex flex-col items-center justify-center ">
                                 <span
-                                  className={`text-[1rem] text-gray-500  lg:text-[1.1rem] ${
+                                  className={`text-base text-gray-500  lg:text-lg ${
                                     product?.discount && "line-through"
                                   }`}
                                 >
@@ -142,7 +143,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                                 </span>
 
                                 {product?.discount && (
-                                  <span className="text-[1rem] text-[#024E82] lg:text-[1.1rem]">
+                                  <span className="text-base text-[#024E82] lg:text-lg">
                                     {formatPrice(
                                       calculateDiscountedPrice(
                                         product?.price,
@@ -182,13 +183,13 @@ const FeaturedProducts: React.FC<ProductProps> = ({
               >
                 <motion.h1
                   variants={fadeFromTopAnimate}
-                  className={`text-[36px] font-bold`}
+                  className={`text-2xl font-bold`}
                 >
                   {featuredTitle}
                 </motion.h1>
                 <motion.p
                   variants={fadeFromTopAnimate}
-                  className="mb-10 mt-4 text-center text-[18px]"
+                  className="mb-10 mt-4 text-center text-lg"
                 >
                   {featuredDesc}
                 </motion.p>
@@ -210,10 +211,10 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                       alt={product.title}
                       className="h-[17rem] w-full object-cover"
                     />
-                    <p className="mt-2 font-poppins text-[0.9rem] text-lg font-bold transition hover:text-gray-600">
+                    <p className="mt-2 text-lg font-bold leading-none transition hover:text-gray-600">
                       {product.title}
                     </p>
-                    <p className="font-lato text-[15px] text-[#024E82]">
+                    <p className="text-[15px] text-[#024E82]">
                       ${product.price}
                     </p>
                   </Link>
@@ -221,7 +222,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
               </motion.div>
 
               {showButton && (
-                <button className="mt-20 whitespace-nowrap bg-[#024E82] px-10 py-4 font-lato text-[16px] text-white transition hover:bg-[#024E82]/90">
+                <button className="mt-20 whitespace-nowrap bg-[#024E82] px-10 py-4 text-lg text-white transition hover:bg-[#024E82]/90">
                   SHOP NOW
                 </button>
               )}

@@ -8,9 +8,9 @@ const UserWishlistCartIcons = () => {
 
   return (
     <div className="flex justify-center space-x-2">
-      <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
+      {/* <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
         <FiUser size={24} color="#222" />
-      </div>
+      </div> */}
       <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
         <FiHeart size={24} color="#222" />
       </div>

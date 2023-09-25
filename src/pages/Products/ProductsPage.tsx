@@ -96,6 +96,11 @@ const ProductsPage = () => {
     const initialSortedProducts = sortProducts(sortedProducts, selectedSort);
     setFilteredProducts(initialSortedProducts);
   }, [selectedCate, selectedSort]);
+  useEffect(() => {
+    openAddCartModal
+      ? (document.body.style.overflowY = "hidden")
+      : (document.body.style.overflowY = "");
+  }, [openAddCartModal]);
 
   return (
     <>
@@ -113,7 +118,7 @@ const ProductsPage = () => {
             </h2>
           </div>
           {/* Ad */}
-          <div className="dflex relative hidden min-h-[10rem] w-full items-center justify-center sm:h-auto">
+          <div className="relative hidden min-h-[10rem] w-full items-center justify-center sm:h-auto">
             <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/10"></div>
             <img className="h-full w-full object-cover" src={adbanner} alt="" />
           </div>
@@ -123,16 +128,14 @@ const ProductsPage = () => {
               "sticky top-[4rem] z-[3] border bg-white px-2 pt-2 sm:top-[4.3rem]"
             }`}
           >
-            <div
-              className={`flex items-center justify-between font-notosanslao`}
-            >
-              <span className="text-sm text-gray-600">
+            <div className="flex items-center justify-between font-notosanslao">
+              <span className="text-xs text-gray-600 md:text-sm">
                 Result: {products.length} items
               </span>
-              <div className={`flex items-center gap-8 text-[1rem]`}>
+              <div className="flex items-center gap-8 text-[0.875rem] md:text-[1rem]">
                 <div
                   onClick={() => handleOpenFilter(true)}
-                  className=" hidden cursor-pointer items-center gap-1"
+                  className="hidden cursor-pointer items-center gap-1"
                 >
                   <span>Filter </span>
                   <BiFilterAlt />

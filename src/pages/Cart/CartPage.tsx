@@ -35,7 +35,7 @@ const CartPage = () => {
     return total + discountedPrice * item.quantity;
   }, 0);
 
-  const shippingFee = 0; // Replace with the shipping fee
+  const shippingFee = 0;
   const total = subtotal + shippingFee;
 
   const hanldeConfirmModal = (value: boolean) => {
@@ -78,6 +78,13 @@ const CartPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    openConfirmModal
+      ? (document.body.style.overflowY = "hidden")
+      : (document.body.style.overflowY = "");
+  }, [openConfirmModal]);
+
   return (
     <div>
       <ConfirmModal
@@ -85,7 +92,7 @@ const CartPage = () => {
         hanldeConfirmModal={hanldeConfirmModal}
       />
       <div className="rounded-div space-y-5 py-5">
-        <div className="flex items-center gap-x-2 text-lg text-gray-600 md:text-xl">
+        <div className="flex items-center gap-x-2 text-base text-gray-600 md:text-lg">
           <div className="flex items-center gap-x-1 text-[#024E82]">
             <FaHome />
             <Link to="/" className="hover:underline">
@@ -105,7 +112,7 @@ const CartPage = () => {
           to="/all-products/all"
           className="sticky top-[4.6rem] z-[4] flex w-fit items-center gap-1 rounded-sm bg-cyan-700 px-2 py-1 font-notosanslao text-white hover:bg-cyan-800 hover:no-underline"
         >
-          <RiShoppingCartFill className="text-2xl" />
+          <RiShoppingCartFill className="text-lg md:text-2xl" />
 
           {cartItems && cartItems.length > 0 ? "ຊອບຕໍ່!" : "ຊອບເລີຍ!"}
         </Link>
@@ -148,10 +155,10 @@ const CartPage = () => {
               ລົບທັງໝົດ
             </button>
           )}
-          <div className="mb-4 text-xl font-semibold text-gray-800 md:text-2xl">
+          <div className="mb-4 text-lg font-semibold text-gray-800 md:text-xl">
             ລວມລາຄາສິນຄ້າ
           </div>
-          <div className="mb-2 flex justify-between text-lg">
+          <div className="mb-2 flex justify-between text-base md:text-lg">
             <span className="text-gray-600">ລວມ:</span>
             <span className="text-gray-800">{formatPrice(subtotal)}</span>
           </div>
@@ -161,8 +168,8 @@ const CartPage = () => {
           </div> */}
           <hr className="my-2 border-t border-gray-300" />
           <div className="mt-2 flex justify-between">
-            <span className="text-xl font-semibold">ລວມທັງໝົດ:</span>
-            <span className="text-xl text-cyan-700">{formatPrice(total)}</span>
+            <span className="text-lg font-semibold">ລວມທັງໝົດ:</span>
+            <span className="text-lg text-cyan-700">{formatPrice(total)}</span>
           </div>
           <OrderButton
             setOpenConfirmModal={setOpenConfirmModal}

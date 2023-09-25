@@ -103,27 +103,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </div>
           </Link>
 
-          {/* {cartItems.find((item) => item.id === product.id) ? (
-            <div className="group flex w-full cursor-pointer items-center justify-center gap-1 bg-cyan-700 py-2 font-notosanslao text-white lg:py-3">
-              <span>ເພີ່ມແລ້ວ</span>
-              <BsBagCheckFill className="text-lg transition group-hover:scale-110 lg:text-2xl" />
-            </div>
-          ) : (
-            <div
-              // onClick={handleAddToCart}
-              onClick={() => handleAddCartModal(true, product?.id)}
-              className="group flex w-full cursor-pointer items-center justify-center gap-1 bg-black py-2 font-notosanslao text-white lg:py-3"
-            >
-              <span>ເພີ່ມ</span>
-              <BsFillBagPlusFill className="text-lg text-white transition group-hover:scale-110 lg:text-2xl" />
-            </div>
-          )} */}
           <div
-            // onClick={handleAddToCart}
             onClick={() => handleAddCartModal(true, product?.id)}
             className="group flex w-full cursor-pointer items-center justify-center gap-1 bg-black py-2 font-notosanslao text-white lg:py-3"
           >
-            <span>ເພີ່ມ</span>
+            <span className="text-base lg:text-xl">ເພີ່ມ</span>
             <BsFillBagPlusFill className="text-lg text-white transition group-hover:scale-110 lg:text-2xl" />
           </div>
         </div>

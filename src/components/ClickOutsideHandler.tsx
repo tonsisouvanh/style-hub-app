@@ -2,29 +2,28 @@ import { useEffect, useRef, ReactNode } from "react";
 
 interface ClickOutsideHandlerProps {
   children: ReactNode;
-  setIsOpen: (isOpen: boolean) => void;
+  onClickOutside: (isOpen: boolean) => void;
 }
 
 const ClickOutsideHandler = ({
   children,
-  setIsOpen,
+  onClickOutside,
 }: ClickOutsideHandlerProps) => {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    function handleDocumentClick(event: MouseEvent) {
       if (divRef.current && !divRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        onClickOutside(false);
       }
-    };
+    }
 
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleDocumentClick);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("mousedown", handleDocumentClick);
     };
-  }, [setIsOpen]);
-
+  }, [divRef, onClickOutside]);
   return <div ref={divRef}>{children}</div>;
 };
 

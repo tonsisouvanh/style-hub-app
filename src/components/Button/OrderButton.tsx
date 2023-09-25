@@ -10,8 +10,8 @@ interface OrderButtonProps {
 }
 
 const OrderButton: React.FC<OrderButtonProps> = ({
-  productData,
-  // product,
+  // productData,
+  // // product,
   setOpenConfirmModal,
   // isDirectional,
 }) => {

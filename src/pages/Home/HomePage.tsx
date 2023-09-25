@@ -9,6 +9,7 @@ import Categories from "../../components/Categories/Categories";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import ImagesGallery from "../../components/Gallery/ImagesGallery";
 const Home = () => {
   const { data: products, status } = useSelector(
     (state: RootState) => state.products,
@@ -32,6 +33,9 @@ const Home = () => {
             {/*============== Categories ==============*/}
             <Categories />
             {/*============== Categories ==============*/}
+            {/*============== Image Gallery ==============*/}
+            <ImagesGallery />
+            {/*============== Image Gallery ==============*/}
 
             {/*============== Featured products ==============*/}
             <FeaturedProducts

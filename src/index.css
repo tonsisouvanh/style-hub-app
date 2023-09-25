@@ -42,6 +42,10 @@
   @apply mx-auto w-full max-w-[1340px] px-5;
 }
 
+.text-outline {
+  -webkit-text-stroke: 0.5px black;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
