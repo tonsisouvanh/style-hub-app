@@ -11,6 +11,9 @@ const UserWishlistCartIcons = () => {
       {/* <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
         <FiUser size={24} color="#222" />
       </div> */}
+      <Link to="/admin/login" className="btn-outline btn">
+        SIGN IN
+      </Link>
       <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
         <FiHeart size={24} color="#222" />
       </div>

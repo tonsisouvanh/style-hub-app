@@ -1,52 +1,109 @@
-// Login.tsx
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import LandingIntro from "./components/LandingIntro";
+import ErrorText from "../../components/Typography/ErrorText";
+import InputText from "../../components/Input/InputText";
 
-import React, { useState } from "react";
+interface LoginObj {
+  emailId: string;
+  password: string;
+}
 
-const Login: React.FC = () => {
-  // const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function Login() {
+  const INITIAL_LOGIN_OBJ: LoginObj = {
+    password: "",
+    emailId: "",
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loginObj, setLoginObj] = useState<LoginObj>(INITIAL_LOGIN_OBJ);
+  const navigate = useNavigate();
+
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMessage("");
 
-    // TODO: Implement login logic here
-    // If login is successful, redirect to the home page
-    // router.push("/");
+    if (loginObj.emailId.trim() === "")
+      return setErrorMessage("Email Id is required! (use any value)");
+    if (loginObj.password.trim() === "")
+      return setErrorMessage("Password is required! (use any value)");
+    else {
+      setLoading(true);
+      // Call API to check user credentials and save token in localstorage
+      localStorage.setItem("token", "DumyTokenHere");
+      setLoading(false);
+      navigate("/admin/dashboard");
+    }
+  };
+
+  const updateFormValue = (updateType: string, value: string) => {
+    setErrorMessage("");
+    setLoginObj({ ...loginObj, [updateType]: value });
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
-      <div className="w-full max-w-md">
-        <h1 className="text-center text-3xl font-bold">Login</h1>
+    <div className="flex min-h-screen items-center bg-base-200">
+      <div className="card mx-auto w-full max-w-5xl  shadow-xl">
+        <div className="grid  grid-cols-1 rounded-xl  bg-base-100 md:grid-cols-2">
+          <div className="">
+            <LandingIntro />
+          </div>
+          <div className="px-10 py-24">
+            <h2 className="mb-2 text-center text-2xl font-semibold">Login</h2>
+            <form onSubmit={(e) => submitForm(e)}>
+              <div className="mb-4">
+                <InputText
+                  type="emailId"
+                  defaultValue={loginObj.emailId}
+                  updateType="emailId"
+                  containerStyle="mt-4"
+                  labelTitle="Email Id"
+                  updateFormValue={updateFormValue}
+                />
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-md border-gray-300 p-3 focus:border-blue-500"
-          />
+                <InputText
+                  defaultValue={loginObj.password}
+                  type="password"
+                  updateType="password"
+                  containerStyle="mt-4"
+                  labelTitle="Password"
+                  updateFormValue={updateFormValue}
+                />
+              </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="mt-4 w-full rounded-md border-gray-300 p-3 focus:border-blue-500"
-          />
+              <div className="text-right text-primary">
+                <Link to="/forgot-password">
+                  <span className="inline-block  text-sm  transition duration-200 hover:cursor-pointer hover:text-primary hover:underline">
+                    Forgot Password?
+                  </span>
+                </Link>
+              </div>
 
-          <button
-            type="submit"
-            className="mt-4 w-full rounded-md bg-blue-500 p-3 text-white hover:bg-blue-700"
-          >
-            Login
-          </button>
-        </form>
+              <ErrorText styleClass="mt-8">{errorMessage}</ErrorText>
+              <button
+                type="submit"
+                className={
+                  "btn-primary btn mt-2 w-full" + (loading ? " loading" : "")
+                }
+              >
+                Login
+              </button>
+
+              <div className="mt-4 text-center">
+                Don't have an account yet?
+                <Link to="/register">
+                  <span className="  inline-block  transition duration-200 hover:cursor-pointer hover:text-primary hover:underline">
+                    Register
+                  </span>
+                </Link>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
