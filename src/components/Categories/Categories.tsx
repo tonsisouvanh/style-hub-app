@@ -52,7 +52,7 @@ const Categories = () => {
                 },
               }}
               key={category.id}
-              className={`$ group relative flex flex-col items-center overflow-hidden shadow-lg`}
+              className={`group relative flex flex-col items-center overflow-hidden shadow-lg`}
             >
               <img
                 src={category.image}

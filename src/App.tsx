@@ -90,7 +90,9 @@ function App() {
 
           <Route
             path="/admin/dashboard"
-            element={<PrivateRoute component={Dashboard} />}
+            element={
+            <PrivateRoute component={Dashboard} />
+          }
           />
           <Route
             path="/admin/login"

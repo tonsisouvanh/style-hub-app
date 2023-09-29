@@ -156,7 +156,7 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
                               onClick={() => handleSelectedSize(size)}
                               className={`${
                                 selectedSize === size && "border-sky-700"
-                              } cursor-pointer rounded-sm border px-2 py-0 uppercase hover:border-sky-700`}
+                              } cursor-pointer rounded-sm border px-3 py-1 uppercase hover:border-sky-700`}
                             >
                               {size}
                             </span>
@@ -211,15 +211,15 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
                       }
                       className={`${
                         !selectedSize && selectedSize === ""
-                          ? "cursor-not-allowed opacity-50"
-                          : null
-                      } modal-close rounded-lg bg-sky-500 p-3 px-4 text-white hover:bg-sky-400`}
+                          ? "cursor-not-allowed bg-gray-300 opacity-50"
+                          : "bg-sky-500"
+                      } modal-close rounded-lg  p-3 px-4 text-white transition hover:bg-sky-500/75`}
                     >
                       ເພີ່ມເຂົ້າກະເປົາ
                     </button>
                     <button
                       onClick={handleCloseModal}
-                      className=" rounded-lg bg-transparent p-3 px-4 text-sky-500 hover:bg-gray-100 hover:text-sky-400"
+                      className=" rounded-lg bg-transparent p-3 px-4 text-sky-500 transition hover:bg-rose-500 hover:text-white"
                     >
                       ຍົກເລີກ
                     </button>

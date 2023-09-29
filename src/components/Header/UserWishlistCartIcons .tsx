@@ -7,11 +7,11 @@ const UserWishlistCartIcons = () => {
   const cartItems = useSelector((state: RootState) => state.cart);
 
   return (
-    <div className="flex justify-center space-x-2">
+    <div className="flex items-center justify-center space-x-2">
       {/* <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
         <FiUser size={24} color="#222" />
       </div> */}
-      <Link to="/admin/login" className="btn-outline btn">
+      <Link to="/admin/login" className="btn-outline btn hidden md:flex">
         SIGN IN
       </Link>
       <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
