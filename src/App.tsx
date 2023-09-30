@@ -19,6 +19,8 @@ import Dashboard from "./pages/Admin/Dashboard";
 import RootLayout from "./layout/RootLayout";
 import { ReactNode } from "react";
 import PrivateRoute from "./route/PrivateRoute";
+import AdminRootLayout from "./layout/AdminRootLayout";
+import Stock from "./pages/Items/Stock";
 function App() {
   const { currentUser } = { currentUser: "" };
 
@@ -89,15 +91,19 @@ function App() {
           />
 
           <Route
-            path="/admin/dashboard"
-            element={
-            <PrivateRoute component={Dashboard} />
-          }
-          />
-          <Route
             path="/admin/login"
             element={<PrivateRoute isCheckLogin={true} component={Login} />}
           />
+          <Route element={<AdminRootLayout />}>
+            <Route
+              path="/admin/dashboard"
+              element={<PrivateRoute component={Dashboard} />}
+            />
+            <Route
+              path="/admin/items/stock"
+              element={<PrivateRoute component={Stock} />}
+            />
+          </Route>
         </Routes>
       </Router>
     </>

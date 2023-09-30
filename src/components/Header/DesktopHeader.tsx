@@ -1,5 +1,4 @@
 import SearchBar from "../SearchBar/SearchBar";
-import { RxHamburgerMenu } from "react-icons/rx";
 
 import { Link } from "react-router-dom";
 import UserWishlistCartIcons from "./UserWishlistCartIcons ";

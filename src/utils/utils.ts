@@ -25,3 +25,8 @@ export const calculateDiscountedPrice = (
   const discountedPrice: number = originalPrice - discountAmount;
   return discountedPrice;
 };
+
+
+export const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
