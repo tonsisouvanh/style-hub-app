@@ -16,96 +16,48 @@ import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Admin/Dashboard";
-import RootLayout from "./layout/RootLayout";
+import ClientLayout from "./layout/ClientLayout";
 import { ReactNode } from "react";
 import PrivateRoute from "./route/PrivateRoute";
-import AdminRootLayout from "./layout/AdminRootLayout";
 import Stock from "./pages/Items/Stock";
+import AdminLayout from "./layout/AdminRootLayout";
 function App() {
-  const { currentUser } = { currentUser: "" };
-
   return (
     <>
-      <Router>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-          transition={Flip}
-        />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <RootLayout>
-                <Home />
-              </RootLayout>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <RootLayout>
-                <AboutPage />
-              </RootLayout>
-            }
-          />
-          <Route
-            path="/all-products/:category"
-            element={
-              <RootLayout>
-                <ProductsPage />
-              </RootLayout>
-            }
-          />
-          <Route
-            path="/single-product/:id"
-            element={
-              <RootLayout>
-                <SingleProduct />
-              </RootLayout>
-            }
-          />
-          <Route
-            path="/cart"
-            element={
-              <RootLayout>
-                <CartPage />
-              </RootLayout>
-            }
-          />
-          <Route
-            path="/404"
-            element={
-              <RootLayout>
-                <NotFoundPage />
-              </RootLayout>
-            }
-          />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Flip}
+      />
+      <Routes>
+        <Route path="login" element={<Login />} />
 
-          <Route
-            path="/admin/login"
-            element={<PrivateRoute isCheckLogin={true} component={Login} />}
-          />
-          <Route element={<AdminRootLayout />}>
-            <Route
-              path="/admin/dashboard"
-              element={<PrivateRoute component={Dashboard} />}
-            />
-            <Route
-              path="/admin/items/stock"
-              element={<PrivateRoute component={Stock} />}
-            />
+        {/* Public route */}
+        <Route path="/" element={<ClientLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="all-products/:category" element={<ProductsPage />} />
+          <Route path="single-product/:id" element={<SingleProduct />} />
+          <Route path="cart" element={<CartPage />} />
+        </Route>
+
+        {/* Protected route */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route element={<PrivateRoute />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="items/stock" element={<Stock />} />
           </Route>
-        </Routes>
-      </Router>
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </>
   );
 }

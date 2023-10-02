@@ -116,7 +116,7 @@ const Stock = (props: Props) => {
                 <BsFillCalculatorFill className="text-2xl text-gray-500" />
               </button>
             </div>
-            <button className="btn bg-sky-500 text-white hover:bg-sky-600">
+            <button className="btn btn-primary">
               ADD
               <AiOutlinePlus />
             </button>
@@ -130,14 +130,14 @@ const Stock = (props: Props) => {
             <p className="font-notosanslao">20 ລາຍການ</p>
             <div>
               <div className="flex items-center gap-1 font-notosanslao">
-                <button className="btn-sm btn bg-sky-500 text-white">
+                <button className="btn-sm btn btn-primary text-white">
                   ກັບຄືນ
                 </button>
                 <button className="btn-sm btn">1</button>
                 <button className="btn-active btn-sm btn">2</button>
                 <button className="btn-sm btn">3</button>
                 <button className="btn-sm btn">4</button>
-                <button className="btn-sm btn bg-sky-500 text-white">
+                <button className="btn-sm btn btn-primary text-white">
                   ໄປໜ້າ
                 </button>
               </div>
@@ -159,7 +159,7 @@ const Stock = (props: Props) => {
                     </label>
                   </th>
                   {tableHeaders.map((header) => (
-                    <th>{capitalizeFirstLetter(header)}</th>
+                    <th className="text-[1rem]" key={header}>{capitalizeFirstLetter(header)}</th>
                   ))}
                 </tr>
               </thead>
@@ -211,14 +211,14 @@ const Stock = (props: Props) => {
                       <input
                         type="checkbox"
                         className="toggle toggle-xs"
-                        checked={product.isNewArrival ? true : false}
+                        defaultChecked={product.isNewArrival ? true : false}
                       />
                     </td>
                     <td>
                       <input
                         type="checkbox"
                         className="toggle toggle-xs"
-                        checked={product.isFeatured ? true : false}
+                        defaultChecked={product.isFeatured ? true : false}
                       />
                     </td>
                     <td>{product.ratings}</td>

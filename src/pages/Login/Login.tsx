@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LandingIntro from "./components/LandingIntro";
 import ErrorText from "../../components/Typography/ErrorText";
@@ -8,6 +8,17 @@ interface LoginObj {
   emailId: string;
   password: string;
 }
+
+const initialState = {
+  name: "auth",
+  token: "aljsfo3u029",
+  roles: [2001, 201],
+};
+// const initialState = {
+//   name: "",
+//   token: "",
+//   roles: [],
+// };
 
 function Login() {
   const INITIAL_LOGIN_OBJ: LoginObj = {
@@ -22,25 +33,31 @@ function Login() {
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrorMessage("");
+    const user = { token: "slajf029380rh8ahs" };
+    localStorage.setItem("user", JSON.stringify(user));
+    navigate("/admin/dashboard");
+    // setErrorMessage("");
 
-    if (loginObj.emailId.trim() === "")
-      return setErrorMessage("Email Id is required! (use any value)");
-    if (loginObj.password.trim() === "")
-      return setErrorMessage("Password is required! (use any value)");
-    else {
-      setLoading(true);
-      // Call API to check user credentials and save token in localstorage
-      localStorage.setItem("token", "DumyTokenHere");
-      setLoading(false);
-      navigate("/admin/dashboard");
-    }
+    // if (loginObj.emailId.trim() === "")
+    //   return setErrorMessage("Email Id is required! (use any value)");
+    // if (loginObj.password.trim() === "")
+    //   return setErrorMessage("Password is required! (use any value)");
+    // else {
+    //   setLoading(true);
+    //   // Call API to check user credentials and save token in localstorage
+    //   localStorage.setItem("token", "DumyTokenHere");
+    //   setLoading(false);
+    //   navigate("/admin/dashboard");
+    // }
   };
-
   const updateFormValue = (updateType: string, value: string) => {
     setErrorMessage("");
     setLoginObj({ ...loginObj, [updateType]: value });
   };
+
+  useEffect(() => {
+    if (initialState) navigate("/admin/dashboard");
+  }, [navigate]);
 
   return (
     <div className="flex min-h-screen items-center bg-base-200">

@@ -1,42 +1,31 @@
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import Login from "../pages/Login/Login";
-import Dashboard from "../pages/Admin/Dashboard";
-// import AccessDenied from './pages/AccessDenied'
-// import { ROLE } from './features/auth/auth'
-// import { selectCurrentUser, selectIsAuthenticated } from './features/auth/authSlice'
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-interface Props {
-  component: React.ComponentType;
-  path?: string;
-  isCheckLogin?: boolean;
-  // roles?: Array<ROLE>;
-}
+type Props = {};
 
-const PrivateRoute: React.FC<Props> = ({
-  component: RouteComponent,
-  // roles,
-  isCheckLogin = false,
-}) => {
-  const user = "sisouvanh";
-  // const user = useSelector(selectCurrentUser);
-  // const isAuthenticated = useSelector(selectIsAuthenticated);
-  // const userHasRequiredRole = user && roles.includes(user.role) ? true : false;
+const initialState = {
+  name: "auth",
+  token: "aljsfo3u029",
+  roles: [2001, 201],
+};
+// const initialState = {
+//   name: "",
+//   token: "",
+//   roles: [],
+// };
 
-  // if (isAuthenticated && userHasRequiredRole) {
-  if (user) {
-    if (isCheckLogin) {
-      return <Navigate to="/admin/dashboard" />;
-    }
-    return <RouteComponent />;
-  }
+const PrivateRoute = (props: Props) => {
+  const auth = initialState;
+  // const { name, roles } = auth;
+  const location = initialState;
 
-  // if (isAuthenticated && !userHasRequiredRole) {
-  if (!user) {
-    return <Login />;
-  }
-
-  return <Navigate to="/" />;
+  return auth?.roles?.includes(2001) ? (
+    <Outlet />
+  ) : auth?.token ? (
+    <Navigate to="/unauthorized" state={{ from: location }} replace />
+  ) : (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
 };
 
 export default PrivateRoute;

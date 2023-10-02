@@ -28,12 +28,12 @@ const ProductsPage = () => {
   const [openAddCartModal, setOpenAddCartModal] = useState<boolean>(false);
   const [proId, setProId] = useState<string>("");
 
-  const [offset, setOffset] = useState(0);
-  useEffect(() => {
-    window.onscroll = () => {
-      setOffset(window.pageYOffset);
-    };
-  }, []);
+  // const [offset, setOffset] = useState(0);
+  // useEffect(() => {
+  //   window.onscroll = () => {
+  //     setOffset(window.pageYOffset);
+  //   };
+  // }, []);
 
   const handleAddCartModal = (isOpen: boolean, proId: string) => {
     setOpenAddCartModal(isOpen);
@@ -123,10 +123,10 @@ const ProductsPage = () => {
             <img className="h-full w-full object-cover" src={adbanner} alt="" />
           </div>
           <div
-            className={`${
-              offset >= 154 &&
-              "sticky top-[4rem] z-[3] border bg-white px-2 pt-2 sm:top-[4.3rem]"
-            }`}
+            // className={`${
+            //   offset >= 154 &&
+            //   "sticky top-0 z-[3] border bg-white px-2 pt-2"
+            // }`}
           >
             <div className="flex items-center justify-between font-notosanslao">
               <span className="text-xs text-gray-600 md:text-sm">

@@ -28,7 +28,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 
   return (
     <>
-      <nav className="sticky top-0 z-[2] bg-white py-3 font-notosanslao shadow">
+      <nav className="sticky -top-1 z-[2] bg-white py-3 font-notosanslao shadow">
         <motion.div
           initial="offscreen"
           animate="onscreen"

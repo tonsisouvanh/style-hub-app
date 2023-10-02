@@ -3,10 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/images/cyberpunktext.png";
 import SidebarLinkGroup from "./SidebarLinkGroup";
 import { BsArrowLeft, BsFillCaretDownFill } from "react-icons/bs";
-import {
-  AiFillDashboard,
-  AiFillSetting,
-} from "react-icons/ai";
+import { AiFillDashboard, AiFillSetting } from "react-icons/ai";
 import { FaProductHunt, FaUser } from "react-icons/fa";
 
 interface SidebarProps {
@@ -71,7 +68,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="py-5.5 lg:py-6.5 flex items-center justify-between gap-2 px-6">
         <div className="mt-5 flex w-full items-center gap-16">
-          <NavLink className="flex w-full justify-center bg-white py-1" to="/">
+          <NavLink className="flex w-full justify-center bg-white py-3" to="/">
             <img className="w-32" src={Logo} alt="Logo" />
           </NavLink>
 
@@ -137,7 +134,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         <ul className="mb-5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
-                              to="admin/dashboard"
+                              to="dashboard"
                               className={({ isActive }) =>
                                 "group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out " +
                                 (isActive && "! text-white")
@@ -196,7 +193,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         <ul className="mb-5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
-                              to="/admin/items/stock"
+                              to="items/stock"
                               className={({ isActive }) =>
                                 "group relative flex items-center gap-2 px-4 font-medium duration-300 ease-in-out" +
                                 (isActive && "! text-white")
