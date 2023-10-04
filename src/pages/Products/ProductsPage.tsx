@@ -101,7 +101,6 @@ const ProductsPage = () => {
       ? (document.body.style.overflowY = "hidden")
       : (document.body.style.overflowY = "");
   }, [openAddCartModal]);
-
   return (
     <>
       <div className="py-7">

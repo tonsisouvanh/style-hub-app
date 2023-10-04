@@ -124,14 +124,14 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                               <LazyLoadImage
                                 className="h-full w-full object-cover"
                                 src={product.images[0] || noimage}
-                                alt={product.title}
+                                alt={product.name}
                                 effect="blur"
                                 placeholderSrc={noimage}
                               />
                             </div>
                             <div className="font-notosanslao">
                               <p className="mt-2 text-sm font-bold leading-none transition hover:text-gray-600 md:text-base">
-                                {product.title}
+                                {product.name}
                               </p>
                               <div className="flex flex-col items-center justify-center ">
                                 <span
@@ -208,11 +208,11 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                   >
                     <img
                       src={product.images[0]}
-                      alt={product.title}
+                      alt={product.name}
                       className="h-[17rem] w-full object-cover"
                     />
                     <p className="mt-2 text-lg font-bold leading-none transition hover:text-gray-600">
-                      {product.title}
+                      {product.name}
                     </p>
                     <p className="text-[15px] text-[#024E82]">
                       ${product.price}

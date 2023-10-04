@@ -47,14 +47,14 @@ const SingleProduct = () => {
     setCurrentImage(value);
   };
   const handleAddToCart = () => {
-    const { id, title, price, discount, images } = product || {};
+    const { id, name, price, discount, images } = product || {};
     if (selectedSize && selectedSize !== "") {
       dispatch(
         addToCart({
           id: id || "",
           images: images || [],
           selectedImg: product?.images[currentImage] || "",
-          name: title || "",
+          name: name || "",
           price: price || 0,
           quantity: 1,
           discount: discount || { type: "", value: 0 },
@@ -117,7 +117,7 @@ const SingleProduct = () => {
                   <LazyLoadImage
                     className="h-full w-full object-cover"
                     src={product?.images[currentImage]}
-                    alt={product?.title}
+                    alt={product?.name}
                     placeholderSrc={noimage}
                     effect="blur"
                     width="100%"
@@ -150,14 +150,14 @@ const SingleProduct = () => {
                       </Link>
                     </div>
                     <span className=""> / </span>
-                    {product?.title}
+                    {product?.name}
                   </div>
                 </motion.div>
                 <motion.h2
                   variants={fadeFromTopAnimate}
                   className="font-notosanslao text-[24px] font-bold lg:text-[36px]"
                 >
-                  {product?.title}
+                  {product?.name}
                 </motion.h2>
                 <motion.div
                   variants={fadeFromTopAnimate}

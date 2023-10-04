@@ -105,7 +105,7 @@ export const menuItems: MenuItem[] = [
     id: "product-5",
     title: "Fitted Blouse",
     description: "Elegant and fitted blouse for formal occasions.",
-    price: 189000, // Price in LAK
+    price: 189000,
     discount: {
       type: "percentage",
       value: 15,

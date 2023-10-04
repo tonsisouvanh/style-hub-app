@@ -20,6 +20,6 @@ export default {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["winter", "light"],
+    themes: ["winter", "night", "light"],
   },
 };

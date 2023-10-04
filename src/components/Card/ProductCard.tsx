@@ -69,7 +69,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 <div className="h-full w-full">
                   <LazyLoadImage
                     src={product.images[0] || noimage}
-                    alt={product.title}
+                    alt={product.name}
                     effect="blur"
                     className="h-full w-full object-cover transition duration-300 hover:scale-110"
                   />
@@ -77,7 +77,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               </div>
               <div className="flex-col items-center justify-center gap-1 px-1 font-notosanslao text-[0.7rem]  sm:text-[0.9rem] lg:text-[1rem]">
                 <p className="mb-2 mt-2 text-center font-bold leading-none transition hover:text-gray-600">
-                  {product.title}
+                  {product.name}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-x-5 ">
                   <span

@@ -1,25 +1,21 @@
 import "./App.css";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 
 import Home from "./pages/Home/HomePage";
 import SingleProduct from "./pages/SingleProduct/SingleProductPage";
 import ProductsPage from "./pages/Products/ProductsPage";
-import AboutPage from "./pages/About/AboutPage";
 import NotFoundPage from "./pages/404/NotFoundPage";
 import CartPage from "./pages/Cart/CartPage";
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login/Login";
-import Dashboard from "./pages/Admin/Dashboard";
+import Dashboard from "./pages/protected/dashboard/Dashboard";
 import ClientLayout from "./layout/ClientLayout";
-import { ReactNode } from "react";
 import PrivateRoute from "./route/PrivateRoute";
-import Stock from "./pages/Items/Stock";
+import Stock from "./pages/protected/item/Stock";
 import AdminLayout from "./layout/AdminRootLayout";
 function App() {
   return (
@@ -43,7 +39,6 @@ function App() {
         {/* Public route */}
         <Route path="/" element={<ClientLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="about" element={<AboutPage />} />
           <Route path="all-products/:category" element={<ProductsPage />} />
           <Route path="single-product/:id" element={<SingleProduct />} />
           <Route path="cart" element={<CartPage />} />

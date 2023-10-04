@@ -2,6 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Product } from "../../types";
+import { Timestamp } from "firebase/firestore";
+
+// Function to serialize Firebase Timestamp to JavaScript Date
+const serializeTimestamp = (timestamp: Timestamp) => {
+  const date = timestamp.toDate();
+  return date.toISOString();
+};
 
 export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchProducts",
@@ -12,10 +19,17 @@ export const fetchProducts = createAsyncThunk<Product[]>(
       throw new Error("An error occurred while fetching products.");
     }
 
-    const products = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Product[];
+    const products = querySnapshot.docs.map((doc) => {
+      const productData = doc.data();
+      // Serialize the 'createdDate' field if it exists
+      if (productData.createdDate) {
+        productData.createdDate = serializeTimestamp(productData.createdDate);
+      }
+      return {
+        id: doc.id,
+        ...productData,
+      };
+    }) as Product[];
     return products;
   },
 );

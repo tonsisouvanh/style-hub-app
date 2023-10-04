@@ -100,9 +100,9 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             ))}
           </ul>
 
-          <div className="hidden lg:flex">
+          {/* <div className="hidden lg:flex">
             <SearchBar />
-          </div>
+          </div> */}
           <UserWishlistCartIcons />
         </motion.div>
       </nav>

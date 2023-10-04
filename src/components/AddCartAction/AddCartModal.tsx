@@ -47,13 +47,13 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
   };
 
   const handleAddToCart = () => {
-    const { id, title, price, discount, images } = product || {};
+    const { id, name, price, discount, images } = product || {};
     dispatch(
       addToCart({
         id: id || "",
         images: images || [],
         selectedImg: product?.images[currentImage] || "",
-        name: title || "",
+        name: name || "",
         price: price || 0,
         quantity: quantity,
         discount: discount || { type: "", value: 0 },
@@ -77,7 +77,7 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
               <ClickOutsideHandler onClickOutside={handleCloseModal}>
                 <div className="modal-content px-6 py-4 text-left">
                   <div className="flex items-center justify-between pb-3">
-                    <p className="text-lg font-bold">{product?.title}</p>
+                    <p className="text-lg font-bold">{product?.name}</p>
                     <div
                       onClick={handleCloseModal}
                       className="modal-close z-[21] cursor-pointer"
@@ -95,7 +95,7 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
                           src={
                             product?.images[currentImage] || product?.images[0]
                           }
-                          alt={product?.title}
+                          alt={product?.name}
                           effect="blur"
                           width="100%"
                           height="100%"
@@ -164,22 +164,7 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
                         </div>
                       </div>
                       {/* quantity */}
-                      {/* <div className="itemcen flex justify-between">
-                        <p className="text-[16px] text-gray-700">ຈຳນວນ</p>
-                        <div className="flex items-center">
-                          <AiOutlineMinus
-                            className="cursor-pointer border px-1 text-[1.4rem] hover:text-cyan-700"
-                            onClick={() => handleAddQuantity("decr")}
-                          />
-                          <span className=" border px-3 py-0 text-sm">
-                            {quantity}
-                          </span>
-                          <AiOutlinePlus
-                            className="cursor-pointer border px-1 text-[1.4rem] hover:text-cyan-700"
-                            onClick={() => handleAddQuantity("incr")}
-                          />
-                        </div>
-                      </div> */}
+                      
                       <div className="itemcen flex items-center justify-between">
                         <p className="text-[16px] text-gray-700">ຈຳນວນ</p>
                         <div className="flex items-center gap-1">

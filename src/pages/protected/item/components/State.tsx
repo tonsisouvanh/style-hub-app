@@ -4,7 +4,7 @@ type Props = {};
 
 const State = (props: Props) => {
   return (
-    <div className="! stats rounded-md font-notosanslao shadow w-full">
+    <div className="! stats rounded-md font-notosanslao shadow w-full text-lg font-bold">
       <div className="stat">
         <div className="stat-figure text-primary">
           <MdSell size={48} className="" />

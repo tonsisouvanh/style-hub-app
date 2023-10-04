@@ -32,32 +32,27 @@ export interface MenuItem {
 }
 
 export interface Discount {
+  value: number;
   type: string;
-  value: number | 0;
-}
-
-export interface Review {
-  id: string;
-  username: string;
-  rating: number;
-  comment: string;
 }
 
 export interface Product {
   id: string;
-  title: string;
+  name: string;
   description: string;
+  importPrice: number;
   price: number;
-  discount: Discount | null;
+  discount?: Discount;
   images: string[];
-  colors: string[];
+  // colors: string[];
   sizes: string[];
   categories: string[];
   brand: string;
   isNewArrival: boolean;
   isFeatured: boolean;
   ratings: number;
-  reviews: Review[];
+  stock: number;
+  // inventory: [{ quantity: number; size: string; color: string }];
 }
 
 export type Option = {
