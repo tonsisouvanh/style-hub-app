@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Product } from "../../types";
 import { Timestamp } from "firebase/firestore";
@@ -9,6 +9,27 @@ const serializeTimestamp = (timestamp: Timestamp) => {
   const date = timestamp.toDate();
   return date.toISOString();
 };
+
+export const addProduct = createAsyncThunk<Product, Omit<Product, "id">>(
+  "products/addProduct",
+  async (newProduct) => {
+    try {
+      const currentDate = new Date();
+
+      // Add the new product to the Firestore collection
+      const docRef = await addDoc(collection(db, "products"), {
+        ...newProduct,
+        createdDate: currentDate,
+      });
+      return {
+        id: docRef.id,
+        ...newProduct,
+      };
+    } catch (error) {
+      throw new Error("An error occurred while adding the product.");
+    }
+  },
+);
 
 export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchProducts",
@@ -21,7 +42,6 @@ export const fetchProducts = createAsyncThunk<Product[]>(
 
     const products = querySnapshot.docs.map((doc) => {
       const productData = doc.data();
-      // Serialize the 'createdDate' field if it exists
       if (productData.createdDate) {
         productData.createdDate = serializeTimestamp(productData.createdDate);
       }
@@ -52,6 +72,18 @@ const productSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message || "";
+      })
+      // ADD
+      .addCase(addProduct.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data.push(action.payload);
+      })
+      .addCase(addProduct.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || "";
       });

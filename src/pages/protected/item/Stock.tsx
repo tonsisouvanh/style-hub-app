@@ -8,21 +8,21 @@ import StockItems from "./components/StockItems";
 import AddProductModal from "../../../components/Modal/AddProductModal";
 import { useState } from "react";
 
-type Props = {};
 
-const Stock = (props: Props) => {
+const Stock = () => {
   const { data: products } = useSelector((state: RootState) => state.products);
   const [openModal, setOpenModal] = useState<boolean>(false);
   console.log(products);
   return (
     <>
+    
       <AddProductModal openModal={openModal} setOpenModal={setOpenModal} />
       <div className="space-y-4">
         {/* State */}
         <State />
         {/* State end */}
-        <p className="font-notosanslao">{products.length} ລາຍການ</p>
 
+        <p className="font-notosanslao">{products.length} ລາຍການ</p>
         <div className="container rounded-md border bg-white p-4 shadow-sm">
           {/* Filter  & search bar*/}
           <Filter openModal={openModal} setOpenModal={setOpenModal} />

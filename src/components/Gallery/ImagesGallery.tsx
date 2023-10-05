@@ -17,15 +17,15 @@ const ImagesGallery = () => {
               <div className="w-1/2 p-1 md:p-2">
                 <img
                   alt="gallery"
-                  className="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://scontent.fvte2-2.fna.fbcdn.net/v/t39.30808-6/375798304_194143990348209_5423151304707976390_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=5614bc&_nc_eui2=AeGvl8zSwcC7KLn6nmt91-ac8Cbu-FL1GaHwJu74UvUZod3gp_lkNl2daDGkvlWlN1RTE1dcyljIJElejcLSp4W6&_nc_ohc=Ps6_2TP6SY0AX9ItooI&_nc_ht=scontent.fvte2-2.fna&oh=00_AfAwc0tiwOLI0_AXWUdjMRYpuI0UPU5zeWOYrZzTH4DS-g&oe=65118B67"
+                  className="block h-full w-full rounded-lg object-contain object-center"
+                  src="https://drive.google.com/uc?id=1EXcpmprWOe1bfEBP0AwQ_zDkAL-W3jDS"
                 />
               </div>
               <div className="w-1/2 p-1 md:p-2">
                 <img
                   alt="gallery"
                   className="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://scontent.fvte2-2.fna.fbcdn.net/v/t39.30808-6/375749522_194143977014877_6569909186087287104_n.jpg?stp=cp6_dst-jpg&_nc_cat=100&ccb=1-7&_nc_sid=5614bc&_nc_eui2=AeGh7uMtOwn1EEuk6Iak6c8pDmRfVsza3PEOZF9WzNrc8Xs9D-_8pR20wfmuMrujUN7c_Dh3G8KS2M7ZtnRCIrUz&_nc_ohc=pAmJNlhSi_8AX_PnMwq&_nc_ht=scontent.fvte2-2.fna&oh=00_AfAW_rZCG_e2KciRbirg5QUURyFxng8Rb6gwK5cv8mEY8g&oe=6512A129"
+                  src="https://drive.google.com/uc?id=1g2awsmcf2ZTP5Er8KPyFgSE7CcGRUt8F"
                 />
               </div>
               <div className="w-full p-1 md:p-2">

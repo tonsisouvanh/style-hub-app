@@ -15,7 +15,6 @@ const AddImages = ({ addedImages, handleAddImagesUrl }: Props) => {
     if (currentUrlInput.trim() === "") {
       setShowWarning(true);
     } else {
-      //   handleAddImagesUrl(currentUrlInput, 0, "add");
       const nextIndex = addedImages.length;
       handleAddImagesUrl(currentUrlInput, nextIndex, "add");
 
@@ -50,7 +49,7 @@ const AddImages = ({ addedImages, handleAddImagesUrl }: Props) => {
               </span>
               <span
                 onClick={() => handleAddImagesUrl("", 0, "clear")}
-                className="btn-accent btn-sm btn"
+                className="btn-error btn-outline btn-sm btn"
               >
                 <AiOutlineClear />
               </span>
