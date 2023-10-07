@@ -367,7 +367,7 @@ const AddProductModal = (props: Props) => {
               <button
                 type="button"
                 onClick={handleCloseModal}
-                className="btn-error btn-outline btn w-full max-w-[8rem] bg-white text-lg"
+                className="btn w-full max-w-[8rem] text-lg"
               >
                 ຍົກເລີກ
               </button>
