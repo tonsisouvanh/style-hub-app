@@ -1,56 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Product } from "../../types";
 import AddImages from "./AddImages";
 import DropdownSelect from "../../pages/protected/item/components/DropdownSelect";
 import InputText from "../Admin/Input/InputText";
 import InputNumber from "../Admin/Input/InputNumber";
-import { LuImport } from "react-icons/lu";
+import { LuEdit } from "react-icons/lu";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { addProduct } from "../../feature/product/ProductSlice";
 import { useAppDispatch } from "../../hook/hooks";
+import { updateProduct } from "../../feature/product/ProductSlice";
 
 type Props = {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
+  editingProduct: Product;
 };
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 const categories = ["tops", "bottoms", "bounce"];
 const globalLabelStyle = "label-text font-bold";
 
-const initialProduct: Product = {
-  name: "",
-  description: "",
-  importPrice: 0,
-  price: 0,
-  discount: {
-    type: "percentage",
-    value: 0,
-  },
-  images: [],
-  sizes: [],
-  categories: [],
-  brand: "",
-  isNewArrival: false,
-  isFeatured: false,
-  ratings: 1,
-  stock: 1,
-};
-const AddProductModal = (props: Props) => {
+const EditProductModal = ({
+  editingProduct,
+  openModal,
+  setOpenModal,
+}: Props) => {
   const dispatch = useAppDispatch();
   const { status } = useSelector((state: RootState) => state.products);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-  } = useForm<Product>();
+    setValue,
+  } = useForm<Product>({ defaultValues: {} });
+
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [addedImages, setAddedImages] = useState<string[]>([]);
+
   const now = new Date();
   const currentDate = now.toLocaleDateString();
 
@@ -107,8 +95,7 @@ const AddProductModal = (props: Props) => {
   };
 
   const handleCloseModal = () => {
-    props.setOpenModal(false);
-    setAddedImages([]);
+    setOpenModal(false);
   };
 
   // Handle form submission
@@ -127,24 +114,32 @@ const AddProductModal = (props: Props) => {
       toast.warning("Please select at least one category and one size");
       return;
     }
-
     try {
-      // Dispatch the action and await the result
-      await dispatch(addProduct(updatedProduct));
+      await dispatch(updateProduct(updatedProduct));
 
-      // Check the status in the Redux store
       if (status === "succeeded") {
-        reset(initialProduct);
         handleCloseModal();
-        toast.success("Product added successfully");
+        toast.success("Product updated successfully");
       } else {
-        toast.error("Something went wrong while adding the product");
+        toast.error("Something went wrong while updating the product");
       }
     } catch (error) {
-      // Handle errors, e.g., network issues or Firebase errors
-      toast.error("An error occurred while adding the product");
+      toast.error("An error occurred while updating the product");
     }
   };
+
+  useEffect(() => {
+    if (editingProduct) {
+      // Loop through the fields and set their values using setValue
+      Object.keys(editingProduct).forEach((key) => {
+        // Use a type assertion to tell TypeScript that key is a valid property of Product
+        setValue(key as keyof Product, editingProduct[key as keyof Product]);
+      });
+      setAddedImages(editingProduct && editingProduct?.images);
+      setSelectedSizes(editingProduct && editingProduct?.sizes);
+      setSelectedCategories(editingProduct && editingProduct?.categories);
+    }
+  }, [editingProduct, setValue]);
 
   return (
     <>
@@ -153,19 +148,16 @@ const AddProductModal = (props: Props) => {
           <span className="loading loading-spinner loading-lg bg-primary"></span>
         </dialog>
       )}
-      <dialog
-        id="my_modal_1"
-        className={`modal ${props.openModal && "modal-open"}`}
-      >
+      <dialog id="my_modal_1" className={`modal ${openModal && "modal-open"}`}>
         <div className="modal-box font-notosanslao">
           <div className="mb-5 flex items-center justify-between">
             <h3 className="flex items-center gap-1 text-lg font-bold">
-              ເພີ່ມສິນຄ້າເຂົ້າສຕ໋ອກ
+              ເແກ້ໄຂສິນຄ້າເຂົ້າ
             </h3>
             <span className="text-sm text-neutral-content">{currentDate}</span>
           </div>
           <div className="divider">
-            <LuImport
+            <LuEdit
               size={60}
               className="mask mask-squircle rounded-full bg-primary p-2 text-white"
             />
@@ -176,7 +168,7 @@ const AddProductModal = (props: Props) => {
               {/* Product Name */}
               <InputText
                 inputName="name"
-                inputPlaceholder="Item a"
+                inputPlaceholder="Abc..."
                 inputLabel="ຊື່"
                 register={register}
                 errorMessage="*ກາລຸນາຕື່ມຂໍ້ມູນ"
@@ -190,7 +182,7 @@ const AddProductModal = (props: Props) => {
               {/* Brand Name */}
               <InputText
                 inputName="brand"
-                inputPlaceholder="brand a"
+                inputPlaceholder="Abc..."
                 inputLabel="ແບຣນ"
                 register={register}
                 errorMessage="*ກາລຸນາຕື່ມຂໍ້ມູນ"
@@ -361,7 +353,7 @@ const AddProductModal = (props: Props) => {
                 type="submit"
                 className="btn-primary btn w-full max-w-[8rem] text-lg"
               >
-                ເພີ່ມ
+                ແກ້ໄຂ
               </button>
 
               <button
@@ -380,4 +372,4 @@ const AddProductModal = (props: Props) => {
   );
 };
 
-export default AddProductModal;
+export default EditProductModal;

@@ -1,5 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import { Product } from "../../types";
 import { Timestamp } from "firebase/firestore";
@@ -30,6 +37,39 @@ export const addProduct = createAsyncThunk<Product, Omit<Product, "id">>(
     }
   },
 );
+export const deleteProduct = createAsyncThunk<void, string>(
+  "products/deleteProduct",
+  async (productId) => {
+    try {
+      // Construct the Firestore document reference for the product
+      const productRef = doc(db, "products", productId);
+
+      // Delete the product document from Firestore
+      await deleteDoc(productRef);
+    } catch (error) {
+      throw new Error("An error occurred while deleting the product.");
+    }
+  },
+);
+
+export const updateProduct = createAsyncThunk<Product, Product>(
+  "products/updateProduct",
+  async (updatedProduct) => {
+    const currentDate = new Date();
+
+    try {
+      // Construct the Firestore document reference for the product
+      const productRef = doc(db, "products", updatedProduct.id || "");
+
+      // Update the product document in Firestore
+      await setDoc(productRef, { ...updatedProduct, createdDate: currentDate });
+
+      return updatedProduct;
+    } catch (error) {
+      throw new Error("An error occurred while updating the product.");
+    }
+  },
+);
 
 export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchProducts",
@@ -37,6 +77,7 @@ export const fetchProducts = createAsyncThunk<Product[]>(
     const querySnapshot = await getDocs(collection(db, "products"));
 
     if (!querySnapshot) {
+      console.log(new Error("An error occurred while fetching products."));
       throw new Error("An error occurred while fetching products.");
     }
 
@@ -84,6 +125,40 @@ const productSlice = createSlice({
         state.data.push(action.payload);
       })
       .addCase(addProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message || "";
+      })
+      // DELETE
+      .addCase(deleteProduct.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // Remove the deleted product from the state
+        state.data = state.data.filter(
+          (product) => product.id !== action.meta.arg,
+        );
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message || "";
+      })
+      // UPDATE
+      .addCase(updateProduct.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // Find and update the product in the state
+        const updatedProduct = action.payload;
+        const productIndex = state.data.findIndex(
+          (product) => product.id === updatedProduct.id,
+        );
+        if (productIndex !== -1) {
+          state.data[productIndex] = updatedProduct;
+        }
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || "";
       });

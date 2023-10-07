@@ -101,6 +101,7 @@ const ProductsPage = () => {
       ? (document.body.style.overflowY = "hidden")
       : (document.body.style.overflowY = "");
   }, [openAddCartModal]);
+
   return (
     <>
       <div className="py-7">
@@ -122,10 +123,10 @@ const ProductsPage = () => {
             <img className="h-full w-full object-cover" src={adbanner} alt="" />
           </div>
           <div
-            // className={`${
-            //   offset >= 154 &&
-            //   "sticky top-0 z-[3] border bg-white px-2 pt-2"
-            // }`}
+          // className={`${
+          //   offset >= 154 &&
+          //   "sticky top-0 z-[3] border bg-white px-2 pt-2"
+          // }`}
           >
             <div className="flex items-center justify-between font-notosanslao">
               <span className="text-xs text-gray-600 md:text-sm">

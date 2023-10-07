@@ -4,7 +4,6 @@ import productReducer, { fetchProducts } from "../feature/product/ProductSlice";
 
 const initialCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
@@ -14,7 +13,6 @@ export const store = configureStore({
     cart: initialCart,
   },
 });
-
 store.dispatch(fetchProducts());
 
 export type RootState = ReturnType<typeof store.getState>;

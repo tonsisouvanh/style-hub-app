@@ -37,7 +37,7 @@ export interface Discount {
 }
 
 export interface Product {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   importPrice: number;

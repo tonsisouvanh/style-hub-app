@@ -130,12 +130,12 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                               />
                             </div>
                             <div className="font-notosanslao">
-                              <p className="mt-2 text-sm font-bold leading-none transition hover:text-gray-600 md:text-base">
+                              <p className="mt-2 h-[2.5rem] text-xs font-bold leading-none transition hover:text-gray-600 sm:text-sm md:text-base">
                                 {product.name}
                               </p>
-                              <div className="flex flex-col items-center justify-center ">
+                              <div className="flex flex-wrap items-center justify-start gap-x-2">
                                 <span
-                                  className={`text-base text-gray-500  lg:text-lg ${
+                                  className={`text-xs text-gray-500 md:text-sm lg:text-lg ${
                                     product?.discount && "line-through"
                                   }`}
                                 >
@@ -155,6 +155,48 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                               </div>
                             </div>
                           </div>
+                          {/* <div className="w-50 group card card-compact border bg-base-100 font-notosanslao">
+                            <figure>
+                              <LazyLoadImage
+                                className="!duration-600 !transition-all group-hover:scale-110"
+                                src={product.images[0] || noimage}
+                                alt={product.name}
+                                effect="blur"
+                                placeholderSrc={noimage}
+                              />
+                            </figure>
+                            <div className="card-body !p-3">
+                              <h2 className="card-title h-[2.5rem] text-xs sm:text-sm">
+                                {product.name}
+                              </h2>
+                              <div className="flex flex-wrap items-center justify-start gap-x-4 ">
+                                <span
+                                  className={`text-xs text-gray-500  lg:text-sm ${
+                                    product?.discount && "line-through"
+                                  }`}
+                                >
+                                  {formatPrice(product?.price || 0)}
+                                </span>
+
+                                {product?.discount && (
+                                  <span className="lg:text-md text-base text-[#024E82]">
+                                    {formatPrice(
+                                      calculateDiscountedPrice(
+                                        product?.price,
+                                        product.discount,
+                                      ),
+                                    )}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="card-actions justify-end">
+                                <button className="btn-primary btn-sm btn">
+                                  ຊື້ເລີຍ
+                                </button>
+                              </div>
+                            </div>
+                          </div> */}
+                          {/* </div> */}
                         </Link>
                       </SwiperSlide>
                     ))}

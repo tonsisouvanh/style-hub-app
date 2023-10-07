@@ -2,7 +2,6 @@ import { Discount } from "../types";
 
 export function formatPrice(price: number, decimalPlaces = 0): string {
   const lakSymbol = "₭";
-
   return price
     .toLocaleString("en-US", {
       style: "currency",
@@ -26,7 +25,6 @@ export const calculateDiscountedPrice = (
   return discountedPrice;
 };
 
-
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
-}
+};

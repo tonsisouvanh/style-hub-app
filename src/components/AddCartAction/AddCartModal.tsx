@@ -155,7 +155,7 @@ const AddCartModal: React.FC<AddCartModalProps> = ({
                               key={size}
                               onClick={() => handleSelectedSize(size)}
                               className={`${
-                                selectedSize === size && "border-sky-700"
+                                selectedSize === size && "bg-sky-700 text-white"
                               } cursor-pointer rounded-sm border px-3 py-1 uppercase hover:border-sky-700`}
                             >
                               {size}

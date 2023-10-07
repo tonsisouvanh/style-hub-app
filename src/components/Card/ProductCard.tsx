@@ -79,9 +79,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 <p className="mb-2 mt-2 text-center font-bold leading-none transition hover:text-gray-600">
                   {product.name}
                 </p>
-                <div className="flex flex-wrap items-center justify-center gap-x-5 ">
+                <div className="gap-x-4 flex flex-wrap items-center">
                   <span
-                    className={`text-[0.8rem] text-gray-500  lg:text-[0.9rem] ${
+                    className={`text-[0.6rem] text-gray-500  lg:text-[1.2rem] ${
                       product?.discount && "line-through"
                     }`}
                   >
@@ -89,7 +89,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   </span>
 
                   {product?.discount && (
-                    <span className="text-[0.8rem] text-[#024E82] lg:text-[0.9rem]">
+                    <span className="text-[0.8rem] text-[#024E82] lg:text-[1.3rem]">
                       {formatPrice(
                         calculateDiscountedPrice(
                           product?.price,
@@ -104,7 +104,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </Link>
 
           <div
-            onClick={() => handleAddCartModal(true, product?.id)}
+            onClick={() => handleAddCartModal(true, product?.id || "")}
             className="group flex w-full cursor-pointer items-center justify-center gap-1 bg-black py-2 font-notosanslao text-white lg:py-3"
           >
             <span className="text-base lg:text-xl">ເພີ່ມ</span>
