@@ -35,6 +35,10 @@ export interface Discount {
   value: number;
   type: string;
 }
+export interface Inventory {
+  size: string;
+  quantity: number;
+}
 
 export interface Product {
   id?: string;
@@ -44,7 +48,6 @@ export interface Product {
   price: number;
   discount?: Discount;
   images: string[];
-  // colors: string[];
   sizes: string[];
   categories: string[];
   brand: string;
@@ -52,7 +55,7 @@ export interface Product {
   isFeatured: boolean;
   ratings: number;
   stock: number;
-  // inventory: [{ quantity: number; size: string; color: string }];
+  inventory: Inventory[];
 }
 
 export type Option = {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Product } from "../../types";
+import { Inventory, Product } from "../../types";
 import AddImages from "./AddImages";
 import DropdownSelect from "../../pages/protected/item/components/DropdownSelect";
 import InputText from "../Admin/Input/InputText";
@@ -11,12 +11,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { addProduct } from "../../feature/product/ProductSlice";
 import { useAppDispatch } from "../../hook/hooks";
-
+import AddInventory from "./AddInventory";
 type Props = {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
 };
-const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 const categories = ["tops", "bottoms", "bounce"];
 const globalLabelStyle = "label-text font-bold";
 
@@ -37,6 +36,7 @@ const initialProduct: Product = {
   isFeatured: false,
   ratings: 1,
   stock: 1,
+  inventory: [],
 };
 const AddProductModal = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -51,6 +51,7 @@ const AddProductModal = (props: Props) => {
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [addedImages, setAddedImages] = useState<string[]>([]);
+  const [addedInventory, setAddedInventory] = useState<Inventory[]>([]);
   const now = new Date();
   const currentDate = now.toLocaleDateString();
 
@@ -73,6 +74,31 @@ const AddProductModal = (props: Props) => {
         break;
     }
     setAddedImages(updatedImages);
+  };
+
+  const handleAddInventory = (
+    newInventory: Inventory,
+    index: number,
+    handleType: string,
+  ) => {
+    let updateInventory: Inventory[] = [...addedInventory];
+    const foundInventoryIndex = updateInventory.findIndex(
+      (i) => i.size === newInventory.size,
+    );
+    switch (handleType) {
+      case "add":
+        if (foundInventoryIndex >= 0) {
+          updateInventory[foundInventoryIndex] = newInventory;
+        } else updateInventory[index] = newInventory;
+        break;
+      case "del":
+        updateInventory = updateInventory.filter((_, i) => i !== index);
+        break;
+      default:
+        updateInventory = [];
+        break;
+    }
+    setAddedInventory(updateInventory);
   };
 
   // Handle multi-select checkbox change
@@ -106,24 +132,35 @@ const AddProductModal = (props: Props) => {
     }
   };
 
+  const clearInput = () => {
+    setAddedImages([]);
+    setAddedInventory([]);
+    setSelectedCategories([]);
+    reset(initialProduct);
+  };
+
   const handleCloseModal = () => {
     props.setOpenModal(false);
-    setAddedImages([]);
+    clearInput();
   };
 
   // Handle form submission
   const handleSubmitForm: SubmitHandler<Product> = async (data: Product) => {
+    const totalQuantity = addedInventory.reduce((acc, currValue) => {
+      return acc + currValue.quantity;
+    }, 0);
+
     const updatedProduct: Product = {
       ...data,
-      sizes: selectedSizes,
       images: addedImages,
       categories: selectedCategories,
       price: Number(data.price),
       importPrice: Number(data.importPrice),
       ratings: Number(data.ratings),
-      stock: Number(data.stock),
+      stock: totalQuantity,
+      inventory: addedInventory,
     };
-    if (selectedCategories.length <= 0 || selectedSizes.length <= 0) {
+    if (selectedCategories.length <= 0) {
       toast.warning("Please select at least one category and one size");
       return;
     }
@@ -157,7 +194,7 @@ const AddProductModal = (props: Props) => {
         id="my_modal_1"
         className={`modal ${props.openModal && "modal-open"}`}
       >
-        <div className="modal-box font-notosanslao">
+        <div className="modal-box relative font-notosanslao">
           <div className="mb-5 flex items-center justify-between">
             <h3 className="flex items-center gap-1 text-lg font-bold">
               ເພີ່ມສິນຄ້າເຂົ້າສຕ໋ອກ
@@ -289,13 +326,14 @@ const AddProductModal = (props: Props) => {
             {/* multiple checkbox input */}
             <div className="my-4 space-y-2">
               {/* Size selection */}
-              <DropdownSelect
+              {/* <DropdownSelect
                 title={"ຂະໜາດ"}
                 options={sizes}
                 selectedOptions={selectedSizes}
                 handleCheckboxChange={handleCheckboxChange}
                 onChangeType="sizes"
-              />
+              /> */}
+
               {/* Category selection */}
               <DropdownSelect
                 title={"ໝວດໝູ່"}
@@ -333,7 +371,7 @@ const AddProductModal = (props: Props) => {
             {/* Checkbox new arraival and featured end*/}
 
             {/* Stock quantity */}
-            <InputNumber
+            {/* <InputNumber
               inputLabel="ຈຳນວນ"
               inputName="stock"
               inputPlaceholder="Stock quantity"
@@ -344,15 +382,17 @@ const AddProductModal = (props: Props) => {
                 required: true,
                 min: { value: 0, message: "ຈຳນວນຂັ້ນຕ່ຳ 0" },
               }}
+            /> */}
+            <AddInventory
+              addedInventory={addedInventory}
+              handleAddInventory={handleAddInventory}
             />
-
             {/* Add image url */}
             <AddImages
               addedImages={addedImages}
               handleAddImagesUrl={handleAddImagesUrl}
             />
             {/* Add image url end*/}
-
             {/* Input end*/}
 
             {/* ========== Button ==========*/}

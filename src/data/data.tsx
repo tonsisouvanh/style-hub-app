@@ -2,6 +2,8 @@ import { Slide, MenuItem } from "../types";
 
 import { jimabanner, jimbbanner } from "../assets/images";
 
+export const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+
 export const slides: Slide[] = [
   {
     id: 1,

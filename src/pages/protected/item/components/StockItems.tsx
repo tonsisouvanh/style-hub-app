@@ -51,10 +51,8 @@ const StockItems = ({ setOpenModal, setEditingProduct, products }: Props) => {
     setOpenModal(true);
     setEditingProduct(product);
   };
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
 
+  console.log(products);
   return (
     <div>
       {status === "loading" && (
@@ -104,7 +102,7 @@ const StockItems = ({ setOpenModal, setEditingProduct, products }: Props) => {
                       <li
                         onClick={() => handleDeleteProduct(product?.id ?? "")}
                       >
-                      <span>
+                        <span>
                           ລົບ
                           <AiFillDelete size={18} />
                         </span>
