@@ -15,12 +15,13 @@ import PrivateRoute from "./route/PrivateRoute";
 import Stock from "./pages/protected/item/Stock";
 import AdminLayout from "./layout/AdminRootLayout";
 import Test from "./pages/Test";
+import ProductDetail from "./pages/Products/ProductDetail";
 function App() {
   return (
     <>
       <ToastContainer
-        position="bottom-right"
-        autoClose={3000}
+        position="bottom-center"
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -48,6 +49,10 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="items/stock" element={<Stock />} />
+            <Route
+              path="items/stock/product-detail/:id"
+              element={<ProductDetail />}
+            />
           </Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />

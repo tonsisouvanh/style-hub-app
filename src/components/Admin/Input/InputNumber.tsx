@@ -50,7 +50,7 @@ const InputNumber = ({
         type="number"
         placeholder={inputPlaceholder}
         name={inputName as string}
-        className="input-bordered input input-sm w-full transition duration-300 hover:shadow-md focus:outline-none"
+        className="input-bordered input input-sm w-full text-base-content transition duration-300 hover:shadow-md focus:outline-none"
       />
     </div>
   );

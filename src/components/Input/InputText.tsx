@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 type Props = {
   labelTitle: string;
@@ -30,7 +30,7 @@ const InputText = (props: Props) => {
         value={value}
         placeholder={props.placeholder || ""}
         onChange={(e) => updateInputValue(e.target.value)}
-        className="input-bordered  input w-full "
+        className="input-bordered input w-full"
       />
     </div>
   );

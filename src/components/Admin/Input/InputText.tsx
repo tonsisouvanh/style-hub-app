@@ -39,7 +39,7 @@ const InputText = ({
         type="text"
         placeholder={inputPlaceholder}
         name={inputName as string}
-        className={`input-bordered input input-sm w-full max-w-xs transition duration-300 hover:shadow-md focus:outline-none`}
+        className={`input-bordered input input-sm w-full max-w-xs text-base-content transition duration-300 hover:shadow-md focus:outline-none`}
       />
     </div>
   );

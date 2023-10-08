@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AiOutlineClear } from "react-icons/ai";
-import { BiImageAdd } from "react-icons/bi";
 import { HiPencil } from "react-icons/hi";
 import { sizes } from "../../data/data";
 import { Inventory } from "../../types";
@@ -48,12 +47,12 @@ const AddInventory = ({ addedInventory, handleAddInventory }: Props) => {
     <>
       <div className="collapse-arrow collapse mt-3 border border-gray-200 transition duration-300 hover:shadow-md">
         <input type="checkbox" className="peer" />
-        <div className="peer-checked:bg-base-200 collapse-title flex items-center justify-between font-bold text-base-content peer-checked:text-base-content">
+        <div className="collapse-title flex items-center justify-between font-bold text-base-content peer-checked:bg-base-200 peer-checked:text-base-content">
           <div className="label-text flex items-center gap-1">
             <span>ຂະໜາດ & ຈຳນວນ</span>
           </div>
         </div>
-        <div className="peer-checked:bg-base-200 collapse-content text-base-content peer-checked:text-base-content">
+        <div className="collapse-content text-base-content peer-checked:bg-base-200 peer-checked:text-base-content">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <select
@@ -102,35 +101,36 @@ const AddInventory = ({ addedInventory, handleAddInventory }: Props) => {
             )}
             <div>
               {/* <ul className="flex flex-wrap items-center gap-x-5 gap-y-2"> */}
-              <ul className="grid grid-cols-2 grid-flow-row gap-2">
-                {addedInventory.map((inven, index) => (
-                  <li key={inven.size} className="flex items-center gap-x-1">
-                    <div className="kbd kbd-md flex items-center gap-2">
-                      <span className="font-bold">{inven.size}</span>=
-                      <span className="font-bold">{inven.quantity}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <span
-                        className="btn-neutral btn-outline btn-sm btn w-[2.5rem]"
-                        onClick={() => handleEdit(inven.size, inven.quantity)}
-                      >
-                        <HiPencil />
-                      </span>
-                      <span
-                        className="btn-neutral btn-outline btn-sm btn w-[2.5rem]"
-                        onClick={() =>
-                          handleAddInventory(
-                            { size: inven.size, quantity: inven.quantity },
-                            index,
-                            "del",
-                          )
-                        }
-                      >
-                        -
-                      </span>
-                    </div>
-                  </li>
-                ))}
+              <ul className="grid grid-flow-row grid-cols-2 gap-2">
+                {addedInventory &&
+                  addedInventory?.map((inven, index) => (
+                    <li key={inven.size} className="flex items-center gap-x-1">
+                      <div className="kbd kbd-md flex items-center gap-2">
+                        <span className="font-bold">{inven.size}</span>=
+                        <span className="font-bold">{inven.quantity}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span
+                          className="btn-neutral btn-outline btn-sm btn w-[2.5rem]"
+                          onClick={() => handleEdit(inven.size, inven.quantity)}
+                        >
+                          <HiPencil />
+                        </span>
+                        <span
+                          className="btn-neutral btn-outline btn-sm btn w-[2.5rem]"
+                          onClick={() =>
+                            handleAddInventory(
+                              { size: inven.size, quantity: inven.quantity },
+                              index,
+                              "del",
+                            )
+                          }
+                        >
+                          -
+                        </span>
+                      </div>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>

@@ -1,17 +1,14 @@
-import { useEffect } from "react";
 import { CiCircleMore } from "react-icons/ci";
 import { capitalizeFirstLetter } from "../../../../utils/utils";
 import { Product } from "../../../../types";
 import { noimage } from "../../../../assets/images";
 import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
-import {
-  deleteProduct,
-  fetchProducts,
-} from "../../../../feature/product/ProductSlice";
+import { deleteProduct } from "../../../../feature/product/ProductSlice";
 import { useAppDispatch } from "../../../../hook/hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 type Props = {
   products: Product[];
@@ -30,7 +27,7 @@ const tableHeaders = [
   "featured",
   "rating",
 ];
-const StockItems = ({ setOpenModal, setEditingProduct, products }: Props) => {
+const StockItems = (props: Props) => {
   const dispatch = useAppDispatch();
   const { status } = useSelector((state: RootState) => state.products);
 
@@ -48,11 +45,10 @@ const StockItems = ({ setOpenModal, setEditingProduct, products }: Props) => {
     }
   };
   const handleClickEditProduct = (product: Product) => {
-    setOpenModal(true);
-    setEditingProduct(product);
+    props.setOpenModal(true);
+    props.setEditingProduct(product);
   };
 
-  console.log(products);
   return (
     <div>
       {status === "loading" && (
@@ -79,7 +75,7 @@ const StockItems = ({ setOpenModal, setEditingProduct, products }: Props) => {
             </tr>
           </thead>
           <tbody className="">
-            {products.map((product, index) => (
+            {props.products.map((product, index) => (
               <tr key={index}>
                 <td>
                   <div
@@ -114,10 +110,12 @@ const StockItems = ({ setOpenModal, setEditingProduct, products }: Props) => {
                         </span>
                       </li>
                       <li>
-                        <span>
-                          ເບິ່ງສິນຄ້າ
-                          <AiFillEye size={18} />
-                        </span>
+                        <Link to={`product-detail/${product?.id}`}>
+                          <span className="flex items-center gap-2">
+                            ເບິ່ງສິນຄ້າ
+                            <AiFillEye size={18} />
+                          </span>
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -144,20 +142,8 @@ const StockItems = ({ setOpenModal, setEditingProduct, products }: Props) => {
                 <td>{product.price}</td>
                 <td>{product.stock}</td>
                 <td>{product.categories}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    className="toggle toggle-xs"
-                    checked={product?.isNewArrival}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="checkbox"
-                    className="toggle toggle-xs"
-                    checked={product?.isFeatured}
-                  />
-                </td>
+                <td>{product.isNewArrival ? "New" : "Old"}</td>
+                <td>{product.isFeatured ? "Featured" : "Not Featured"}</td>
                 <td>{product.ratings}</td>
               </tr>
             ))}

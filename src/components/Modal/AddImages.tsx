@@ -7,7 +7,7 @@ type Props = {
   handleAddImagesUrl: (url: string, index: number, hanldeType: string) => void;
 };
 
-const AddImages = ({ addedImages, handleAddImagesUrl }: Props) => {
+const AddImages = (props: Props) => {
   const [currentUrlInput, setCurrentUrlInput] = useState<string>("");
   const [showWarning, setShowWarning] = useState<boolean>(false);
 
@@ -15,14 +15,13 @@ const AddImages = ({ addedImages, handleAddImagesUrl }: Props) => {
     if (currentUrlInput.trim() === "") {
       setShowWarning(true);
     } else {
-      const nextIndex = addedImages.length;
-      handleAddImagesUrl(currentUrlInput, nextIndex, "add");
+      const nextIndex = props.addedImages.length;
+      props.handleAddImagesUrl(currentUrlInput, nextIndex, "add");
 
       setCurrentUrlInput("");
       setShowWarning(false);
     }
   };
-
   return (
     <>
       <div className="collapse-arrow collapse mt-3 border border-gray-200 transition duration-300 hover:shadow-md">
@@ -48,7 +47,7 @@ const AddImages = ({ addedImages, handleAddImagesUrl }: Props) => {
                 +
               </span>
               <span
-                onClick={() => handleAddImagesUrl("", 0, "clear")}
+                onClick={() => props.handleAddImagesUrl("", 0, "clear")}
                 className="btn-error btn-outline btn-sm btn"
               >
                 <AiOutlineClear />
@@ -59,7 +58,7 @@ const AddImages = ({ addedImages, handleAddImagesUrl }: Props) => {
             )}
             <div>
               <ul className="flex flex-wrap items-center gap-5">
-                {addedImages.map((imageUrl, index) => (
+                {props.addedImages.map((imageUrl, index) => (
                   <li key={index} className="flex items-center gap-2">
                     <img
                       className="mask mask-square h-12 w-12"
@@ -68,7 +67,9 @@ const AddImages = ({ addedImages, handleAddImagesUrl }: Props) => {
                     />
                     <span
                       className="btn-error btn-outline btn-sm btn"
-                      onClick={() => handleAddImagesUrl(imageUrl, index, "del")}
+                      onClick={() =>
+                        props.handleAddImagesUrl(imageUrl, index, "del")
+                      }
                     >
                       -
                     </span>

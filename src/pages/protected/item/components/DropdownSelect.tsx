@@ -26,7 +26,7 @@ const DropdownSelect = ({
       </div>
       <div
         tabIndex={0}
-        className="dropdown-content menu rounded-box z-[1] w-52 space-y-2 bg-base-100 p-3 shadow"
+        className="dropdown-content menu rounded-box z-[2] w-52 space-y-2 bg-base-100 p-3 shadow"
       >
         {options.map((option) => (
           <label

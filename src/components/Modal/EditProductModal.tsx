@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Product } from "../../types";
+import { Inventory, Product } from "../../types";
 import AddImages from "./AddImages";
 import DropdownSelect from "../../pages/protected/item/components/DropdownSelect";
 import InputText from "../Admin/Input/InputText";
@@ -11,20 +11,42 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useAppDispatch } from "../../hook/hooks";
 import { updateProduct } from "../../feature/product/ProductSlice";
+import AddInventory from "./AddInventory";
 
 type Props = {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
   editingProduct: Product;
+
+  handleAddImagesUrl: (url: string, index: number, handleType: string) => void;
+  addedImages: string[];
+  setAddedImages: React.Dispatch<React.SetStateAction<string[]>>;
+
+  handleAddInventory: (
+    newInventory: Inventory,
+    index: number,
+    handleType: string,
+  ) => void;
+  addedInventory: Inventory[];
+  setAddedInventory: React.Dispatch<React.SetStateAction<Inventory[]>>;
+  selectedCategories: string[];
+  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 };
-const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 const categories = ["tops", "bottoms", "bounce"];
 const globalLabelStyle = "label-text font-bold";
 
 const EditProductModal = ({
-  editingProduct,
+  setAddedImages,
+  addedImages,
+  handleAddImagesUrl,
+  addedInventory,
+  setAddedInventory,
+  handleAddInventory,
   openModal,
   setOpenModal,
+  selectedCategories,
+  setSelectedCategories,
+  editingProduct,
 }: Props) => {
   const dispatch = useAppDispatch();
   const { status } = useSelector((state: RootState) => state.products);
@@ -35,33 +57,8 @@ const EditProductModal = ({
     setValue,
   } = useForm<Product>({ defaultValues: {} });
 
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [addedImages, setAddedImages] = useState<string[]>([]);
-
   const now = new Date();
   const currentDate = now.toLocaleDateString();
-
-  // Function to handle adding an image URL
-  const handleAddImagesUrl = (
-    url: string,
-    index: number,
-    handleType: string,
-  ) => {
-    let updatedImages: string[] = [...addedImages];
-    switch (handleType) {
-      case "add":
-        updatedImages[index] = url;
-        break;
-      case "del":
-        updatedImages = updatedImages.filter((_, i) => i !== index);
-        break;
-      default:
-        updatedImages = [];
-        break;
-    }
-    setAddedImages(updatedImages);
-  };
 
   // Handle multi-select checkbox change
   const handleMultiSelectChange = (
@@ -79,9 +76,9 @@ const EditProductModal = ({
   // Handle checkbox change for sizes, colors, and categories
   const handleCheckboxChange = (name: string, type: string) => {
     switch (type) {
-      case "sizes":
-        handleMultiSelectChange(name, selectedSizes, setSelectedSizes);
-        break;
+      // case "sizes":
+      //   handleMultiSelectChange(name, selectedSizes, setSelectedSizes);
+      //   break;
       case "categories":
         handleMultiSelectChange(
           name,
@@ -100,17 +97,21 @@ const EditProductModal = ({
 
   // Handle form submission
   const handleSubmitForm: SubmitHandler<Product> = async (data: Product) => {
+    const totalQuantity = addedInventory.reduce((acc, currValue) => {
+      return acc + currValue.quantity;
+    }, 0);
     const updatedProduct: Product = {
       ...data,
-      sizes: selectedSizes,
       images: addedImages,
       categories: selectedCategories,
       price: Number(data.price),
       importPrice: Number(data.importPrice),
       ratings: Number(data.ratings),
-      stock: Number(data.stock),
+      stock: totalQuantity,
+      inventory: addedInventory,
     };
-    if (selectedCategories.length <= 0 || selectedSizes.length <= 0) {
+
+    if (selectedCategories.length <= 0) {
       toast.warning("Please select at least one category and one size");
       return;
     }
@@ -136,15 +137,20 @@ const EditProductModal = ({
         setValue(key as keyof Product, editingProduct[key as keyof Product]);
       });
       setAddedImages(editingProduct && editingProduct?.images);
-      setSelectedSizes(editingProduct && editingProduct?.sizes);
+      setAddedInventory(editingProduct && editingProduct?.inventory);
       setSelectedCategories(editingProduct && editingProduct?.categories);
     }
-  }, [editingProduct, setValue]);
-
+  }, [
+    setValue,
+    setAddedImages,
+    setAddedInventory,
+    setSelectedCategories,
+    editingProduct,
+  ]);
   return (
     <>
       {status === "loading" && (
-        <dialog id="my_modal_1" className="modal modal-open z-[9999]">
+        <dialog id="my_modal_1" className="modal-open modal z-[9999]">
           <span className="loading loading-spinner loading-lg bg-primary"></span>
         </dialog>
       )}
@@ -158,8 +164,8 @@ const EditProductModal = ({
           </div>
           <div className="divider">
             <LuEdit
-              size={60}
-              className="mask mask-squircle rounded-full bg-primary p-2 text-white"
+              size={80}
+              className="mask mask-squircle rounded-full bg-secondary p-2 text-white"
             />
           </div>
           <form onSubmit={handleSubmit(handleSubmitForm)}>
@@ -280,14 +286,6 @@ const EditProductModal = ({
 
             {/* multiple checkbox input */}
             <div className="my-4 space-y-2">
-              {/* Size selection */}
-              <DropdownSelect
-                title={"ຂະໜາດ"}
-                options={sizes}
-                selectedOptions={selectedSizes}
-                handleCheckboxChange={handleCheckboxChange}
-                onChangeType="sizes"
-              />
               {/* Category selection */}
               <DropdownSelect
                 title={"ໝວດໝູ່"}
@@ -324,20 +322,11 @@ const EditProductModal = ({
             </div>
             {/* Checkbox new arraival and featured end*/}
 
-            {/* Stock quantity */}
-            <InputNumber
-              inputLabel="ຈຳນວນ"
-              inputName="stock"
-              inputPlaceholder="Stock quantity"
-              register={register}
-              errorMessage="*ກາລຸນາຕື່ມຂໍ້ມູນ"
-              errors={errors}
-              validationRules={{
-                required: true,
-                min: { value: 0, message: "ຈຳນວນຂັ້ນຕ່ຳ 0" },
-              }}
+            {/* Add inventory */}
+            <AddInventory
+              addedInventory={addedInventory}
+              handleAddInventory={handleAddInventory}
             />
-
             {/* Add image url */}
             <AddImages
               addedImages={addedImages}
@@ -348,10 +337,10 @@ const EditProductModal = ({
             {/* Input end*/}
 
             {/* ========== Button ==========*/}
-            <div className="modal-action sticky bottom-0">
+            <div className="modal-action sticky bottom-0 z-[9]">
               <button
                 type="submit"
-                className="btn-primary btn w-full max-w-[8rem] text-lg"
+                className="btn-primary btn w-full max-w-[8rem] shadow-lg text-lg"
               >
                 ແກ້ໄຂ
               </button>
@@ -359,7 +348,7 @@ const EditProductModal = ({
               <button
                 type="button"
                 onClick={handleCloseModal}
-                className="btn-error btn-outline btn w-full max-w-[8rem] bg-white text-lg"
+                className="btn shadow-lg w-full max-w-[8rem] text-lg"
               >
                 ຍົກເລີກ
               </button>
