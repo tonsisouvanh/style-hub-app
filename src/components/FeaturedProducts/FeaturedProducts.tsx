@@ -130,7 +130,7 @@ const FeaturedProducts: React.FC<ProductProps> = ({
                               />
                             </div>
                             <div className="font-notosanslao">
-                              <p className="mt-2 h-[2.5rem] text-xs font-bold leading-none transition hover:text-gray-600 sm:text-sm md:text-base">
+                              <p className="mt-2 h-auto text-xs font-bold leading-0 transition hover:text-gray-600 sm:text-sm md:text-base">
                                 {product.name}
                               </p>
                               <div className="flex flex-wrap items-center justify-start gap-x-2">

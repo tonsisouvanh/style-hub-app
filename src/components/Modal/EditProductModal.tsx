@@ -287,13 +287,13 @@ const EditProductModal = ({
             {/* multiple checkbox input */}
             <div className="my-4 space-y-2">
               {/* Category selection */}
-              <DropdownSelect
+              {/* <DropdownSelect
                 title={"ໝວດໝູ່"}
                 options={categories}
                 selectedOptions={selectedCategories}
                 handleCheckboxChange={handleCheckboxChange}
                 onChangeType="categories"
-              />
+              /> */}
             </div>
             {/* multiple checkbox input end*/}
 

@@ -1,8 +1,9 @@
 import { AiFillCaretDown } from "react-icons/ai";
+import { Category } from "../../../../types";
 
 type Props = {
   title: string;
-  options: string[];
+  options: Category[];
   selectedOptions: string[];
   onChangeType: string;
   handleCheckboxChange: (name: string, type: string) => void;
@@ -28,21 +29,22 @@ const DropdownSelect = ({
         tabIndex={0}
         className="dropdown-content menu rounded-box z-[2] w-52 space-y-2 bg-base-100 p-3 shadow"
       >
-        {options.map((option) => (
-          <label
-            key={option}
-            className="btn-ghost btn-xs btn flex w-full cursor-pointer items-center justify-between gap-1 font-normal"
-          >
-            <span className="label-text">{option}</span>
-            <input
-              type="checkbox"
-              className=" checkbox checkbox-sm"
-              name={option}
-              checked={selectedOptions.includes(option)}
-              onChange={() => handleCheckboxChange(option, onChangeType)}
-            />
-          </label>
-        ))}
+        {options &&
+          options.map((option) => (
+            <label
+              key={option.name}
+              className="btn-ghost btn-xs btn flex w-full cursor-pointer items-center justify-between gap-1 font-normal"
+            >
+              <span className="label-text">{option.name}</span>
+              <input
+                type="checkbox"
+                className=" checkbox checkbox-sm"
+                name={option.name}
+                checked={selectedOptions.includes(option.name)}
+                onChange={() => handleCheckboxChange(option.name, onChangeType)}
+              />
+            </label>
+          ))}
       </div>
     </div>
   );

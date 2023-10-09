@@ -81,7 +81,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 </p>
                 <div className="gap-x-4 flex flex-wrap items-center">
                   <span
-                    className={`text-[0.6rem] text-gray-500  lg:text-[1.2rem] ${
+                    className={`text-[0.8rem] text-gray-500  lg:text-[1.2rem] ${
                       product?.discount && "line-through"
                     }`}
                   >
@@ -89,7 +89,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   </span>
 
                   {product?.discount && (
-                    <span className="text-[0.8rem] text-[#024E82] lg:text-[1.3rem]">
+                    <span className="text-[0.9rem] text-[#024E82] lg:text-[1.3rem]">
                       {formatPrice(
                         calculateDiscountedPrice(
                           product?.price,

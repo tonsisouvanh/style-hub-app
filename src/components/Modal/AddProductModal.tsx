@@ -1,5 +1,5 @@
-import React from "react";
-import { Inventory, Product } from "../../types";
+import React, { useState } from "react";
+import { Category, Inventory, Product } from "../../types";
 import AddImages from "./AddImages";
 import DropdownSelect from "../../pages/protected/item/components/DropdownSelect";
 import InputText from "../Admin/Input/InputText";
@@ -12,6 +12,7 @@ import { RootState } from "../../store/store";
 import { addProduct } from "../../feature/product/ProductSlice";
 import { useAppDispatch } from "../../hook/hooks";
 import AddInventory from "./AddInventory";
+import AddCategoryModal from "./AddCategoryModal";
 type Props = {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
@@ -32,7 +33,6 @@ type Props = {
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 };
-const categories = ["tops", "bottoms", "bounce"];
 const globalLabelStyle = "label-text font-bold";
 const AddProductModal = ({
   setAddedImages,
@@ -49,7 +49,10 @@ const AddProductModal = ({
 }: Props) => {
   const dispatch = useAppDispatch();
   const { status } = useSelector((state: RootState) => state.products);
-
+  const [openAddCateModal, setOpenAddCateModal] = useState<boolean>(false);
+  const { data: categories } = useSelector(
+    (state: RootState) => state.categories,
+  );
   const {
     register,
     handleSubmit,
@@ -141,7 +144,6 @@ const AddProductModal = ({
       toast.error("An error occurred while adding the product");
     }
   };
-
   return (
     <>
       {status === "loading" && (
@@ -150,6 +152,17 @@ const AddProductModal = ({
         </dialog>
       )}
       <dialog id="my_modal_1" className={`modal ${openModal && "modal-open"}`}>
+        <dialog
+          id="my_modal_5"
+          className={`modal modal-bottom sm:modal-middle ${
+            openAddCateModal && "modal-open"
+          }`}
+        >
+          <AddCategoryModal
+            openAddCateModal={openAddCateModal}
+            setOpenAddCateModal={setOpenAddCateModal}
+          />
+        </dialog>
         <div className="modal-box relative font-notosanslao">
           <div className="mb-5 flex items-center justify-between">
             <h3 className="flex items-center gap-1 text-lg font-bold">
@@ -280,8 +293,15 @@ const AddProductModal = ({
             {/* Discount end*/}
 
             {/* multiple checkbox input */}
+            {/* Category selection */}
             <div className="my-4 space-y-2">
-              {/* Category selection */}
+              <button
+                type="button"
+                onClick={() => setOpenAddCateModal(true)}
+                className="btn-outline btn-xs btn"
+              >
+                +ເພີ່ມໝວດໝູ່
+              </button>
               <DropdownSelect
                 title={"ໝວດໝູ່"}
                 options={categories}
@@ -333,7 +353,7 @@ const AddProductModal = ({
             <div className="modal-action sticky bottom-0 z-[9]">
               <button
                 type="submit"
-                className="btn-primary btn w-full max-w-[8rem] shadow-lg text-lg"
+                className="btn-primary btn w-full max-w-[8rem] text-lg shadow-lg"
               >
                 ເພີ່ມ
               </button>
@@ -341,7 +361,7 @@ const AddProductModal = ({
               <button
                 type="button"
                 onClick={handleCloseModal}
-                className="btn w-full max-w-[8rem] shadow-lg text-lg"
+                className="btn w-full max-w-[8rem] text-lg shadow-lg"
               >
                 ຍົກເລີກ
               </button>
