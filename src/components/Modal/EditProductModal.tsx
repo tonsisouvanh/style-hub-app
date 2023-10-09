@@ -12,6 +12,7 @@ import { RootState } from "../../store/store";
 import { useAppDispatch } from "../../hook/hooks";
 import { updateProduct } from "../../feature/product/ProductSlice";
 import AddInventory from "./AddInventory";
+import AddCategoryModal from "./AddCategoryModal";
 
 type Props = {
   openModal: boolean;
@@ -32,7 +33,6 @@ type Props = {
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 };
-const categories = ["tops", "bottoms", "bounce"];
 const globalLabelStyle = "label-text font-bold";
 
 const EditProductModal = ({
@@ -50,6 +50,10 @@ const EditProductModal = ({
 }: Props) => {
   const dispatch = useAppDispatch();
   const { status } = useSelector((state: RootState) => state.products);
+  const [openAddCateModal, setOpenAddCateModal] = useState<boolean>(false);
+  const { data: categories } = useSelector(
+    (state: RootState) => state.categories,
+  );
   const {
     register,
     handleSubmit,
@@ -76,9 +80,6 @@ const EditProductModal = ({
   // Handle checkbox change for sizes, colors, and categories
   const handleCheckboxChange = (name: string, type: string) => {
     switch (type) {
-      // case "sizes":
-      //   handleMultiSelectChange(name, selectedSizes, setSelectedSizes);
-      //   break;
       case "categories":
         handleMultiSelectChange(
           name,
@@ -91,8 +92,15 @@ const EditProductModal = ({
     }
   };
 
+  const clearInput = () => {
+    setAddedImages([]);
+    setAddedInventory([]);
+    setSelectedCategories([]);
+  };
+
   const handleCloseModal = () => {
     setOpenModal(false);
+    clearInput();
   };
 
   // Handle form submission
@@ -131,9 +139,7 @@ const EditProductModal = ({
 
   useEffect(() => {
     if (editingProduct) {
-      // Loop through the fields and set their values using setValue
       Object.keys(editingProduct).forEach((key) => {
-        // Use a type assertion to tell TypeScript that key is a valid property of Product
         setValue(key as keyof Product, editingProduct[key as keyof Product]);
       });
       setAddedImages(editingProduct && editingProduct?.images);
@@ -150,11 +156,22 @@ const EditProductModal = ({
   return (
     <>
       {status === "loading" && (
-        <dialog id="my_modal_1" className="modal-open modal z-[9999]">
+        <dialog id="my_modal_1" className="modal modal-open z-[9999]">
           <span className="loading loading-spinner loading-lg bg-primary"></span>
         </dialog>
       )}
       <dialog id="my_modal_1" className={`modal ${openModal && "modal-open"}`}>
+        <dialog
+          id="my_modal_5"
+          className={`modal modal-bottom sm:modal-middle ${
+            openAddCateModal && "modal-open"
+          }`}
+        >
+          <AddCategoryModal
+            openAddCateModal={openAddCateModal}
+            setOpenAddCateModal={setOpenAddCateModal}
+          />
+        </dialog>
         <div className="modal-box font-notosanslao">
           <div className="mb-5 flex items-center justify-between">
             <h3 className="flex items-center gap-1 text-lg font-bold">
@@ -287,13 +304,20 @@ const EditProductModal = ({
             {/* multiple checkbox input */}
             <div className="my-4 space-y-2">
               {/* Category selection */}
-              {/* <DropdownSelect
+              <button
+                type="button"
+                onClick={() => setOpenAddCateModal(true)}
+                className="btn-outline btn-xs btn"
+              >
+                +ເພີ່ມໝວດໝູ່
+              </button>
+              <DropdownSelect
                 title={"ໝວດໝູ່"}
                 options={categories}
                 selectedOptions={selectedCategories}
                 handleCheckboxChange={handleCheckboxChange}
                 onChangeType="categories"
-              /> */}
+              />
             </div>
             {/* multiple checkbox input end*/}
 
@@ -340,7 +364,7 @@ const EditProductModal = ({
             <div className="modal-action sticky bottom-0 z-[9]">
               <button
                 type="submit"
-                className="btn-primary btn w-full max-w-[8rem] shadow-lg text-lg"
+                className="btn-primary btn w-full max-w-[8rem] text-lg shadow-lg"
               >
                 ແກ້ໄຂ
               </button>
@@ -348,7 +372,7 @@ const EditProductModal = ({
               <button
                 type="button"
                 onClick={handleCloseModal}
-                className="btn shadow-lg w-full max-w-[8rem] text-lg"
+                className="btn w-full max-w-[8rem] text-lg shadow-lg"
               >
                 ຍົກເລີກ
               </button>

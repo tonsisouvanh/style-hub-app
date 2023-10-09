@@ -1,5 +1,5 @@
 import { CiCircleMore } from "react-icons/ci";
-import { capitalizeFirstLetter } from "../../../../utils/utils";
+import { capitalizeFirstLetter, formatPrice } from "../../../../utils/utils";
 import { Product } from "../../../../types";
 import { noimage } from "../../../../assets/images";
 import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
@@ -18,14 +18,23 @@ type Props = {
 };
 const tableHeaders = [
   "ID",
-  "name",
-  "Image",
-  "price",
-  "quantity",
-  "category",
-  "new arraival",
-  "featured",
-  "rating",
+  "ຊື່",
+  "ຮູບ",
+  "ລາຄາຕົ້ນທຶນ",
+  "ລາຄາຂາຍ",
+  "ຈ/ນ",
+  // "category",
+  "ເຄື່ອງມາໃໝ່",
+  "Featured",
+  // "ID",
+  // "name",
+  // "Image",
+  // "price",
+  // "quantity",
+  // // "category",
+  // "new arraival",
+  // "featured",
+  // "rating",
 ];
 const StockItems = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -59,8 +68,8 @@ const StockItems = (props: Props) => {
       <div className="min-h-[15rem] overflow-x-auto">
         <table className="table-pin-rows table-pin-cols table-xs table">
           {/* head */}
-          <thead>
-            <tr>
+          <thead className="font-notosanslao">
+            <tr className="">
               <th></th>
               <th>
                 <label>
@@ -88,7 +97,10 @@ const StockItems = (props: Props) => {
                     // }
                     // `}
                   >
-                    <label tabIndex={0} className="btn-ghost btn-xs btn m-1">
+                    <label
+                      tabIndex={0}
+                      className="btn-ghost btn-xs btn m-1 text-primary"
+                    >
                       <CiCircleMore size={15} />
                     </label>
                     <ul
@@ -125,9 +137,9 @@ const StockItems = (props: Props) => {
                     <input type="checkbox" className="checkbox" />
                   </label>
                 </td>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>
+                <td className="text-info-content">{product.id}</td>
+                <td className="text-info-content">{product.name}</td>
+                <td className="">
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask h-12 w-12">
@@ -139,12 +151,16 @@ const StockItems = (props: Props) => {
                     </div>
                   </div>
                 </td>
-                <td>{product.price}</td>
-                <td>{product.stock}</td>
-                <td>{product.categories}</td>
-                <td>{product.isNewArrival ? "New" : "Old"}</td>
-                <td>{product.isFeatured ? "Featured" : "Not Featured"}</td>
-                <td>{product.ratings}</td>
+                <td className="text-info-content">{formatPrice(product.importPrice) }</td>
+                <td className="text-info-content">{formatPrice(product.price) }</td>
+                <td className="text-info-content">{product.stock}</td>
+                {/* <td>{product.categories}</td> */}
+                <td className="text-info-content">
+                  {product.isNewArrival ? "New" : "Old"}
+                </td>
+                <td className="text-info-content">
+                  {product.isFeatured ? "Featured" : "Not Featured"}
+                </td>
               </tr>
             ))}
           </tbody>

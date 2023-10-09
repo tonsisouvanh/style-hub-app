@@ -11,6 +11,10 @@ interface SidebarProps {
   setSidebarOpen: (arg: boolean) => void;
 }
 
+const dropdownLiStyle = "hover:text-white hover:bg-white/10";
+const dropdownNavlinkStyle =
+  "group relative flex items-center gap-2 px-4 py-2 font-medium duration-300 ease-in-out";
+
 const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const location = useLocation();
   const { pathname } = location;
@@ -132,11 +136,11 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li>
+                          <li className={dropdownLiStyle}>
                             <NavLink
                               to="dashboard"
                               className={({ isActive }) =>
-                                "group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out " +
+                                dropdownNavlinkStyle +
                                 (isActive && "! text-white")
                               }
                             >
@@ -191,11 +195,11 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5 mt-4 flex flex-col gap-2.5 pl-6">
-                          <li className="hover:text-white">
+                          <li className={dropdownLiStyle}>
                             <NavLink
                               to="items/stock"
                               className={({ isActive }) =>
-                                "group relative flex items-center gap-2 px-4 font-medium duration-300 ease-in-out" +
+                                dropdownNavlinkStyle +
                                 (isActive && "! text-white")
                               }
                             >

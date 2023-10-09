@@ -5,19 +5,32 @@ import DropdownNotification from "../components/Dropdown/DropdownNotification";
 import DropdownUser from "../components/Dropdown/DropdownUser";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearch } from "react-icons/bi";
+import { themes } from "../data/data";
+import { useEffect, useState } from "react";
 
 const AdminHeader = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light",
+  );
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme || "");
+    const localTheme = localStorage.getItem("theme");
+    document
+      .querySelector("html")
+      ?.setAttribute("data-theme", localTheme || "");
+  }, [theme]);
   return (
-    <header className="z-[999] drop-shadow-1 dark:bg-boxdark sticky top-0 flex w-full bg-white dark:drop-shadow-none">
+    <header className="sticky top-0 z-[999] flex w-full bg-secondary-content">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-md md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <button
-            className="group flex flex-col items-center justify-center rounded border p-1 lg:hidden"
+            className="group btn-sm btn flex flex-col items-center justify-center rounded border p-1 lg:hidden"
             onClick={(e) => {
               e.stopPropagation();
               props.setSidebarOpen(!props.sidebarOpen);
@@ -27,7 +40,10 @@ const AdminHeader = (props: {
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block flex-shrink-0 lg:hidden" to="/">
+          <Link
+            className="block h-auto flex-shrink-0 rounded-full bg-white p-1 lg:hidden"
+            to="/"
+          >
             <img className="w-10" src={Logo} alt="Logo" />
           </Link>
         </div>
@@ -51,7 +67,28 @@ const AdminHeader = (props: {
         <div className="2xsm:gap-7 flex items-center gap-3">
           <ul className="2xsm:gap-4 flex items-center gap-2">
             {/* <!-- Dark Mode Toggler --> */}
-            {/* <DarkModeSwitcher /> */}
+            <div className="dropdown">
+              <label
+                tabIndex={0}
+                className="btn-accent btn-sm btn m-1 rounded-full"
+              >
+                Theme
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu rounded-box z-[1] w-52 max-w-fit space-y-2 bg-base-100 p-2 shadow"
+              >
+                {themes.map((theme) => (
+                  <li
+                    className="btn-xs btn w-fit"
+                    onClick={() => setTheme(theme)}
+                    key={theme}
+                  >
+                    {theme}
+                  </li>
+                ))}
+              </ul>
+            </div>
             {/* <!-- Dark Mode Toggler --> */}
 
             {/* <!-- Notification Menu Area --> */}

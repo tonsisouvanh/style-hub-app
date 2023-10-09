@@ -27,24 +27,36 @@ const DropdownSelect = ({
       </div>
       <div
         tabIndex={0}
-        className="dropdown-content menu rounded-box z-[2] w-52 space-y-2 bg-base-100 p-3 shadow"
+        className="dropdown-content menu rounded-box z-[10] !max-h-[15rem] w-full space-y-2 overflow-x-auto border bg-base-100 p-3 shadow"
       >
-        {options &&
-          options.map((option) => (
-            <label
-              key={option.name}
-              className="btn-ghost btn-xs btn flex w-full cursor-pointer items-center justify-between gap-1 font-normal"
-            >
-              <span className="label-text">{option.name}</span>
-              <input
-                type="checkbox"
-                className=" checkbox checkbox-sm"
-                name={option.name}
-                checked={selectedOptions.includes(option.name)}
-                onChange={() => handleCheckboxChange(option.name, onChangeType)}
-              />
-            </label>
-          ))}
+        <div>
+          <div className="w-full">
+            <input
+              className="input-bordered input input-xs join-item mb-2 w-full focus:outline-none"
+              placeholder="Search..."
+            />
+          </div>
+          <div className="grid grid-cols-3 gap-1">
+            {options &&
+              options.map((option) => (
+                <label
+                  key={option.name}
+                  className="btn-ghost btn-xs btn flex cursor-pointer items-center justify-between gap-1 font-normal"
+                >
+                  <span className="label-text text-xs">{option.name}</span>
+                  <input
+                    type="checkbox"
+                    className=" checkbox checkbox-sm"
+                    name={option.name}
+                    checked={selectedOptions.includes(option.name)}
+                    onChange={() =>
+                      handleCheckboxChange(option.name, onChangeType)
+                    }
+                  />
+                </label>
+              ))}
+          </div>
+        </div>
       </div>
     </div>
   );

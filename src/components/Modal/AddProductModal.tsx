@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Category, Inventory, Product } from "../../types";
+import { Inventory, Product } from "../../types";
 import AddImages from "./AddImages";
 import DropdownSelect from "../../pages/protected/item/components/DropdownSelect";
 import InputText from "../Admin/Input/InputText";
@@ -29,7 +29,6 @@ type Props = {
   ) => void;
   addedInventory: Inventory[];
   setAddedInventory: React.Dispatch<React.SetStateAction<Inventory[]>>;
-
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -79,9 +78,6 @@ const AddProductModal = ({
   // Handle checkbox change for sizes, colors, and categories
   const handleCheckboxChange = (name: string, type: string) => {
     switch (type) {
-      case "sizes":
-        // handleMultiSelectChange(name, props.selectedSizes, props,setSelectedSizes);
-        break;
       case "categories":
         handleMultiSelectChange(
           name,
@@ -128,10 +124,8 @@ const AddProductModal = ({
     }
 
     try {
-      // Dispatch the action and await the result
       await dispatch(addProduct(updatedProduct));
 
-      // Check the status in the Redux store
       if (status === "succeeded") {
         reset(initialProduct);
         handleCloseModal();
@@ -140,14 +134,13 @@ const AddProductModal = ({
         toast.error("Something went wrong while adding the product");
       }
     } catch (error) {
-      // Handle errors, e.g., network issues or Firebase errors
       toast.error("An error occurred while adding the product");
     }
   };
   return (
     <>
       {status === "loading" && (
-        <dialog id="my_modal_1" className="modal modal-open z-[9999]">
+        <dialog id="my_modal_1" className="modal-open modal z-[9999]">
           <span className="loading loading-spinner loading-lg bg-primary"></span>
         </dialog>
       )}

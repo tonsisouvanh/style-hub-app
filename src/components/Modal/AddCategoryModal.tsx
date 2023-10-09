@@ -20,37 +20,7 @@ const AddCategoryModal = ({ setOpenAddCateModal, openAddCateModal }: Props) => {
   const [showWarning, setShowWarning] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  // const handleAddCategory = async () => {
-  //   if (cate.trim() === "") {
-  //     setShowWarning(true);
-  //     setMessage("can not be empty");
-  //   } else {
-  //     try {
-  //       // Dispatch the action and await the result
-  //       await dispatch(addCategory(cate));
 
-  //       // Check the status in the Redux store
-  //       if (status === "succeeded") {
-  //         setOpenAddCateModal(false);
-  //         toast.success("Product added successfully");
-  //       } else if (categories.some((category) => category.name === cate)) {
-  //         // Check if the category already exists
-  //         setShowWarning(true);
-  //         setMessage("Category already exists");
-  //         return;
-  //       } else {
-  //         toast.error("Something went wrong while adding the product");
-  //       }
-  //     } catch (error) {
-  //       // Handle errors, e.g., network issues or Firebase errors
-  //       toast.error("An error occurred while adding the product");
-  //     }
-
-  //     setCate(cate);
-  //     setCate("");
-  //     setShowWarning(false);
-  //   }
-  // };
   const handleAddCategory = async () => {
     if (cate.trim() === "") {
       setShowWarning(true);
