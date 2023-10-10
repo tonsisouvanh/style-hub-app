@@ -1,6 +1,7 @@
 import { FieldErrors, RegisterOptions, UseFormRegister } from "react-hook-form";
 import { Product } from "../../../types";
-
+import NumpadModal from "../../Modal/NumpadModal";
+import { useState } from "react";
 type Props = {
   inputLabel: string;
   inputPlaceholder?: string;
@@ -9,6 +10,7 @@ type Props = {
   register?: UseFormRegister<Product>;
   errors: FieldErrors<Product>;
   validationRules?: RegisterOptions;
+  setValue: (name: keyof Product, value: string) => void;
 };
 
 const InputNumber = ({
@@ -19,9 +21,19 @@ const InputNumber = ({
   errorMessage,
   errors,
   validationRules,
+  setValue,
 }: Props) => {
+  const [openNumpadModal, setOpenNumpadModal] = useState<boolean>(false);
   return (
     <div className="w-full max-w-full">
+      {openNumpadModal && (
+        <NumpadModal
+          openNumpadModal={openNumpadModal}
+          setOpenNumpadModal={setOpenNumpadModal}
+          setValue={setValue}
+          inputName={inputName}
+        />
+      )}
       <label className="label">
         <span className="label-text font-bold">{inputLabel}</span>
         <span>
@@ -50,6 +62,7 @@ const InputNumber = ({
         type="number"
         placeholder={inputPlaceholder}
         name={inputName as string}
+        onMouseDown={() => setOpenNumpadModal(true)}
         className="input-bordered input input-sm w-full text-base-content transition duration-300 hover:shadow-md focus:outline-none"
       />
     </div>

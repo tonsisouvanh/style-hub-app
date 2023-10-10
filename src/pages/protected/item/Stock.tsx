@@ -120,7 +120,7 @@ const Stock = () => {
         {/* State end */}
 
         {/* <p className="font-notosanslao">{products.length} ລາຍການ</p> */}
-        <div className="container rounded-md border bg-white p-4 shadow-sm">
+        <div className="container rounded-md border bg-base-100 p-4 shadow-sm">
           {/* Filter  & search bar*/}
           <Filter openModal={openModal} setOpenModal={setOpenModal} />
           {/* Filter  & search bar end*/}
@@ -128,7 +128,7 @@ const Stock = () => {
           <div className="divider"></div>
 
           {/* Pagination */}
-          <Pagination itemNo={products.length}/>
+          <Pagination itemNo={products.length} />
           {/* Pagination end*/}
 
           <div className="divider"></div>

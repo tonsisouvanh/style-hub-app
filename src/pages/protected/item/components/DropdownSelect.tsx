@@ -1,5 +1,6 @@
 import { AiFillCaretDown } from "react-icons/ai";
 import { Category } from "../../../../types";
+import { useEffect, useState } from "react";
 
 type Props = {
   title: string;
@@ -16,6 +17,27 @@ const DropdownSelect = ({
   onChangeType,
   handleCheckboxChange,
 }: Props) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filteredItems, setFilteredItems] = useState<Category[]>(options);
+
+  // Handle search input change
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+    filterItems(event.target.value);
+  };
+
+  // Filter items based on the search term
+  const filterItems = (query: string) => {
+    const filtered = options.filter((item) =>
+      item.name.toLowerCase().includes(query.toLowerCase()),
+    );
+    setFilteredItems(filtered);
+  };
+
+  // Update filtered items when options change
+  useEffect(() => {
+    setFilteredItems(options);
+  }, [options]);
   return (
     <div className="dropdown-bottom dropdown w-full">
       <div
@@ -34,27 +56,28 @@ const DropdownSelect = ({
             <input
               className="input-bordered input input-xs join-item mb-2 w-full focus:outline-none"
               placeholder="Search..."
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </div>
           <div className="grid grid-cols-3 gap-1">
-            {options &&
-              options.map((option) => (
-                <label
-                  key={option.name}
-                  className="btn-ghost btn-xs btn flex cursor-pointer items-center justify-between gap-1 font-normal"
-                >
-                  <span className="label-text text-xs">{option.name}</span>
-                  <input
-                    type="checkbox"
-                    className=" checkbox checkbox-sm"
-                    name={option.name}
-                    checked={selectedOptions.includes(option.name)}
-                    onChange={() =>
-                      handleCheckboxChange(option.name, onChangeType)
-                    }
-                  />
-                </label>
-              ))}
+            {filteredItems.map((option) => (
+              <label
+                key={option.name}
+                className="btn-ghost btn-xs btn flex cursor-pointer items-center justify-between gap-1 font-normal"
+              >
+                <span className="label-text text-xs">{option.name}</span>
+                <input
+                  type="checkbox"
+                  className=" checkbox checkbox-sm"
+                  name={option.name}
+                  checked={selectedOptions.includes(option.name)}
+                  onChange={() =>
+                    handleCheckboxChange(option.name, onChangeType)
+                  }
+                />
+              </label>
+            ))}
           </div>
         </div>
       </div>

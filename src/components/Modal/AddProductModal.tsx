@@ -57,6 +57,7 @@ const AddProductModal = ({
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<Product>();
   const now = new Date();
   const currentDate = now.toLocaleDateString();
@@ -140,7 +141,7 @@ const AddProductModal = ({
   return (
     <>
       {status === "loading" && (
-        <dialog id="my_modal_1" className="modal-open modal z-[9999]">
+        <dialog id="my_modal_1" className="modal modal-open z-[9999]">
           <span className="loading loading-spinner loading-lg bg-primary"></span>
         </dialog>
       )}
@@ -225,6 +226,7 @@ const AddProductModal = ({
                   required: true,
                   min: { value: 0, message: "ລາຄາຂັ້ນຕ່ຳ 0" },
                 }}
+                setValue={setValue}
               />
               {/* Price */}
               <InputNumber
@@ -238,6 +240,7 @@ const AddProductModal = ({
                   required: true,
                   min: { value: 0, message: "ລາຄາຂັ້ນຕ່ຳ 0" },
                 }}
+                setValue={setValue}
               />
             </div>
             {/* Price end */}
@@ -267,6 +270,7 @@ const AddProductModal = ({
                   required: false,
                   min: { value: 0, message: "ລາຄາຂັ້ນຕ່ຳ 0" },
                 }}
+                setValue={setValue}
               />
 
               <InputNumber
@@ -281,6 +285,7 @@ const AddProductModal = ({
                   min: { value: 1, message: "*1-5" },
                   max: { value: 5, message: "*1-5" },
                 }}
+                setValue={setValue}
               />
             </div>
             {/* Discount end*/}

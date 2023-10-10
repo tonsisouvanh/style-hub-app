@@ -7,6 +7,8 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearch } from "react-icons/bi";
 import { themes } from "../data/data";
 import { useEffect, useState } from "react";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
+import { FaBlackTie } from "react-icons/fa";
 
 const AdminHeader = (props: {
   sidebarOpen: string | boolean | undefined;
@@ -24,7 +26,7 @@ const AdminHeader = (props: {
       ?.setAttribute("data-theme", localTheme || "");
   }, [theme]);
   return (
-    <header className="sticky top-0 z-[999] flex w-full bg-secondary-content">
+    <header className="sticky top-0 z-[999] flex w-full bg-base-100">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-md md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
           {/* <!-- Hamburger Toggle BTN --> */}
@@ -70,21 +72,31 @@ const AdminHeader = (props: {
             <div className="dropdown">
               <label
                 tabIndex={0}
-                className="btn-accent btn-sm btn m-1 rounded-full"
+                className="btn-secondary btn-sm btn m-1 rounded-full"
               >
-                Theme
+                {theme === "night" ? (
+                  <BsFillMoonFill />
+                ) : theme === "winter" ? (
+                  <BsFillSunFill />
+                ) : (
+                  <FaBlackTie />
+                )}
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu rounded-box z-[1] w-52 max-w-fit space-y-2 bg-base-100 p-2 shadow"
+                className="dropdown-content menu rounded-box z-[2] max-h-[20rem] w-fit bg-base-100 p-2 shadow"
               >
                 {themes.map((theme) => (
-                  <li
-                    className="btn-xs btn w-fit"
-                    onClick={() => setTheme(theme)}
-                    key={theme}
-                  >
-                    {theme}
+                  <li className="" onClick={() => setTheme(theme)} key={theme}>
+                    <a>
+                      {theme === "night" ? (
+                        <BsFillMoonFill />
+                      ) : theme === "winter" ? (
+                        <BsFillSunFill />
+                      ) : (
+                        <FaBlackTie />
+                      )}
+                    </a>
                   </li>
                 ))}
               </ul>

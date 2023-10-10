@@ -213,8 +213,10 @@ export const menuItems: MenuItem[] = [
 
 export const themes = [
   "winter",
-  "light",
-  "dark",
+  // "light",
+  "black",
+  // "dracula",
+  "night"
   // "cupcake",
   // "bumblebee",
   // "emerald",
@@ -231,7 +233,6 @@ export const themes = [
   // "pastel",
   // "fantasy",
   // "wireframe",
-  // "black",
   // "luxury",
   // "dracula",
   // "cmyk",

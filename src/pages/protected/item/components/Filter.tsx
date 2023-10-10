@@ -13,7 +13,6 @@ const Filter = (props: Props) => {
   const { status, data: categories } = useSelector(
     (state: RootState) => state.categories,
   );
-  console.log(categories);
   return (
     <div className="flex flex-wrap items-center gap-2 font-notosanslao">
       <div className="dropdown">
@@ -47,7 +46,7 @@ const Filter = (props: Props) => {
         </label>
         <ul
           tabIndex={0}
-          className="dropdown-content menu rounded-box z-[2] max-h-[20rem] w-52  overflow-y-scroll bg-base-100 p-2 shadow"
+          className="dropdown-content menu rounded-box z-[2] max-h-[20rem] w-52 overflow-y-scroll bg-base-100 p-2 shadow"
         >
           <div>
             {categories.map((category) => (

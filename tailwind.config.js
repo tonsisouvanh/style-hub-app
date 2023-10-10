@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        // Define a custom screen size for disabling the keyboard
+        "disable-keyboard": { raw: "(max-width: 639px)" },
+      },
       gridTemplateColumns: {
         fluid: "repeat(auto-fit, minmax(15rem,1fr))",
       },

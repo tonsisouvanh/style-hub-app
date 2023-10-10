@@ -99,7 +99,7 @@ const StockItems = (props: Props) => {
                   >
                     <label
                       tabIndex={0}
-                      className="btn-ghost btn-xs btn m-1 text-primary"
+                      className="btn-ghost btn-xs btn m-1"
                     >
                       <CiCircleMore size={15} />
                     </label>
@@ -137,8 +137,8 @@ const StockItems = (props: Props) => {
                     <input type="checkbox" className="checkbox" />
                   </label>
                 </td>
-                <td className="text-info-content">{product.id}</td>
-                <td className="text-info-content">{product.name}</td>
+                <td className="">{product.id}</td>
+                <td className="">{product.name}</td>
                 <td className="">
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
@@ -151,14 +151,14 @@ const StockItems = (props: Props) => {
                     </div>
                   </div>
                 </td>
-                <td className="text-info-content">{formatPrice(product.importPrice) }</td>
-                <td className="text-info-content">{formatPrice(product.price) }</td>
-                <td className="text-info-content">{product.stock}</td>
+                <td className="">{formatPrice(product.importPrice) }</td>
+                <td className="">{formatPrice(product.price) }</td>
+                <td className="">{product.stock}</td>
                 {/* <td>{product.categories}</td> */}
-                <td className="text-info-content">
+                <td className="">
                   {product.isNewArrival ? "New" : "Old"}
                 </td>
-                <td className="text-info-content">
+                <td className="">
                   {product.isFeatured ? "Featured" : "Not Featured"}
                 </td>
               </tr>

@@ -2,14 +2,14 @@ import { Discount } from "../types";
 
 export function formatPrice(price: number, decimalPlaces = 0): string {
   const lakSymbol = "₭";
-  return price
+  return price ? price
     .toLocaleString("en-US", {
       style: "currency",
       currency: "LAK",
       currencyDisplay: "symbol",
       minimumFractionDigits: decimalPlaces,
     })
-    .replace("LAK", lakSymbol);
+    .replace("LAK", lakSymbol) : '';
 }
 
 export const calculateDiscountedPrice = (
@@ -28,3 +28,15 @@ export const calculateDiscountedPrice = (
 export const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
+
+
+
+  // Function to disable keyboard interactions
+ export const disableKeyboard = () => {
+    document.addEventListener('keydown', handleKeyDown);
+  };
+
+  // Function to enable keyboard interactions
+export  const enableKeyboard = () => {
+    document.removeEventListener('keydown', handleKeyDown);
+  };

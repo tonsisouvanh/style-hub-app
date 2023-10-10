@@ -241,6 +241,7 @@ const EditProductModal = ({
                   required: true,
                   min: { value: 0, message: "ລາຄາຂັ້ນຕ່ຳ 0" },
                 }}
+                setValue={setValue}
               />
               {/* Price */}
               <InputNumber
@@ -254,6 +255,7 @@ const EditProductModal = ({
                   required: true,
                   min: { value: 0, message: "ລາຄາຂັ້ນຕ່ຳ 0" },
                 }}
+                setValue={setValue}
               />
             </div>
             {/* Price end */}
@@ -283,6 +285,7 @@ const EditProductModal = ({
                   required: false,
                   min: { value: 0, message: "ລາຄາຂັ້ນຕ່ຳ 0" },
                 }}
+                setValue={setValue}
               />
 
               <InputNumber
@@ -297,6 +300,7 @@ const EditProductModal = ({
                   min: { value: 1, message: "*1-5" },
                   max: { value: 5, message: "*1-5" },
                 }}
+                setValue={setValue}
               />
             </div>
             {/* Discount end*/}
