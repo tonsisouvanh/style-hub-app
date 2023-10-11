@@ -2,7 +2,6 @@ import React from "react";
 import { CartItem } from "../../../types";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { noimage } from "../../../assets/images";
-// import { fadeFromTopAnimate } from "../../../animation";
 import { calculateDiscountedPrice, formatPrice } from "../../../utils/utils";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";

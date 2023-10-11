@@ -87,13 +87,6 @@ const Stock = () => {
     }
     setAddedInventory(updateInventory);
   };
-  // useEffect(() => {
-  //   first
-
-  //   return () => {
-  //     second
-  //   }
-  // }, [third])
   const renderedItems = products && products.slice(0, selectedNumber);
 
   return (

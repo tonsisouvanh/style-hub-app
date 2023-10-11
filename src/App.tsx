@@ -14,7 +14,6 @@ import ClientLayout from "./layout/ClientLayout";
 import PrivateRoute from "./route/PrivateRoute";
 import Stock from "./pages/protected/item/Stock";
 import AdminLayout from "./layout/AdminRootLayout";
-import Test from "./pages/Test";
 import ProductDetail from "./pages/Products/ProductDetail";
 function App() {
   return (
@@ -40,7 +39,6 @@ function App() {
           <Route path="all-products/:category" element={<ProductsPage />} />
           <Route path="single-product/:id" element={<SingleProduct />} />
           <Route path="cart" element={<CartPage />} />
-          <Route path="test" element={<Test />} />
         </Route>
         {/* // Protected route */}
         <Route path="/admin" element={<AdminLayout />}>

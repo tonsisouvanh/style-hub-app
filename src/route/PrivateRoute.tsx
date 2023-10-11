@@ -1,7 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
-  // const { user } = useSelector((state: RootState) => state.user);
   const userStr = sessionStorage.getItem("user");
   const user = userStr ? JSON.parse(userStr) : null;
 
