@@ -1,4 +1,3 @@
-import SearchBar from "../SearchBar/SearchBar";
 
 import { Link } from "react-router-dom";
 import UserWishlistCartIcons from "./UserWishlistCartIcons ";

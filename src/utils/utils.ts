@@ -31,12 +31,12 @@ export const capitalizeFirstLetter = (str: string) => {
 
 
 
-  // Function to disable keyboard interactions
- export const disableKeyboard = () => {
-    document.addEventListener('keydown', handleKeyDown);
-  };
+//   // Function to disable keyboard interactions
+//  export const disableKeyboard = () => {
+//     document.addEventListener('keydown', handleKeyDown);
+//   };
 
-  // Function to enable keyboard interactions
-export  const enableKeyboard = () => {
-    document.removeEventListener('keydown', handleKeyDown);
-  };
+//   // Function to enable keyboard interactions
+// export  const enableKeyboard = () => {
+//     document.removeEventListener('keydown', handleKeyDown);
+//   };

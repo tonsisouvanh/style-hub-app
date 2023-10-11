@@ -1,4 +1,3 @@
-import React from "react";
 import loginmain from "../../../assets/svg/loginmain.svg";
 
 const LandingIntro = () => {

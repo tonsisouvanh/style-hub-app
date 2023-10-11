@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { AiOutlineClose, AiTwotoneShopping } from "react-icons/ai";
+import {AiTwotoneShopping } from "react-icons/ai";
 import SearchBar from "../SearchBar/SearchBar";
-import { AiFillHome } from "react-icons/ai";
 import { menuItems } from "../../data/data";
 import { Category } from "../../types";
 

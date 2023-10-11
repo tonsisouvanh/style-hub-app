@@ -71,7 +71,7 @@ const ProductsPage = () => {
           sortedProducts.sort((a, b) => b.price - a.price);
           break;
         default:
-          sortedProducts.sort((a, b) => a.id.localeCompare(b.id));
+          // sortedProducts.sort((a, b) => a.id.localeCompare(b.id));
           break;
       }
       return sortedProducts;

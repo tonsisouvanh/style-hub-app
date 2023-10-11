@@ -15,7 +15,6 @@ const Numpad: React.FC<NumpadProps> = ({
   onClearClick,
   onDeleteClick,
   onEnterClick,
-  openNumpadModal,
   setOpenNumpadModal,
 }) => {
   const handleEnterClick = () => {

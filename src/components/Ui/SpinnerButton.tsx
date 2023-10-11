@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-const SpinnerButton = (props: Props) => {
+const SpinnerButton = () => {
   return (
     <>
       <div>

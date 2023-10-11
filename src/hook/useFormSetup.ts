@@ -2,7 +2,7 @@ import {
   useForm,
   SubmitHandler,
   UseFormRegister,
-  FieldValues,
+  // FieldValues,
 } from "react-hook-form";
 
 type FormValues = {
@@ -24,16 +24,16 @@ export const useFormSetup = () => {
     setValue,
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    // Handle form submission here
-  };
+  // const onSubmit: SubmitHandler<FormValues> = (data) => {
+  //   // Handle form submission here
+  // };
 
   return {
     register,
     handleSubmit,
     errors,
     reset,
-    onSubmit,
+    // onSubmit,
     setValue,
   };
 };
