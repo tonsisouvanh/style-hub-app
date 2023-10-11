@@ -1,4 +1,4 @@
-import { FiShoppingBag, FiHeart, FiUser } from "react-icons/fi";
+import { FiShoppingBag, FiHeart } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store/store";
@@ -11,7 +11,7 @@ const UserWishlistCartIcons = () => {
       {/* <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">
         <FiUser size={24} color="#222" />
       </div> */}
-      <Link to="login" className="btn-outline btn hidden md:flex">
+      <Link to="login" className="btn-neutral btn btn-sm hidden text-white md:flex">
         SIGN IN
       </Link>
       <div className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-gray-300">

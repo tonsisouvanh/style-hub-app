@@ -39,6 +39,7 @@ const Stock = () => {
   const [addedImages, setAddedImages] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [addedInventory, setAddedInventory] = useState<Inventory[]>([]);
+  const [selectedNumber, setSelectedNumber] = useState<number>(10); // Default to 5
 
   // // Function to handle adding an image URL
   const handleAddImagesUrl = (
@@ -86,6 +87,15 @@ const Stock = () => {
     }
     setAddedInventory(updateInventory);
   };
+  // useEffect(() => {
+  //   first
+
+  //   return () => {
+  //     second
+  //   }
+  // }, [third])
+  const renderedItems = products && products.slice(0, selectedNumber);
+
   return (
     <>
       <AddProductModal
@@ -128,7 +138,11 @@ const Stock = () => {
           <div className="divider"></div>
 
           {/* Pagination */}
-          <Pagination itemNo={products.length} />
+          <Pagination
+            selectedNumber={selectedNumber}
+            setSelectedNumner={setSelectedNumber}
+            itemNo={products.length}
+          />
           {/* Pagination end*/}
 
           <div className="divider"></div>
@@ -137,7 +151,7 @@ const Stock = () => {
           <StockItems
             openModal={openEditModal}
             setOpenModal={setOpenEditModal}
-            products={products}
+            products={renderedItems}
             setEditingProduct={setEditingProduct}
           />
           {/*Stock Table end*/}

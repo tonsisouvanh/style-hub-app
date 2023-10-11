@@ -10,13 +10,16 @@ type Props = {
 };
 
 const Filter = (props: Props) => {
-  const { status, data: categories } = useSelector(
+  const { data: categories } = useSelector(
     (state: RootState) => state.categories,
   );
   return (
     <div className="flex flex-wrap items-center gap-2 font-notosanslao">
       <div className="dropdown">
-        <label tabIndex={0} className="btn-primary btn-outline btn">
+        <label
+          tabIndex={0}
+          className="btn-primary btn-outline btn-disabled btn"
+        >
           ສະຖານະ
           <span>
             <AiFillCaretDown />
@@ -38,7 +41,10 @@ const Filter = (props: Props) => {
         </ul>
       </div>
       <div className="dropdown">
-        <label tabIndex={0} className="btn-primary btn-outline btn">
+        <label
+          tabIndex={0}
+          className="btn-primary btn-outline btn-disabled btn"
+        >
           ໝວດໝູ່
           <span>
             <AiFillCaretDown />

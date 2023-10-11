@@ -3,6 +3,12 @@ export interface Category {
   name: string;
 }
 
+export interface Auth {
+  email: string;
+  password?: string;
+  token?: string;
+}
+
 export interface CartItem {
   id: string;
   images: string[];

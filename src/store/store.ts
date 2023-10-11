@@ -4,6 +4,7 @@ import productReducer, { fetchProducts } from "../feature/product/ProductSlice";
 import categoryReducer, {
   fetchCategories,
 } from "../feature/categories/CategorySlice";
+import authReducer from "../feature/auth/AuthSlice";
 
 const initialCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
@@ -12,6 +13,7 @@ export const store = configureStore({
     cart: cartReducer,
     products: productReducer,
     categories: categoryReducer,
+    user: authReducer,
   },
   preloadedState: {
     cart: initialCart,

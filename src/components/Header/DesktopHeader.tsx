@@ -75,7 +75,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           </Link>
 
           {/* Nav menu */}
-          <ul className="hidden items-center gap-5 text-lg lg:flex">
+          <ul className="hidden items-center gap-5 text-lg text-black lg:flex">
             <li className="group relative flex w-fit flex-col items-center hover:border-b-2 hover:border-b-black">
               <Link
                 to="/all-products/all"

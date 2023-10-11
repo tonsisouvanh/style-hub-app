@@ -65,7 +65,7 @@ const StockItems = (props: Props) => {
           <span className="loading loading-spinner loading-lg bg-white"></span>
         </dialog>
       )}
-      <div className="min-h-[15rem] overflow-x-auto">
+      <div className="h-auto overflow-x-auto">
         <table className="table-pin-rows table-pin-cols table-xs table">
           {/* head */}
           <thead className="font-notosanslao">
@@ -97,10 +97,7 @@ const StockItems = (props: Props) => {
                     // }
                     // `}
                   >
-                    <label
-                      tabIndex={0}
-                      className="btn-ghost btn-xs btn m-1"
-                    >
+                    <label tabIndex={0} className="btn-ghost btn-xs btn m-1">
                       <CiCircleMore size={15} />
                     </label>
                     <ul
@@ -151,13 +148,11 @@ const StockItems = (props: Props) => {
                     </div>
                   </div>
                 </td>
-                <td className="">{formatPrice(product.importPrice) }</td>
-                <td className="">{formatPrice(product.price) }</td>
+                <td className="">{formatPrice(product.importPrice)}</td>
+                <td className="">{formatPrice(product.price)}</td>
                 <td className="">{product.stock}</td>
                 {/* <td>{product.categories}</td> */}
-                <td className="">
-                  {product.isNewArrival ? "New" : "Old"}
-                </td>
+                <td className="">{product.isNewArrival ? "New" : "Old"}</td>
                 <td className="">
                   {product.isFeatured ? "Featured" : "Not Featured"}
                 </td>

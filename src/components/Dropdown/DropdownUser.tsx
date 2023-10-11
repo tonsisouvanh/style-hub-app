@@ -2,8 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import UserOne from "../../assets/images/user/user-01.png";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../hook/hooks";
+import { RootState } from "../../store/store";
+import { signOutUser } from "../../feature/auth/AuthSlice";
 
 const DropdownUser = () => {
+  const { status } = useSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef<any>(null);
@@ -11,10 +18,16 @@ const DropdownUser = () => {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate('/admin/login')
-  }
+  const handleLogout = async () => {
+    try {
+      await dispatch(signOutUser());
+      if (status === "succeeded") {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Sign-in error =>", error);
+    }
+  };
 
   // close on click outside
   useEffect(() => {
@@ -51,9 +64,7 @@ const DropdownUser = () => {
         to="#"
       >
         <span className="hidden text-right lg:block">
-          <span className="block text-sm font-medium label-text">
-            Jimoi
-          </span>
+          <span className="label-text block text-sm font-medium">Jimoi</span>
           <span className="block text-xs">ADMIN</span>
         </span>
 
@@ -81,16 +92,16 @@ const DropdownUser = () => {
       </Link>
 
       {/* <!-- Dropdown Start --> */}
-    
+
       <div
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`w-62.5 border-stroke shadow-default dark:border-strokedark dark:bg-boxdark rounded-box  absolute right-0 mt-4 flex flex-col border bg-white p-2 shadow ${
+        className={`w-62.5 border-stroke shadow-default dark:border-strokedark dark:bg-boxdark rounded-box  absolute right-0 mt-4 flex flex-col border bg-base-100 p-2 shadow ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >
-        <ul className="border-stroke py-7 dark:border-strokedark flex flex-col gap-5  border-b px-6">
+        <ul className="border-stroke dark:border-strokedark flex flex-col gap-5 border-b  px-6 py-7">
           <li>
             <Link
               to="/profile"
@@ -163,7 +174,10 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button onClick={handleLogout} className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+        >
           <svg
             className="fill-current"
             width="22"

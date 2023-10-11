@@ -33,9 +33,8 @@ function App() {
         transition={Flip}
       />
       <Routes>
-        <Route path="login" element={<Login />} />
-
-        {/* Public route */}
+        <Route path="/login" element={<Login />} />
+        {/* // Public route */}
         <Route path="/" element={<ClientLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="all-products/:category" element={<ProductsPage />} />
@@ -43,8 +42,7 @@ function App() {
           <Route path="cart" element={<CartPage />} />
           <Route path="test" element={<Test />} />
         </Route>
-
-        {/* Protected route */}
+        {/* // Protected route */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route element={<PrivateRoute />}>
             <Route path="dashboard" element={<Dashboard />} />

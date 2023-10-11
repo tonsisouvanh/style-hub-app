@@ -1,28 +1,17 @@
-import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-type Props = {};
+const PrivateRoute = () => {
+  // const { user } = useSelector((state: RootState) => state.user);
+  const userStr = sessionStorage.getItem("user");
+  const user = userStr ? JSON.parse(userStr) : null;
 
-const initialState = {
-  name: "auth",
-  token: "aljsfo3u029",
-  roles: [2001, 201],
-};
-// const initialState = {
-//   name: "",
-//   token: "",
-//   roles: [],
-// };
+  const auth = user;
+  const location = user;
 
-const PrivateRoute = (props: Props) => {
-  const auth = initialState;
-  // const { name, roles } = auth;
-  const location = initialState;
-
-  return auth?.roles?.includes(2001) ? (
+  return auth?.token ? (
     <Outlet />
   ) : auth?.token ? (
-    <Navigate to="/unauthorized" state={{ from: location }} replace />
+    <Navigate to="/" state={{ from: location }} replace />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
   );

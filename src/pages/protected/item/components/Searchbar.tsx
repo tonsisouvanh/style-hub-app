@@ -2,14 +2,17 @@ import { AiOutlineCaretDown, AiOutlineSearch } from "react-icons/ai";
 import { BsFillCalculatorFill } from "react-icons/bs";
 import NumpadModal from "../../../../components/Modal/NumpadModal";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 const Searchbar = () => {
   const [openNumpadModal, setOpenNumpadModal] = useState<boolean>(false);
-
+  const { setValue } = useForm();
   return (
     <>
       <NumpadModal
         openNumpadModal={openNumpadModal}
         setOpenNumpadModal={setOpenNumpadModal}
+        setValue={setValue}
+        inputName={"ratings"}
       />
       <div className="relative flex flex-1 items-center">
         <div className="dropdown">
@@ -40,8 +43,9 @@ const Searchbar = () => {
         />
 
         <button
+          disabled={true}
           onClick={() => setOpenNumpadModal(true)}
-          className="top-1/5 absolute right-1 rounded-lg p-2 transition hover:bg-gray-200"
+          className="top-1/5 absolute right-1 rounded-lg p-2 transition hover:bg-gray-200 cursor-not-allowed"
         >
           <BsFillCalculatorFill className="text-2xl text-base-content" />
         </button>

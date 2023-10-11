@@ -5,26 +5,12 @@ import DropdownNotification from "../components/Dropdown/DropdownNotification";
 import DropdownUser from "../components/Dropdown/DropdownUser";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearch } from "react-icons/bi";
-import { themes } from "../data/data";
-import { useEffect, useState } from "react";
-import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
-import { FaBlackTie } from "react-icons/fa";
+import ThemeSwitch from "../components/theme/ThemeSwitch";
 
 const AdminHeader = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light",
-  );
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme || "");
-    const localTheme = localStorage.getItem("theme");
-    document
-      .querySelector("html")
-      ?.setAttribute("data-theme", localTheme || "");
-  }, [theme]);
   return (
     <header className="sticky top-0 z-[999] flex w-full bg-base-100">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-md md:px-6 2xl:px-11">
@@ -69,7 +55,7 @@ const AdminHeader = (props: {
         <div className="2xsm:gap-7 flex items-center gap-3">
           <ul className="2xsm:gap-4 flex items-center gap-2">
             {/* <!-- Dark Mode Toggler --> */}
-            <div className="dropdown">
+            {/* <div className="dropdown">
               <label
                 tabIndex={0}
                 className="btn-secondary btn-sm btn m-1 rounded-full"
@@ -100,7 +86,8 @@ const AdminHeader = (props: {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
+            <ThemeSwitch />
             {/* <!-- Dark Mode Toggler --> */}
 
             {/* <!-- Notification Menu Area --> */}

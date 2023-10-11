@@ -27,20 +27,6 @@ export const addCategory = createAsyncThunk<Category, string>(
   },
 );
 
-// export const addCategory = createAsyncThunk<void, string>(
-//   "categories/addCategory",
-//   async (newCategory) => {
-//     try {
-//       // Add the new category to the Firestore collection
-//       await addDoc(collection(db, "categories"), {
-//         name: newCategory,
-//       });
-//     } catch (error) {
-//       throw new Error("An error occurred while adding the category.");
-//     }
-//   }
-// );
-
 export const deleteCategory = createAsyncThunk<void, string>(
   "categories/deleteCategory",
   async (categoryId) => {
